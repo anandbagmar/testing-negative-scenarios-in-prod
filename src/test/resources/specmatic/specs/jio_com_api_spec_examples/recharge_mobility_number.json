@@ -33,11 +33,11 @@
     "data": {
         "mobileNumber": {
             "2222222222": {
-                "billingType": "PREPAID",
+                "billingType": "POSTPAID",
                 "partyId": "1014996235"
             },
             "1111111111": {
-                "billingType": "POSTPAID",
+                "billingType": "PREPAID",
                 "partyId": "1485654208"
             },
             "*": {

@@ -114,12 +114,6 @@ paths:
           required: true
           schema:
             type: string
-        - name: Cookie
-          in: header
-          description: "Cookies for session state when required."
-          required: true
-          schema:
-            type: string
       responses:
         "200":
           description: "Success: returns paymentURL and flags (prime/post). Indicates the client may redirect or present the payment URL."

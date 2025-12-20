@@ -34,10 +34,10 @@ public class JioRecharge_UFG_Test {
     private WebDriver driver;
     private static final boolean USE_UFG = true;
     private static final boolean DISABLE_EYES = false;
-    private static final String POSTPAID_PHONE_NUMBER = "1111111111";
+    private static final String POSTPAID_PHONE_NUMBER = "2222222222";
     private static final String POSTPAID_VALID_RECHARGE_AMOUNT = "50";
     private static final String POSTPAID_INVALID_RECHARGE_AMOUNT = "5000";
-    private static final String PREPAID_PHONE_NUMBER = "2222222222";
+    private static final String PREPAID_PHONE_NUMBER = "1111111111";
 
     @BeforeSuite
     public static void beforeSuite() {
@@ -132,17 +132,17 @@ public class JioRecharge_UFG_Test {
 //        Assert.assertTrue(isPass.get(), "Visual differences found.");
     }
 
-//    @Test (alwaysRun = true)
+    @Test (alwaysRun = true)
     void postPaidValidRechargeTest() {
         driver.get("https://www.jio.com/");
-        eyes.checkWindow("Jio Home Page");
+        eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
         waitFor(3);
         By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
         scrollTillElementIntoView(driver, jionumberTextBox);
 
         typeInTextBox(driver, jionumberTextBox, POSTPAID_PHONE_NUMBER);
-        eyes.checkWindow("Entered Mobile Number");
+        eyes.check("Entered Mobile Number", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
         waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
         waitFor(3);
@@ -152,57 +152,56 @@ public class JioRecharge_UFG_Test {
         typeInTextBox(driver, amountTextBox, POSTPAID_VALID_RECHARGE_AMOUNT);
         eyes.checkWindow("Entered Valid Recharge Amount");
 
+        System.out.println("Clicking Pay button");
         driver.findElement(By.xpath("//div[text()='Pay']")).click();
         waitFor(3);
+        System.out.println("Checking Payment Options page");
         eyes.check("Payment Options Page", Target.window().fully());
     }
 
     @Test (alwaysRun = true)
     void postPaidInvalidRechargeTest() {
         driver.get("https://www.jio.com/");
-        eyes.checkWindow("Jio Home Page");
+        eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
         waitFor(3);
         By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
         scrollTillElementIntoView(driver, jionumberTextBox);
 
-        System.out.println("Typing Mobile Number - " + POSTPAID_PHONE_NUMBER);
         typeInTextBox(driver, jionumberTextBox, POSTPAID_PHONE_NUMBER);
-        System.out.println("Entered Mobile Number");
-        eyes.checkWindow("Entered Mobile Number");
+        eyes.check("Entered Mobile Number", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
         System.out.println("Clicking Proceed button");
         waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
         waitFor(3);
+        System.out.println("Enter recharge amount");
 
         By amountTextBox = By.xpath("//input[@placeholder='Amount']");
         waitTillElementIsPresent(driver, amountTextBox);
-        System.out.println("Typing Invalid Recharge Amount - " + POSTPAID_INVALID_RECHARGE_AMOUNT);
         typeInTextBox(driver, amountTextBox, POSTPAID_INVALID_RECHARGE_AMOUNT);
-        System.out.println("Entered Invalid Recharge Amount");
-        eyes.checkWindow("Entered Valid Recharge Amount");
+        eyes.check("Entered Valid Recharge Amount", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
         driver.findElement(By.xpath("//div[text()='Pay']")).click();
         waitFor(3);
         System.out.println("Checking for Invalid recharge amount error");
-        eyes.check("Invalid recharge amount error", Target.window().fully());
+        eyes.check("Invalid recharge amount error", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
 //        String actualErrorMessage = driver.findElement(By.xpath("//span[@class=\"j-error-message\"]")).getText();
 //        String expectedErrorMessage = "Based on your current outstanding amount, maximum payment allowed is Rs." + POSTPAID_VALID_RECHARGE_AMOUNT + ".0";
 //        Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Error message mismatch!");
     }
 
-//    @Test (alwaysRun = true)
+    @Test (alwaysRun = true)
     void prePaidRechargeTest() {
         driver.get("https://www.jio.com/");
-        eyes.checkWindow("Jio Home Page");
+        eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
         waitFor(3);
         By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
         scrollTillElementIntoView(driver, jionumberTextBox);
 
         typeInTextBox(driver, jionumberTextBox, PREPAID_PHONE_NUMBER);
-        eyes.checkWindow("Entered Mobile Number");
+        eyes.check("Entered Mobile Number", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
         waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
         waitFor(5);
@@ -211,10 +210,12 @@ public class JioRecharge_UFG_Test {
     }
 
     private static void typeInTextBox(WebDriver driver, By locator, String inputText) {
+        System.out.println("Typing text: " + inputText + " into element: " + locator.toString());
         WebElement mobileNumberInput = waitTillElementIsVisible(driver, locator);
 
         for (char digit : inputText.toCharArray()) {
             mobileNumberInput.sendKeys(Character.toString(digit));
         }
+        System.out.println("Typed text: " + inputText + " into element: " + locator.toString());
     }
 }

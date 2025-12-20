@@ -7,11 +7,10 @@
             "serviceType": "mobility"
         },
         "headers": {
-            "Accept": "(string)",
-            "Cookie": "(cookie:string)"
+            "Accept": "(string)"
         }
     },
-    "delay-in-seconds": 10,
+    "delay-in-seconds": 60,
     "http-response": {
         "status": 200,
         "body": {
@@ -27,8 +26,7 @@
             "x-frame-options": "SAMEORIGIN",
             "x-content-type-options": "nosniff",
             "Referrer-Policy": "strict-origin-when-cross-origin",
-            "x-handled-by": "api",
-            "Set-Cookie": "$(cookie)"
+            "x-handled-by": "api"
         }
     }
 }
