@@ -34,12 +34,10 @@ public class JioRecharge_UFG_Test {
     private WebDriver driver;
     private static final boolean USE_UFG = true;
     private static final boolean DISABLE_EYES = false;
-    private static final String POSTPAID_PHONE_NUMBER = "2222222222";
-//    private static final String POSTPAID_PHONE_NUMBER = "8766623339";
+    private static final String POSTPAID_PHONE_NUMBER = "1111111111";
     private static final String POSTPAID_VALID_RECHARGE_AMOUNT = "50";
     private static final String POSTPAID_INVALID_RECHARGE_AMOUNT = "5000";
-    private static final String PREPAID_PHONE_NUMBER = "1111111111";
-//    private static final String PREPAID_PHONE_NUMBER = "9326223699";
+    private static final String PREPAID_PHONE_NUMBER = "2222222222";
 
     @BeforeSuite
     public static void beforeSuite() {
