@@ -42,8 +42,9 @@ The key objective is to enable **negative scenario testing in a deployed applica
 
 To run tests with Applitools Visual AI:
 
-1. Sign up for a free Applitools trial:  
-   https://applitools.com/users/sign_up
+1. Sign up for a <a href="https://auth.applitools.com/users/general-register?app=eyes" target="_blank" rel="noopener noreferrer">
+   Applitools trial account
+   </a>
 
 2. Obtain your **APPLITOOLS_API_KEY**
 
@@ -75,8 +76,9 @@ Charles Proxy is used to **route selected application API calls to a local Specm
 
 ### Installation
 
-1. Download and install Charles Proxy:  
-   https://www.charlesproxy.com/download/
+1. Download and install <a href="https://www.charlesproxy.com/download/" target="_blank" rel="noopener noreferrer">
+   Charles Proxy
+   </a>
 2. Launch the Charles application
 
 ---
