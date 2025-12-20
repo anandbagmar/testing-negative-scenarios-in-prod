@@ -1,8 +1,9 @@
+# testing-negative-scenarios-in-prod
+
 This repo contains various (positive and negative) tests implemented using Selenium-java. 
 There is integration with Applitools integrated for Visual Testing.
 To test the negative flows, the repo uses Specmatic.io for intelligent stubbing of APIs.
 
-# testing-negative-scenarios-in-prod
 
 # Machine setup instructions & Prerequisites
 - Install JDK 17 or higher
@@ -10,6 +11,7 @@ To test the negative flows, the repo uses Specmatic.io for intelligent stubbing 
 - Open the cloned project in your IDE as a Gradle project. This will automatically download all the dependencies
 - Ensure that you have Chrome browser installed on your machine
 
+## Applitools Visual AI setup
   - To run the tests with Applitools Visual AI
   Sign up for a free trial account on Applitools (https://applitools.com/users/sign_up) to get your API key.
   Set APPLITOOLS_API_KEY 
@@ -23,8 +25,26 @@ To test the negative flows, the repo uses Specmatic.io for intelligent stubbing 
         > eyes.setApiKey("<replace_me>");
         ```
 
+## Charles Proxy setup
+- Setup Charles proxy on your machine. Download Charles from https://www.charlesproxy.com/download/. Install and launch Charles application.
+
+- Ensure all traffic is proxied through Charles. In Charles, go to Proxy -> Proxy Settings -> Proxies tab. Ensure HTTP Proxy is enabled on port 8888
+
+- Install Charles Root Certificate
+    - In Charles, go to Help -> SSL Proxying -> Install Charles Root Certificate and **Always Trust** it
+
+- In Tools -> Map Remote, add the following 2 mappings:
+    - From: `https://www.jio.com:443/api/jio-recharge-service/recharge/` To: `http://localhost:9000/api/jio-recharge-service/*`
+      See this for reference: ![Charles-MapRemote-Recharge-Service](src/test/resources/Charles/Charles-MapRemote-Recharge-Service.png)
+
+    - From: `https://www.jio.com:443/api/jio-paybill-service/paybill/` To: `http://localhost:9000/api/jio-paybill-service/*`
+      See this for reference: ![Charles-MapRemote-Paybill-Service](src/test/resources/Charles/Charles-MapRemote-Paybill-Service.png)
+
+    - This is how your Map Remote window should look like: ![Charles-MapRemote-Window](src/test/resources/Charles/Charles-MapRemote.png)
+
+## Specmatic setup
 - To run the tests with Specmatic stubbing
-  - **Install & trust all** the certificates required to run the tests with Specmatic stubbing. The certificates are available in the folder - [specmatic-certs](src/test/resources/specmatic/specmatic-certs)
+  - **Install & Always Trust** all the certificates required to run the tests with Specmatic stubbing. The certificates are available in the [jio-certs](src/test/resources/jio-certs)
   
   - Download the latest release of Specmatic using the following command: 
     ```shell
