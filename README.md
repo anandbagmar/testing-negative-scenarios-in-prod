@@ -1,66 +1,200 @@
-# testing-negative-scenarios-in-prod
+# Testing Negative Scenarios in A Deployed Application Using Selenium, Applitools & Specmatic
 
-This repo contains various (positive and negative) tests implemented using Selenium-java. 
-There is integration with Applitools integrated for Visual Testing.
-To test the negative flows, the repo uses Specmatic.io for intelligent stubbing of APIs.
+## Overview
 
+This repository demonstrates how to validate **both positive and negative end-to-end scenarios against a deployed application** using a controlled and safe testing approach.
 
-# Machine setup instructions & Prerequisites
-- Install JDK 17 or higher
-- Clone this git repo (https://github.com/anandbagmar/testing-negative-scenarios-in-prod) on your laptop
-- Open the cloned project in your IDE as a Gradle project. This will automatically download all the dependencies
-- Ensure that you have Chrome browser installed on your machine
+It combines:
+- **Selenium (Java)** for functional automation
+- **Applitools Visual AI** for visual and UI regression testing
+- **Specmatic** for intelligent, spec-compliant API stubbing
 
-## Applitools Visual AI setup
-  - To run the tests with Applitools Visual AI
-  Sign up for a free trial account on Applitools (https://applitools.com/users/sign_up) to get your API key.
-  Set APPLITOOLS_API_KEY 
-    - Set APPLITOOLS_API_KEY as an environment variable, or,
-    - Update the APPLITOOLS_API_KEY in the file - [JioRecharge_UFG_Test.java](src/test/java/com/eot/e2e/negative/JioRecharge_UFG_Test.java) as shown below:
-        ```
-        > eyes.setApiKey(System.getenv("APPLITOOLS_API_KEY"));
-        ```
-        with
-        ```
-        > eyes.setApiKey("<replace_me>");
-        ```
+The key objective is to enable **negative scenario testing in a deployed application** by selectively stubbing specific backend APIs, while allowing the rest of the application traffic to hit the live environment.
 
-## Charles Proxy setup
-- Setup Charles proxy on your machine. Download Charles from https://www.charlesproxy.com/download/. Install and launch Charles application.
+---
 
-- Ensure all traffic is proxied through Charles. In Charles, go to Proxy -> Proxy Settings -> Proxies tab. Ensure HTTP Proxy is enabled on port 8888
+## Technology Stack
 
-- Install Charles Root Certificate
-    - In Charles, go to Help -> SSL Proxying -> Install Charles Root Certificate and **Always Trust** it
+- Java 17+
+- Selenium (Java)
+- Gradle
+- Applitools Eyes (Visual AI)
+- Specmatic (API stubbing)
+- Charles Proxy (traffic interception & routing)
+- Google Chrome
 
-- In Tools -> Map Remote, add the following 2 mappings:
-    - From: `https://www.jio.com:443/api/jio-recharge-service/recharge/` To: `http://localhost:9000/api/jio-recharge-service/*`
-      See this for reference: ![Charles-MapRemote-Recharge-Service](src/test/resources/Charles/Charles-MapRemote-Recharge-Service.png)
+---
 
-    - From: `https://www.jio.com:443/api/jio-paybill-service/paybill/` To: `http://localhost:9000/api/jio-paybill-service/*`
-      See this for reference: ![Charles-MapRemote-Paybill-Service](src/test/resources/Charles/Charles-MapRemote-Paybill-Service.png)
+## Prerequisites & Machine Setup
 
-    - This is how your Map Remote window should look like: ![Charles-MapRemote-Window](src/test/resources/Charles/Charles-MapRemote.png)
+1. Install **JDK 17 or higher**
+2. Ensure **Google Chrome** is installed
+3. Clone the repository:
+   ```bash
+   git clone https://github.com/anandbagmar/testing-negative-scenarios-in-prod
+   ```
+4. Open the project in your IDE **as a Gradle project**
+    - All dependencies will be resolved automatically
 
-## Specmatic setup
-- To run the tests with Specmatic stubbing
-  - **Install & Always Trust** all the certificates required to run the tests with Specmatic stubbing. The certificates are available in the [jio-certs](src/test/resources/jio-certs)
-  
-  - Download the latest release of Specmatic using the following command: 
-    ```shell
-    curl -L -f -o ./src/test/resources/specmatic/specmatic.jar https://github.com/specmatic/specmatic/releases/latest/download/specmatic.jar
-    ```
+---
 
-  - Start Mock Server
-  To start the mock server for Jio.com API recordings, use the following command:
+## Applitools Visual AI Setup
 
-    ```shell
-    
-    java -jar ./src/test/resources/specmatic/specmatic.jar stub  ./src/test/resources/specmatic/specs/jio_com_api_spec.yaml 
-    ```
+To run tests with Applitools Visual AI:
 
-## Running the tests
+1. Sign up for a free Applitools trial:  
+   https://applitools.com/users/sign_up
 
-You can run the test directly from any IDE, OR, you can run the test from the command line using the command:
+2. Obtain your **APPLITOOLS_API_KEY**
 
-> ./gradlew clean test --tests [JioRecharge_UFG_Test.java](src/test/java/com/eot/e2e/negative/JioRecharge_UFG_Test.java)
+3. Configure the API key using one of the following options:
+
+### Option A: Environment Variable (Recommended)
+```bash
+export APPLITOOLS_API_KEY=<your_api_key>
+```
+
+### Option B: Hardcode in Test (Not recommended for CI)
+Update the following line in  
+`src/test/java/com/eot/e2e/negative/JioRecharge_UFG_Test.java`
+
+```java
+eyes.setApiKey(System.getenv("APPLITOOLS_API_KEY"));
+```
+
+Replace with:
+```java
+eyes.setApiKey("<replace_me>");
+```
+
+---
+
+## Charles Proxy Setup
+
+Charles Proxy is used to **route selected application API calls to a local Specmatic stub server**, while allowing all other traffic to continue to the live environment.
+
+### Installation
+
+1. Download and install Charles Proxy:  
+   https://www.charlesproxy.com/download/
+2. Launch the Charles application
+
+---
+
+### Proxy Configuration
+
+1. Navigate to:
+   ```
+   Proxy → Proxy Settings → Proxies
+   ```
+2. Ensure:
+    - **HTTP Proxy** is enabled
+    - Port is set to **8888**
+
+---
+
+### Install Charles Root Certificate
+
+1. Go to:
+   ```
+   Help → SSL Proxying → Install Charles Root Certificate
+   ```
+2. Set the certificate to **Always Trust**
+
+---
+
+### Map Remote Configuration
+
+Configure the following mappings under:
+```
+Tools → Map Remote
+```
+
+#### Mapping 1 – Recharge Service
+- **From**  
+  `https://www.jio.com:443/api/jio-recharge-service/*`
+- **To**  
+  `http://localhost:9000/api/jio-recharge-service/*`
+
+Reference image: ![Charles-MapRemote-Recharge-Service](src/test/resources/Charles/Charles-MapRemote-Recharge-Service.png)
+
+---
+
+#### Mapping 2 – Paybill Service
+- **From**  
+  `https://www.jio.com:443/api/jio-paybill-service/*`
+- **To**  
+  `http://localhost:9000/api/jio-paybill-service/*`
+
+Reference image: ![Charles-MapRemote-Paybill-Service](src/test/resources/Charles/Charles-MapRemote-Paybill-Service.png)
+
+---
+
+#### Final Map Remote View
+Your Map Remote window should resemble the following: 
+![](src/test/resources/Charles/Charles-MapRemote.png)
+
+---
+
+## Specmatic Setup
+
+Specmatic provides **intelligent, spec-compliant API stubs** to simulate positive, negative, and edge-case backend scenarios.
+
+### Certificates
+
+- Install and **Always Trust** all certificates located in:
+  ```
+  src/test/resources/jio-certs
+  ```
+
+---
+
+### Download Specmatic
+
+Download the latest Specmatic JAR:
+```bash
+curl -L -f -o ./src/test/resources/specmatic/specmatic.jar \
+https://github.com/specmatic/specmatic/releases/latest/download/specmatic.jar
+```
+
+---
+
+### Start the Specmatic Stub Server
+
+Start the mock server using the Jio API specification:
+```bash
+java -jar ./src/test/resources/specmatic/specmatic.jar stub \
+./src/test/resources/specmatic/specs/jio_com_api_spec.yaml
+```
+
+The stub server will start on **http://localhost:9000**.
+
+---
+
+## Running the Tests
+
+### Option 1: Run from IDE
+Execute `JioRecharge_UFG_Test` directly from your IDE.
+
+### Option 2: Run from Command Line
+```bash
+./gradlew clean test --tests com.eot.e2e.negative.JioRecharge_UFG_Test
+```
+
+---
+
+## Key Outcomes
+
+- Enables **safe negative scenario testing in a deployed environment**
+- Avoids manipulating real data
+- Combines **functional and visual validation**
+- Demonstrates **selective API stubbing** without breaking the full user journey
+
+---
+
+## Notes
+
+- This project is intended for **educational, POC, and controlled enterprise testing use cases**
+- Always ensure you have appropriate approvals before testing against any deployed environments
+
+---
