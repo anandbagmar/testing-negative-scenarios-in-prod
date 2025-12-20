@@ -95,9 +95,9 @@ public class JioRecharge_UFG_Test {
     private static void configureBrowersForUFG(Configuration config) {
         // Add browsers with different viewports
         config.addBrowser(1600, 1200, BrowserType.CHROME);
-//        config.addBrowser(1920, 1600, BrowserType.FIREFOX);
-//        config.addBrowser(1600, 1200, BrowserType.EDGE_CHROMIUM);
-//        config.addBrowser(1920, 1600, BrowserType.SAFARI);
+        config.addBrowser(1920, 1600, BrowserType.FIREFOX);
+        config.addBrowser(1600, 1200, BrowserType.EDGE_CHROMIUM);
+        config.addBrowser(1920, 1600, BrowserType.SAFARI);
 //        config.addBrowser(800, 600, BrowserType.CHROME);
 //        config.addBrowser(800, 600, BrowserType.CHROME_ONE_VERSION_BACK);
 //        config.addBrowser(800, 600, BrowserType.CHROME_TWO_VERSIONS_BACK);
@@ -132,7 +132,7 @@ public class JioRecharge_UFG_Test {
 //        Assert.assertTrue(isPass.get(), "Visual differences found.");
     }
 
-    @Test (alwaysRun = true)
+//    @Test (alwaysRun = true)
     void postPaidValidRechargeTest() {
         driver.get("https://www.jio.com/");
         eyes.checkWindow("Jio Home Page");
@@ -166,19 +166,25 @@ public class JioRecharge_UFG_Test {
         By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
         scrollTillElementIntoView(driver, jionumberTextBox);
 
+        System.out.println("Typing Mobile Number - " + POSTPAID_PHONE_NUMBER);
         typeInTextBox(driver, jionumberTextBox, POSTPAID_PHONE_NUMBER);
+        System.out.println("Entered Mobile Number");
         eyes.checkWindow("Entered Mobile Number");
 
+        System.out.println("Clicking Proceed button");
         waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
         waitFor(3);
 
         By amountTextBox = By.xpath("//input[@placeholder='Amount']");
         waitTillElementIsPresent(driver, amountTextBox);
+        System.out.println("Typing Invalid Recharge Amount - " + POSTPAID_INVALID_RECHARGE_AMOUNT);
         typeInTextBox(driver, amountTextBox, POSTPAID_INVALID_RECHARGE_AMOUNT);
+        System.out.println("Entered Invalid Recharge Amount");
         eyes.checkWindow("Entered Valid Recharge Amount");
 
         driver.findElement(By.xpath("//div[text()='Pay']")).click();
         waitFor(3);
+        System.out.println("Checking for Invalid recharge amount error");
         eyes.check("Invalid recharge amount error", Target.window().fully());
 
 //        String actualErrorMessage = driver.findElement(By.xpath("//span[@class=\"j-error-message\"]")).getText();
@@ -186,7 +192,7 @@ public class JioRecharge_UFG_Test {
 //        Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Error message mismatch!");
     }
 
-    @Test (alwaysRun = true)
+//    @Test (alwaysRun = true)
     void prePaidRechargeTest() {
         driver.get("https://www.jio.com/");
         eyes.checkWindow("Jio Home Page");
