@@ -1,0 +1,49 @@
+{
+    "http-request": {
+        "path": "/api/jio-recharge-service/recharge/mobility/number/(mobileNumber:string)",
+        "method": "GET",
+        "headers": {
+            "Accept": "(string)"
+        }
+    },
+    "http-response": {
+        "status": 200,
+        "body": {
+            "primaryService": {
+                "serviceId": "$(mobileNumber)",
+                "primeMember": true,
+                "billingType": "$(data.mobileNumber[mobileNumber].billingType)",
+                "deleted": false
+            },
+            "nextPage": "PREPAID",
+            "productType": "MOBILITY",
+            "partyId": "$(data.mobileNumber[mobileNumber].partyId)"
+        },
+        "status-text": "OK",
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Connection": "keep-alive",
+            "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload always",
+            "x-frame-options": "SAMEORIGIN",
+            "x-content-type-options": "nosniff",
+            "Referrer-Policy": "strict-origin-when-cross-origin",
+            "x-handled-by": "api"
+        }
+    },
+    "data": {
+        "mobileNumber": {
+            "2222222222": {
+                "billingType": "PREPAID",
+                "partyId": "1014996235"
+            },
+            "1111111111": {
+                "billingType": "POSTPAID",
+                "partyId": "1485654208"
+            },
+            "*": {
+                "billingType": "POSTPAID",
+                "partyId": "1485654208"
+            }
+        }
+    }
+}

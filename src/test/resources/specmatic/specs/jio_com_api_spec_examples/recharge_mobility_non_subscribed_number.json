@@ -1,0 +1,23 @@
+{
+    "http-request": {
+        "path": "/api/jio-recharge-service/recharge/mobility/number/9999999999",
+        "method": "GET",
+        "headers": {
+            "Accept": "(string)"
+        }
+    },
+    "http-response": {
+        "status": 400,
+        "body": {
+            "errorCode": "400 BAD_REQUEST",
+            "errorMessage": "NOT_SUBSCRIBED_USER"
+        },
+        "status-text": "Bad Request",
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Connection": "keep-alive",
+            "x-frame-options": "SAMEORIGIN",
+            "x-content-type-options": "nosniff"
+        }
+    }
+}

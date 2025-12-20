@@ -1,0 +1,30 @@
+{
+    "http-request": {
+        "path": "/api/jio-paybill-service/paybill/submitDetail/(mobileNumber:string)/5000",
+        "method": "GET",
+        "query": {
+            "rechargeType": "fetchBill",
+            "serviceType": "mobility"
+        },
+        "headers": {
+            "Accept": "(string)"
+        }
+    },
+    "http-response": {
+        "status": 400,
+        "body": {
+            "errorCode": "2001",
+            "errorMessage": "INFO_OUTSTANDING_MORE_THAN_ALLOWED",
+            "dynMsg": [
+                "50.0"
+            ]
+        },
+        "status-text": "Bad Request",
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Connection": "keep-alive",
+            "x-frame-options": "SAMEORIGIN",
+            "x-content-type-options": "nosniff"
+        }
+    }
+}
