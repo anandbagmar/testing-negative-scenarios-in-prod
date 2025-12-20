@@ -12,7 +12,7 @@ To start the mock server for Jio.com API recordings, use the following command:
 
 ```shell
 
-java -jar ./src/test/resources/specmatic/specmatic.jar stub  jio_com_api_spec.yaml 
+java -jar ./src/test/resources/specmatic/specmatic.jar stub ./src/test/resources/specmatic/specs/jio_com_api_spec.yaml 
 ```
 
 ## Test the Mock Server
