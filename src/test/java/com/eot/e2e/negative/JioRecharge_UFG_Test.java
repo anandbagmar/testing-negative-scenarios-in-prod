@@ -1,27 +1,38 @@
 package com.eot.e2e.negative;
 
-import com.applitools.eyes.*;
-import com.applitools.eyes.selenium.BrowserType;
-import com.applitools.eyes.selenium.Configuration;
-import com.applitools.eyes.selenium.Eyes;
-import com.applitools.eyes.selenium.fluent.Target;
-import com.applitools.eyes.visualgrid.model.DeviceName;
-import com.applitools.eyes.visualgrid.services.RunnerOptions;
-import com.applitools.eyes.visualgrid.services.VisualGridRunner;
-import com.eot.utilities.Browser;
-import com.eot.utilities.Driver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-import org.testng.annotations.*;
-
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
+
+import com.applitools.eyes.BatchInfo;
+import com.applitools.eyes.MatchLevel;
+import com.applitools.eyes.RectangleSize;
+import com.applitools.eyes.StdoutLogHandler;
+import com.applitools.eyes.TestResultsStatus;
+import com.applitools.eyes.TestResultsSummary;
+import com.applitools.eyes.selenium.BrowserType;
+import com.applitools.eyes.selenium.Configuration;
+import com.applitools.eyes.selenium.Eyes;
+import com.applitools.eyes.selenium.fluent.Target;
+import com.applitools.eyes.visualgrid.services.RunnerOptions;
+import com.applitools.eyes.visualgrid.services.VisualGridRunner;
+import com.eot.utilities.Browser;
+import com.eot.utilities.Driver;
 import static com.eot.utilities.EyesResults.displayVisualValidationResults;
-import static com.eot.utilities.Wait.*;
+import static com.eot.utilities.Wait.scrollTillElementIntoView;
+import static com.eot.utilities.Wait.waitFor;
+import static com.eot.utilities.Wait.waitTillElementIsClickable;
+import static com.eot.utilities.Wait.waitTillElementIsPresent;
+import static com.eot.utilities.Wait.waitTillElementIsVisible;
 
 public class JioRecharge_UFG_Test {
 
@@ -33,11 +44,19 @@ public class JioRecharge_UFG_Test {
     private Eyes eyes;
     private WebDriver driver;
     private static final boolean USE_UFG = true;
-    private static final boolean DISABLE_EYES = false;
-    private static final String POSTPAID_PHONE_NUMBER = "2222222222";
+    private static final boolean DISABLE_EYES = true;
+    private static final String POSTPAID_VALID_RECHARGE_PHONE_NUMBER = "9120000050";
     private static final String POSTPAID_VALID_RECHARGE_AMOUNT = "50";
-    private static final String POSTPAID_INVALID_RECHARGE_AMOUNT = "5000";
-    private static final String PREPAID_PHONE_NUMBER = "1111111111";
+    private static final String POSTPAID_INVALID_RECHARGE_PHONE_NUMBER = "9120050000";
+    private static final String POSTPAID_INVALID_RECHARGE_AMOUNT = "50000";
+    private static final String PREPAID_PHONE_NUMBER_0_PLANS = "9822000000";
+    private static final String PREPAID_PHONE_NUMBER_1_PLAN = "9822000001";
+    private static final String PREPAID_PHONE_NUMBER_2_PLANS = "9822000002";
+    private static final String PREPAID_PHONE_NUMBER_5_PLANS = "9822000005";
+    private static final String PREPAID_PHONE_NUMBER_10_PLANS = "9822000010";
+    private static final String INVALID_PHONE_NUMBER = "1111111111";
+
+    private static final String URL = "http://localhost:8080";
 
     @BeforeSuite
     public static void beforeSuite() {
@@ -134,15 +153,16 @@ public class JioRecharge_UFG_Test {
 
     @Test (alwaysRun = true)
     void postPaidValidRechargeTest() {
-        driver.get("https://www.jio.com/");
+        driver.get(URL);
         eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
         waitFor(3);
         By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
-        scrollTillElementIntoView(driver, jionumberTextBox);
+        By rechargeOrPayBillsHeading = By.xpath("//div[text()='Recharge or pay bills']");
+        scrollTillElementIntoView(driver, rechargeOrPayBillsHeading);
 
-        typeInTextBox(driver, jionumberTextBox, POSTPAID_PHONE_NUMBER);
-        eyes.check("Entered Mobile Number", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
+        typeInTextBox(driver, jionumberTextBox, POSTPAID_VALID_RECHARGE_PHONE_NUMBER);
+        eyes.check("Entered Mobile Number", Target.region(By.xpath("//div[@class=\"recharge-paybill-withleads\"]")));
 
         waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
         waitFor(3);
@@ -161,15 +181,16 @@ public class JioRecharge_UFG_Test {
 
     @Test (alwaysRun = true)
     void postPaidInvalidRechargeTest() {
-        driver.get("https://www.jio.com/");
+        driver.get(URL);
         eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
         waitFor(3);
         By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
-        scrollTillElementIntoView(driver, jionumberTextBox);
+        By rechargeOrPayBillsHeading = By.xpath("//div[text()='Recharge or pay bills']");
+        scrollTillElementIntoView(driver, rechargeOrPayBillsHeading);
 
-        typeInTextBox(driver, jionumberTextBox, POSTPAID_PHONE_NUMBER);
-        eyes.check("Entered Mobile Number", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
+        typeInTextBox(driver, jionumberTextBox, POSTPAID_INVALID_RECHARGE_PHONE_NUMBER);
+        eyes.check("Entered Mobile Number", Target.region(By.xpath("//div[@class=\"recharge-paybill-withleads\"]")));
 
         System.out.println("Clicking Proceed button");
         waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
@@ -192,18 +213,44 @@ public class JioRecharge_UFG_Test {
     }
 
     @Test (alwaysRun = true)
-    void prePaidRechargeTest() {
-        driver.get("https://www.jio.com/");
+    void prePaidRecharge0PlansTest() {
+        prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_0_PLANS);
+    }
+
+    @Test (alwaysRun = true)
+    void prePaidRecharge1PlanTest() {
+        prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_1_PLAN);
+    }
+
+    @Test (alwaysRun = true)
+    void prePaidRecharge2PlansTest() {
+        prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_2_PLANS);
+    }
+
+    @Test (alwaysRun = true)
+    void prePaidRecharge5PlansTest() {
+        prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_5_PLANS);
+    }
+
+    @Test (alwaysRun = true)
+    void prePaidRecharge10PlansTest() {
+        prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_10_PLANS);
+    }
+
+    private void prepaidRechargePlanTest(String prepaidPhoneNumber10Plans) {
+        driver.get(URL);
         eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
         waitFor(3);
         By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
-        scrollTillElementIntoView(driver, jionumberTextBox);
+        By rechargeOrPayBillsHeading = By.xpath("//div[text()='Recharge or pay bills']");
+        scrollTillElementIntoView(driver, rechargeOrPayBillsHeading);
 
-        typeInTextBox(driver, jionumberTextBox, PREPAID_PHONE_NUMBER);
-        eyes.check("Entered Mobile Number", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
+        typeInTextBox(driver, jionumberTextBox, prepaidPhoneNumber10Plans);
+        eyes.check("Entered Mobile Number", Target.region(By.xpath("//div[@class=\"recharge-paybill-withleads\"]")));
 
-        waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
+        waitFor(2);
+        driver.findElement(By.xpath("//div[text()='Proceed']")).click();
         waitFor(5);
 
         eyes.checkWindow("Recharge Options Page");
@@ -216,6 +263,7 @@ public class JioRecharge_UFG_Test {
         for (char digit : inputText.toCharArray()) {
             mobileNumberInput.sendKeys(Character.toString(digit));
         }
+        waitFor(1);
         System.out.println("Typed text: " + inputText + " into element: " + locator.toString());
     }
 }

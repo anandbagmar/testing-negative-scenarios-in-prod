@@ -1,0 +1,37 @@
+{
+    "http-request": {
+        "path": "/api/jio-common-servlet/jiocommon/redirect",
+        "method": "GET",
+        "headers": {
+            "Connection": "keep-alive",
+            "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "(string)",
+
+            "Upgrade-Insecure-Requests": "1",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "Sec-Fetch-Site": "same-origin",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-User": "?1",
+            "Sec-Fetch-Dest": "document",
+            "Accept-Encoding": "gzip, deflate, br, zstd",
+            "Cookie": "(string)"
+        }
+    },
+    "http-response": {
+        "status": 200,
+        "body": "<html><head><meta name='viewport' content='width=device-width, initial-scale=1.0'><script type='text/javascript'>function formSubmit(){setTimeout(function () { document.getElementById('payment').submit() }, 1000)}</script><style> p { margin: 0; } .loderClass { width: 48px; height: auto; } body { margin: 0; } .wrapper { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; width: 100%; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; } .powered-by { font-family: helvetica, arial, sans-serif; font-size: 16px; color: rgba(0, 0, 0, 0.65); font-style: normal; font-weight: 700; line-height: 20px; letter-spacing: -0.07px; } .content { margin: 8px 0; display: flex; align-items: center; } .margin-top_16 { margin-top: 16px; } .image-style { width: 130px; height: 40px; object-fit: contain; } .sub-text { font-family: helvetica, arial, sans-serif; font-size: 14px; color: rgba(0, 0, 0, 0.65); font-style: normal; font-weight: 500; line-height: 16px; letter-spacing: -0.06px; } .footer { width: 100%; position: absolute; bottom: 64px; text-align: center; } </style></head><body onload='javascript:formSubmit();' style='overflow: hidden;'><div class='wrapper'> <img src=' https://jep-asset.akamaized.net/MyJio_Client/corefiles/jpg/loader.gif' class='loderClass' />  </div> <div class='footer'> <p class='sub-text'>Do not close or refresh the page</p> </div><form name='payment' id='payment' method='POST' action='https://pay.jio.com/jiopg/v1/payment-options'><input type='hidden' name='param1' value='fc0cdeaf-ca03-46c8-8a96-6d904dd28861-1442b912-ecf8-4ab6-92e9-02a1408151ac'/><input type='hidden' name='param2' value='JIO'/><input type='hidden' name='header' value='false'/><input type='hidden' name='theme' value='null'/><input type='hidden' name='gaparam' value='null'/><input type='hidden' name='native' value='null'/><input type='hidden' name='useJpgToken' value='true'/><input type='submit' value='' style='display: none;'/></form></body></html>",
+        "status-text": "OK",
+        "headers": {
+            "Content-Type": "text/html;charset=UTF-8",
+            "Connection": "keep-alive",
+            "Set-Cookie": "ADRUM_BTa=R:22|g:cd450734-13a4-4d29-9125-563e3d4c3287|n:customer1_a309c9d0-b5ef-4ff1-8978-610c0b29df8f; Path=/~~ADRUM_BT1=R:22|i:4879681|e:2; Path=/~~ADRUM_BTa=R:22|g:1af17a06-eb7e-4193-9337-aa49d6dbe7b8; Path=/~~ADRUM_BTa=R:22|g:1af17a06-eb7e-4193-9337-aa49d6dbe7b8|n:customer1_a309c9d0-b5ef-4ff1-8978-610c0b29df8f; Path=/~~SameSite=None; Path=/; Secure~~ADRUM_BT1=R:22|i:5901106; Path=/~~ADRUM_BT1=R:22|i:5901106|e:2; Path=/~~ADRUM_BT1=R:22|i:5901106|e:2|d:2; Path=/~~NSC_Q1_kjp_njdsptfswjdf_WT_443=ffffffff0985b18445525d5f4f58455e445a4a4229a0; path=/; secure; httponly",
+            "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload always",
+            "X-XSS-Protection": "1; mode=block",
+            "x-frame-options": "SAMEORIGIN",
+            "x-content-type-options": "nosniff",
+            "Referrer-Policy": "strict-origin-when-cross-origin",
+            "x-handled-by": "api"
+        }
+    }
+}

@@ -35,3 +35,7 @@ node_modules
 **/*.png
 .venv
 .github
+
+proxy_recording__
+lib/_temp
+.ai

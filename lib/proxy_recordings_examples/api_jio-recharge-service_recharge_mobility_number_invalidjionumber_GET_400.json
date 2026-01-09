@@ -1,0 +1,34 @@
+{
+    "http-request": {
+        "path": "/api/jio-recharge-service/recharge/mobility/number/1111111111",
+        "method": "GET",
+        "headers": {
+            "Connection": "keep-alive",
+            "sec-ch-ua-platform": "(string)",
+            "Accept": "application/json, text/plain, */*",
+            "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+
+            "sec-ch-ua-mobile": "?0",
+            "Sec-Fetch-Site": "same-origin",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Dest": "empty",
+            "Accept-Encoding": "gzip, deflate, br, zstd",
+            "Cookie": "(string)"
+        }
+    },
+    "http-response": {
+        "status": 400,
+        "body": {
+            "errorCode": "400 BAD_REQUEST",
+            "errorMessage": "NOT_SUBSCRIBED_USER"
+        },
+        "status-text": "Bad Request",
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Connection": "keep-alive",
+            "Set-Cookie": "ADRUM_BTa=R:22|g:dcccdd98-e0a9-4dee-a65a-28e971922494|n:customer1_a309c9d0-b5ef-4ff1-8978-610c0b29df8f; Path=/~~ADRUM_BTa=R:22|g:5f22b8a1-6c09-4e0f-bf2e-a2ee11148f3e; Path=/~~ADRUM_BTa=R:22|g:5f22b8a1-6c09-4e0f-bf2e-a2ee11148f3e|n:customer1_a309c9d0-b5ef-4ff1-8978-610c0b29df8f; Path=/~~SameSite=None; Path=/; Secure~~ADRUM_BT1=R:22|i:4600189; Path=/~~ADRUM_BT1=R:22|i:4600189|e:798; Path=/~~NSC_Q1_kjp_njdsptfswjdf_WT_443=ffffffff0985b18445525d5f4f58455e445a4a4229a0; path=/; secure; httponly",
+            "x-frame-options": "SAMEORIGIN",
+            "x-content-type-options": "nosniff"
+        }
+    }
+}

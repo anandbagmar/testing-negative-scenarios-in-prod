@@ -1,0 +1,46 @@
+{
+  "http-request": {
+    "path": "/api/jio-recharge-service/recharge/buy",
+    "method": "POST",
+    "headers": {
+      "Connection": "keep-alive",
+      "sec-ch-ua-platform": "(string)",
+      "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+
+      "Content-Type": "application/json",
+      "sec-ch-ua-mobile": "?0",
+      "Accept": "*/*",
+      "Origin": "http://localhost:8080",
+      "Sec-Fetch-Site": "same-origin",
+      "Sec-Fetch-Mode": "cors",
+      "Sec-Fetch-Dest": "empty",
+      "Accept-Encoding": "gzip, deflate, br, zstd",
+      "Cookie": "(string)"
+    },
+    "body": {
+      "planKey": "1019011#1Z0002#Z0003#Z0006RECHARGE1cb20",
+      "selectedService": "9326223699"
+    }
+  },
+  "http-response": {
+    "status": 200,
+    "body": {
+      "bypassCart": true,
+      "fiberActivationFlow": 0,
+      "irServiceList": [],
+      "irR2ServiceList": []
+    },
+    "status-text": "OK",
+    "headers": {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Connection": "keep-alive",
+      "Set-Cookie": "ADRUM_BT1=R:149|i:2440687|e:160; Path=/~~ADRUM_BTa=R:149|g:88ffd013-6c2e-4e4f-a9e2-7b11a7a1f2a4|n:customer1_a309c9d0-b5ef-4ff1-8978-610c0b29df8f; Path=/~~ADRUM_BTa=R:149|g:95c9c9bf-39fa-47cd-a958-e950f3940715; Path=/~~ADRUM_BTa=R:149|g:95c9c9bf-39fa-47cd-a958-e950f3940715|n:customer1_a309c9d0-b5ef-4ff1-8978-610c0b29df8f; Path=/~~SameSite=None; Path=/; Secure~~ADRUM_BT1=R:149|i:5384310; Path=/~~ADRUM_BT1=R:149|i:5384310|e:361; Path=/~~NSC_Q2_kjp_njdsptfswjdf_WT_443=ffffffff0985b86345525d5f4f58455e445a4a4229a0; path=/; secure; httponly",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload always",
+      "X-XSS-Protection": "1; mode=block",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "x-handled-by": "api"
+    }
+  }
+}

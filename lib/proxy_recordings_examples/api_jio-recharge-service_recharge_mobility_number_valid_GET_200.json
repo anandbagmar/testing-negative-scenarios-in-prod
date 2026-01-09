@@ -1,0 +1,81 @@
+{
+  "http-request": {
+    "path": "/api/jio-recharge-service/recharge/mobility/number/(mobileNumber:number)",
+    "method": "GET",
+    "headers": {
+      "Connection": "keep-alive",
+      "sec-ch-ua-platform": "(string)",
+      "Accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+
+      "sec-ch-ua-mobile": "?0",
+      "Sec-Fetch-Site": "same-origin",
+      "Sec-Fetch-Mode": "cors",
+      "Sec-Fetch-Dest": "empty",
+      "Accept-Encoding": "gzip, deflate, br, zstd",
+      "Cookie": "(string)"
+    }
+  },
+  "http-response": {
+    "status": 200,
+    "body": {
+      "primaryService": {
+        "serviceId": "$(mobileNumber)",
+        "primeMember": true,
+        "billingType": "$(data.mobileNumber[mobileNumber].billingType)",
+        "deleted": false
+      },
+      "nextPage": "PREPAID",
+      "productType": "MOBILITY",
+      "partyId": "$(data.mobileNumber[mobileNumber].partyId)"
+    },
+    "status-text": "OK",
+    "headers": {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Connection": "keep-alive",
+      "Set-Cookie": "Authorization=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKSU8uQ09NIiwic3ViIjoiZWUzNzI1OGYtMzU0MS00NWQ4LWJlMjgtODVlNjlmMTViYjEwIiwiaWF0IjoxNzY3ODcxODkyLCJleHAiOjE3Njc4NzI3OTJ9.rvIDsll5_PVh8YGIg8OYkbWw3QlzplseWQSiZdAuv2s; Path=/; Secure; HttpOnly~~ssaid=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKSU8uQ09NIiwic3ViIjoiZWUzNzI1OGYtMzU0MS00NWQ4LWJlMjgtODVlNjlmMTViYjEwIiwiaWF0IjoxNzY3ODcxODkyLCJleHAiOjE3Njc4NzI3OTJ9.rvIDsll5_PVh8YGIg8OYkbWw3QlzplseWQSiZdAuv2s; SameSite=none; Secure; HttpOnly; Path=/; ~~ADRUM_BTa=R:22|g:61bc674b-72c4-4620-87a1-2b4bb39b1a32|n:customer1_a309c9d0-b5ef-4ff1-8978-610c0b29df8f; Path=/~~ADRUM_BT1=R:22|i:5384310|e:330; Path=/~~ADRUM_BTa=R:22|g:a4ee642d-358d-4ba9-aab7-783a33b478ce; Path=/~~ADRUM_BTa=R:22|g:a4ee642d-358d-4ba9-aab7-783a33b478ce|n:customer1_a309c9d0-b5ef-4ff1-8978-610c0b29df8f; Path=/~~SameSite=None; Path=/; Secure~~ADRUM_BT1=R:22|i:4600189; Path=/~~ADRUM_BT1=R:22|i:4600189|e:755; Path=/~~NSC_Q1_kjp_njdsptfswjdf_WT_443=ffffffff0985b18845525d5f4f58455e445a4a4229a0; path=/; secure; httponly",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload always",
+      "X-XSS-Protection": "1; mode=block",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "x-handled-by": "api"
+    }
+  },
+  "data": {
+    "mobileNumber": {
+      "9120000050": {
+        "billingType": "POSTPAID",
+        "partyId": "1485654250"
+      },
+      "9120050000": {
+        "billingType": "POSTPAID",
+        "partyId": "1485654200"
+      },
+      "9822000000": {
+        "billingType": "PREPAID",
+        "partyId": "1014996235"
+      },
+      "9822000001": {
+        "billingType": "PREPAID",
+        "partyId": "1014996235"
+      },
+      "9822000002": {
+        "billingType": "PREPAID",
+        "partyId": "1014996235"
+      },
+      "9822000005": {
+        "billingType": "PREPAID",
+        "partyId": "1014996235"
+      },
+      "9822000010": {
+        "billingType": "PREPAID",
+        "partyId": "1014996235"
+      },
+      "*": {
+        "billingType": "POSTPAID",
+        "partyId": "1014996999"
+      }
+    }
+  }
+}

@@ -1,0 +1,1299 @@
+openapi: 3.0.1
+info:
+  title: proxy_recordings
+  version: "1"
+paths:
+  /api/jio-common-servlet/jiocommon/redirect:
+    get:
+      summary: api_jio-common-servlet_jiocommon_redirect_GET_200_10
+      parameters:
+      - name: Connection
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua-mobile
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua-platform
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: DNT
+        in: header
+        required: true
+        schema:
+          type: integer
+      - name: Upgrade-Insecure-Requests
+        in: header
+        required: true
+        schema:
+          type: integer
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Site
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Mode
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-User
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Dest
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Cookie
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: api_jio-common-servlet_jiocommon_redirect_GET_200_10
+          headers:
+            Connection:
+              required: true
+              schema:
+                type: string
+            Set-Cookie:
+              required: true
+              schema:
+                type: string
+            Strict-Transport-Security:
+              required: true
+              schema:
+                type: string
+            X-XSS-Protection:
+              required: true
+              schema:
+                type: string
+            x-frame-options:
+              required: true
+              schema:
+                type: string
+            x-content-type-options:
+              required: true
+              schema:
+                type: string
+            Referrer-Policy:
+              required: true
+              schema:
+                type: string
+            x-handled-by:
+              required: true
+              schema:
+                type: string
+          content:
+            text/html:
+              schema:
+                type: string
+  /api/jio-paybill-service/paybill/submitDetail/{param1}/{param2}:
+    get:
+      summary: api_jio-paybill-service_paybill_submitDetail_8766623339_50000_GET_400_3
+      parameters:
+      - name: param1
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: param2
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: serviceType
+        in: query
+        schema:
+          type: string
+      - name: rechargeType
+        in: query
+        schema:
+          type: string
+      - name: Connection
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua-platform
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: DNT
+        in: header
+        required: true
+        schema:
+          type: integer
+      - name: sec-ch-ua-mobile
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Site
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Mode
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Dest
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Cookie
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "400":
+          description: api_jio-paybill-service_paybill_submitDetail_8766623339_50000_GET_400_3
+          headers:
+            Connection:
+              required: true
+              schema:
+                type: string
+            Set-Cookie:
+              required: true
+              schema:
+                type: string
+            x-frame-options:
+              required: true
+              schema:
+                type: string
+            x-content-type-options:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_Jio-paybill-service_Paybill_SubmitDetail_param1_param2_GET_400_application_json_ResponseBody"
+        "200":
+          description: api_jio-paybill-service_paybill_submitDetail_8766623339_50_GET_200_4
+          headers:
+            Connection:
+              required: true
+              schema:
+                type: string
+            Set-Cookie:
+              required: true
+              schema:
+                type: string
+            Strict-Transport-Security:
+              required: true
+              schema:
+                type: string
+            X-XSS-Protection:
+              required: true
+              schema:
+                type: string
+            x-frame-options:
+              required: true
+              schema:
+                type: string
+            x-content-type-options:
+              required: true
+              schema:
+                type: string
+            Referrer-Policy:
+              required: true
+              schema:
+                type: string
+            x-handled-by:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_Jio-paybill-service_Paybill_SubmitDetail_param1_param2_GET_200_application_json_ResponseBody"
+  /api/jio-recharge-service/recharge/buy:
+    post:
+      summary: api_jio-recharge-service_recharge_buy_POST_200_8
+      parameters:
+      - name: Connection
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua-platform
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: DNT
+        in: header
+        required: true
+        schema:
+          type: integer
+      - name: sec-ch-ua-mobile
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Origin
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Site
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Mode
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Dest
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Cookie
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Api_Jio-recharge-service_Recharge_Buy_POST_application_json_RequestBody"
+        required: true
+      responses:
+        "200":
+          description: api_jio-recharge-service_recharge_buy_POST_200_8
+          headers:
+            Connection:
+              required: true
+              schema:
+                type: string
+            Set-Cookie:
+              required: true
+              schema:
+                type: string
+            Strict-Transport-Security:
+              required: true
+              schema:
+                type: string
+            X-XSS-Protection:
+              required: true
+              schema:
+                type: string
+            x-frame-options:
+              required: true
+              schema:
+                type: string
+            x-content-type-options:
+              required: true
+              schema:
+                type: string
+            Referrer-Policy:
+              required: true
+              schema:
+                type: string
+            x-handled-by:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_Jio-recharge-service_Recharge_Buy_POST_200_application_json_ResponseBody"
+  /api/jio-recharge-service/recharge/mobility/number/{param}:
+    get:
+      summary: api_jio-recharge-service_recharge_mobility_number_1111111111_GET_400_1
+      parameters:
+      - name: param
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: Connection
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua-platform
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: DNT
+        in: header
+        required: true
+        schema:
+          type: integer
+      - name: sec-ch-ua-mobile
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Site
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Mode
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Dest
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Cookie
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "400":
+          description: api_jio-recharge-service_recharge_mobility_number_1111111111_GET_400_1
+          headers:
+            Connection:
+              required: true
+              schema:
+                type: string
+            Set-Cookie:
+              required: true
+              schema:
+                type: string
+            x-frame-options:
+              required: true
+              schema:
+                type: string
+            x-content-type-options:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_Jio-recharge-service_Recharge_Mobility_Number_param_GET_400_application_json_ResponseBody"
+        "200":
+          description: api_jio-recharge-service_recharge_mobility_number_8766623339_GET_200_2
+          headers:
+            Connection:
+              required: true
+              schema:
+                type: string
+            Set-Cookie:
+              required: true
+              schema:
+                type: string
+            Strict-Transport-Security:
+              required: true
+              schema:
+                type: string
+            X-XSS-Protection:
+              required: true
+              schema:
+                type: string
+            x-frame-options:
+              required: true
+              schema:
+                type: string
+            x-content-type-options:
+              required: true
+              schema:
+                type: string
+            Referrer-Policy:
+              required: true
+              schema:
+                type: string
+            x-handled-by:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_Jio-recharge-service_Recharge_Mobility_Number_param_GET_200_application_json_ResponseBody"
+  /api/jio-recharge-service/recharge/pay:
+    post:
+      summary: api_jio-recharge-service_recharge_pay_POST_200_9
+      parameters:
+      - name: Connection
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua-platform
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: DNT
+        in: header
+        required: true
+        schema:
+          type: integer
+      - name: sec-ch-ua-mobile
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Origin
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Site
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Mode
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Dest
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Cookie
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Api_Jio-recharge-service_Recharge_Pay_POST_application_json_RequestBody"
+        required: true
+      responses:
+        "200":
+          description: api_jio-recharge-service_recharge_pay_POST_200_9
+          headers:
+            Connection:
+              required: true
+              schema:
+                type: string
+            Set-Cookie:
+              required: true
+              schema:
+                type: string
+            Strict-Transport-Security:
+              required: true
+              schema:
+                type: string
+            X-XSS-Protection:
+              required: true
+              schema:
+                type: string
+            x-frame-options:
+              required: true
+              schema:
+                type: string
+            x-content-type-options:
+              required: true
+              schema:
+                type: string
+            Referrer-Policy:
+              required: true
+              schema:
+                type: string
+            x-handled-by:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_Jio-recharge-service_Recharge_Pay_POST_200_application_json_ResponseBody"
+  /api/jio-recharge-service/recharge/plans/serviceId/{param}:
+    get:
+      summary: api_jio-recharge-service_recharge_plans_serviceId_9326223699_GET_200_7
+      parameters:
+      - name: param
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: Connection
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua-platform
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: sec-ch-ua
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: DNT
+        in: header
+        required: true
+        schema:
+          type: integer
+      - name: sec-ch-ua-mobile
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Site
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Mode
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Sec-Fetch-Dest
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept-Encoding
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Cookie
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: api_jio-recharge-service_recharge_plans_serviceId_9326223699_GET_200_7
+          headers:
+            Connection:
+              required: true
+              schema:
+                type: string
+            Strict-Transport-Security:
+              required: true
+              schema:
+                type: string
+            X-XSS-Protection:
+              required: true
+              schema:
+                type: string
+            x-frame-options:
+              required: true
+              schema:
+                type: string
+            x-content-type-options:
+              required: true
+              schema:
+                type: string
+            Referrer-Policy:
+              required: true
+              schema:
+                type: string
+            x-handled-by:
+              required: true
+              schema:
+                type: string
+            Set-Cookie:
+              required: true
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Api_Jio-recharge-service_Recharge_Plans_ServiceId_param_GET_200_application_json_ResponseBody"
+components:
+  schemas:
+    Api_Jio-paybill-service_Paybill_SubmitDetail_param1_param2_GET_400_application_json_ResponseBody:
+      required:
+      - dynMsg
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        dynMsg:
+          type: array
+          items:
+            type: string
+    Api_Jio-paybill-service_Paybill_SubmitDetail_param1_param2_GET_200_application_json_ResponseBody:
+      required:
+      - paymentURL
+      - post
+      - prime
+      type: object
+      properties:
+        paymentURL:
+          type: string
+        post:
+          type: boolean
+        prime:
+          type: boolean
+    Api_Jio-recharge-service_Recharge_Buy_POST_application_json_RequestBody:
+      required:
+      - planKey
+      - selectedService
+      type: object
+      properties:
+        planKey:
+          type: string
+        selectedService:
+          type: string
+    Api_Jio-recharge-service_Recharge_Buy_POST_200_application_json_ResponseBody:
+      required:
+      - bypassCart
+      - fiberActivationFlow
+      - irR2ServiceList
+      - irServiceList
+      type: object
+      properties:
+        bypassCart:
+          type: boolean
+        fiberActivationFlow:
+          type: integer
+        irServiceList:
+          type: array
+          items:
+            type: string
+        irR2ServiceList:
+          type: array
+          items:
+            type: string
+    Api_Jio-recharge-service_Recharge_Mobility_Number_param_GET_400_application_json_ResponseBody:
+      required:
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+    PrimaryService:
+      required:
+      - billingType
+      - deleted
+      - primeMember
+      - serviceId
+      type: object
+      properties:
+        serviceId:
+          type: string
+        primeMember:
+          type: boolean
+        billingType:
+          type: string
+        deleted:
+          type: boolean
+    Api_Jio-recharge-service_Recharge_Mobility_Number_param_GET_200_application_json_ResponseBody:
+      required:
+      - nextPage
+      - partyId
+      - primaryService
+      - productType
+      type: object
+      properties:
+        primaryService:
+          $ref: "#/components/schemas/PrimaryService"
+        nextPage:
+          type: string
+        productType:
+          type: string
+        partyId:
+          type: string
+    ServicePlanList:
+      required:
+      - planKey
+      - quantity
+      - serviceId
+      type: object
+      properties:
+        planKey:
+          type: string
+        quantity:
+          type: integer
+        serviceId:
+          type: string
+    Api_Jio-recharge-service_Recharge_Pay_POST_application_json_RequestBody:
+      required:
+      - addonPlanKeys
+      - flexiTopupFlow
+      - servicePlanList
+      type: object
+      properties:
+        addonPlanKeys:
+          type: array
+          items:
+            type: string
+        flexiTopupFlow:
+          type: boolean
+        servicePlanList:
+          type: array
+          items:
+            $ref: "#/components/schemas/ServicePlanList"
+    Api_Jio-recharge-service_Recharge_Pay_POST_200_application_json_ResponseBody:
+      required:
+      - paymentURL
+      - rechargePOSFlow
+      type: object
+      properties:
+        paymentURL:
+          type: string
+        rechargePOSFlow:
+          type: boolean
+    BadgeData:
+      required:
+      - animationCount
+      - badgeColor
+      - badgeJson
+      - badgeTextColor
+      - borderAnimationCount
+      - cardBackground
+      - cardTheme
+      - gradientColorArray
+      type: object
+      properties:
+        badgeColor:
+          type: string
+        badgeTextColor:
+          type: string
+        badgeJson:
+          type: string
+        cardTheme:
+          type: string
+        gradientColorArray:
+          type: array
+          items:
+            type: string
+        cardBackground:
+          type: string
+        animationCount:
+          type: integer
+        borderAnimationCount:
+          type: integer
+    Items__:
+      required:
+      - exactId
+      - exactIdKey
+      - id
+      - idKey
+      - label
+      type: object
+      properties:
+        label:
+          type: string
+        id:
+          type: string
+        idKey:
+          type: string
+        exactId:
+          type: string
+        exactIdKey:
+          type: string
+    Items___:
+      required:
+      - exactId
+      - exactIdKey
+      - id
+      - idKey
+      - label
+      type: object
+      properties:
+        label:
+          type: string
+        id:
+          type: string
+        idKey:
+          type: string
+        exactId:
+          type: string
+        exactIdKey:
+          type: string
+    "3":
+      required:
+      - header
+      - items
+      type: object
+      properties:
+        header:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Items___"
+    DescChars:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    Notes:
+      required:
+      - message
+      - rows
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        rows:
+          type: integer
+        message:
+          type: string
+    SideFilters:
+      required:
+      - country
+      - filterKey
+      - label
+      type: object
+      properties:
+        label:
+          type: string
+        filterKey:
+          type: string
+        country:
+          type: boolean
+    Items:
+      required:
+      - exactId
+      - exactIdKey
+      - id
+      - idKey
+      - label
+      type: object
+      properties:
+        label:
+          type: string
+        id:
+          type: string
+        idKey:
+          type: string
+        exactId:
+          type: string
+        exactIdKey:
+          type: string
+    "0":
+      type: object
+      properties:
+        header:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Items"
+    Items_:
+      required:
+      - exactId
+      - exactIdKey
+      - id
+      - idKey
+      - label
+      type: object
+      properties:
+        label:
+          type: string
+        id:
+          type: string
+        idKey:
+          type: string
+        exactId:
+          type: string
+        exactIdKey:
+          type: string
+    "1":
+      required:
+      - header
+      - items
+      type: object
+      properties:
+        header:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Items_"
+    "2":
+      required:
+      - header
+      - items
+      type: object
+      properties:
+        header:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Items__"
+    FilterDetails:
+      required:
+      - "0"
+      - "1"
+      - "2"
+      type: object
+      properties:
+        "0":
+          $ref: "#/components/schemas/0"
+        "1":
+          $ref: "#/components/schemas/1"
+        "2":
+          $ref: "#/components/schemas/2"
+        "3":
+          $ref: "#/components/schemas/3"
+    Filters:
+      required:
+      - filterDetails
+      - sideFilters
+      type: object
+      properties:
+        sideFilters:
+          type: array
+          items:
+            $ref: "#/components/schemas/SideFilters"
+        filterDetails:
+          $ref: "#/components/schemas/FilterDetails"
+    CustomFilters:
+      required:
+      - exactId
+      - exactIdKey
+      - label
+      type: object
+      properties:
+        label:
+          type: string
+        exactId:
+          type: string
+        exactIdKey:
+          type: string
+        id:
+          type: string
+        idKey:
+          type: string
+    Note:
+      required:
+      - rows
+      type: object
+      properties:
+        rows:
+          type: integer
+    PrimeData:
+      required:
+      - freeData
+      - freeDataUnits
+      - offerBenefits1
+      - planName1
+      - planName2
+      - totalFreeData
+      - totalPlanAmount
+      type: object
+      properties:
+        freeData:
+          type: integer
+        freeDataUnits:
+          type: string
+        totalFreeData:
+          type: integer
+        totalPlanAmount:
+          type: integer
+        planName1:
+          type: string
+        planName2:
+          type: string
+        offerBenefits1:
+          type: string
+        offerBenefits4:
+          type: string
+        offerBenefits3:
+          type: string
+        plan:
+          type: string
+        offerBenefits2:
+          type: string
+        subscriptions:
+          type: string
+        normalBenefits1:
+          type: string
+        normalBenefits4:
+          type: string
+        descChars:
+          type: array
+          items:
+            $ref: "#/components/schemas/DescChars"
+    FilterKeys:
+      required:
+      - data
+      - price
+      type: object
+      properties:
+        data:
+          type: string
+        price:
+          type: string
+        priceRange:
+          type: string
+        validity:
+          type: string
+        validityRange:
+          type: string
+        ott:
+          type: string
+    Plans:
+      required:
+      - amount
+      - billingType
+      - categoryLabel
+      - description
+      - expiryDays
+      - filterKeys
+      - id
+      - key
+      - name
+      - planName
+      - postOverPreFlag
+      - primeData
+      - primeFlag
+      - quantity
+      - redeemEligibleflag
+      - transferEligibleflag
+      - transferQuantity
+      - upselling
+      - voucherId
+      - wrapperPlan
+      type: object
+      properties:
+        name:
+          type: string
+        amount:
+          type: string
+        id:
+          type: string
+        description:
+          type: string
+        primeData:
+          $ref: "#/components/schemas/PrimeData"
+        primeFlag:
+          type: string
+        key:
+          type: string
+        planName:
+          type: string
+        categoryLabel:
+          type: string
+        quantity:
+          type: integer
+        transferEligibleflag:
+          type: boolean
+        transferQuantity:
+          type: integer
+        redeemEligibleflag:
+          type: boolean
+        expiryDays:
+          type: integer
+        wrapperPlan:
+          type: boolean
+        postOverPreFlag:
+          type: boolean
+        billingType:
+          type: string
+        upselling:
+          type: boolean
+        filterKeys:
+          $ref: "#/components/schemas/FilterKeys"
+        voucherId:
+          type: string
+        priceImageName:
+          type: string
+        badgeData:
+          $ref: "#/components/schemas/BadgeData"
+    SubCategories:
+      required:
+      - plans
+      - sortOrder
+      - type
+      - typeFlag
+      type: object
+      properties:
+        type:
+          type: string
+        typeFlag:
+          type: boolean
+        plans:
+          type: array
+          items:
+            $ref: "#/components/schemas/Plans"
+        sortOrder:
+          type: integer
+        note:
+          $ref: "#/components/schemas/Note"
+    PlanCategories:
+      required:
+      - customFilters
+      - headerType
+      - irFlag
+      - isdFlag
+      - notes
+      - order
+      - planHeader1
+      - planHeader2
+      - planHeader3
+      - subCategories
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+        headerType:
+          type: string
+        planHeader1:
+          type: string
+        planHeader2:
+          type: string
+        planHeader3:
+          type: string
+        irFlag:
+          type: boolean
+        isdFlag:
+          type: boolean
+        order:
+          type: integer
+        notes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Notes"
+        subCategories:
+          type: array
+          items:
+            $ref: "#/components/schemas/SubCategories"
+        customFilters:
+          type: array
+          items:
+            $ref: "#/components/schemas/CustomFilters"
+        filters:
+          $ref: "#/components/schemas/Filters"
+        planHeader4:
+          type: string
+    Api_Jio-recharge-service_Recharge_Plans_ServiceId_param_GET_200_application_json_ResponseBody:
+      required:
+      - planCategories
+      - primeMember
+      - productType
+      - type
+      type: object
+      properties:
+        planCategories:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlanCategories"
+        productType:
+          type: string
+        primeMember:
+          type: boolean
+        type:
+          type: string

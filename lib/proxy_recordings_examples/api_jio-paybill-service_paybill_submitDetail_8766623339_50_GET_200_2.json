@@ -1,0 +1,43 @@
+{
+  "http-request": {
+    "path": "/api/jio-paybill-service/paybill/submitDetail/8766623339/50",
+    "method": "GET",
+    "query": {
+      "rechargeType": "fetchBill",
+      "serviceType": "mobility"
+    },
+    "headers": {
+      "Connection": "keep-alive",
+      "sec-ch-ua-platform": "(string)",
+      "Accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+
+      "sec-ch-ua-mobile": "?0",
+      "Sec-Fetch-Site": "same-origin",
+      "Sec-Fetch-Mode": "cors",
+      "Sec-Fetch-Dest": "empty",
+      "Accept-Encoding": "gzip, deflate, br, zstd",
+      "Cookie": "(string)"
+    }
+  },
+  "http-response": {
+    "status": 200,
+    "body": {
+      "paymentURL": "/api/jio-common-servlet/jiocommon/redirect",
+      "post": false,
+      "prime": true
+    },
+    "status-text": "OK",
+    "headers": {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Connection": "keep-alive",
+      "Set-Cookie": "Authorization=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKSU8uQ09NIiwic3ViIjoiOWQwYjNhZDUtYTkyYS00MGVkLTlmM2ItNjYyZDQwMTI5NjI0IiwiaWF0IjoxNzY3OTM3MzYzLCJleHAiOjE3Njc5MzgyNjN9.ltbig2iSjiDBX52sACRNSxOgDsF4pdIAWKUDsKp2ido; Path=/; Secure; HttpOnly~~ssaid=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKSU8uQ09NIiwic3ViIjoiOWQwYjNhZDUtYTkyYS00MGVkLTlmM2ItNjYyZDQwMTI5NjI0IiwiaWF0IjoxNzY3OTM3MzYzLCJleHAiOjE3Njc5MzgyNjN9.ltbig2iSjiDBX52sACRNSxOgDsF4pdIAWKUDsKp2ido; SameSite=none; Secure; HttpOnly; Path=/; ~~NSC_Q1_kjp_njdsptfswjdf_WT_443=ffffffff0985b18445525d5f4f58455e445a4a4229a0; path=/; secure; httponly",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload always",
+      "X-XSS-Protection": "1; mode=block",
+      "x-frame-options": "SAMEORIGIN",
+      "x-content-type-options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "x-handled-by": "api"
+    }
+  }
+}

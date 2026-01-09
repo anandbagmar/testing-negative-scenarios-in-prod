@@ -21,6 +21,9 @@ version '0.0.1'
 repositories {
     mavenLocal()
     mavenCentral()
+        maven {
+            url = uri("https://repo.specmatic.io/releases")
+        }
 }
 
 compileJava { options.encoding = "UTF-8" }
@@ -28,6 +31,7 @@ compileJava { options.encoding = "UTF-8" }
 dependencies {
     implementation "com.applitools:eyes-selenium-java5:$project.applitoolsVersion"
     implementation "org.testng:testng:$project.testngVersion"
+    implementation "io.specmatic.studio:specmatic-studio:1.16.0"
 }
 
 static def getCurrentDatestamp() {

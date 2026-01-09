@@ -1,0 +1,41 @@
+{
+    "http-request": {
+        "path": "/api/jio-paybill-service/paybill/submitDetail/8766623339/50000",
+        "method": "GET",
+        "query": {
+            "rechargeType": "fetchBill",
+            "serviceType": "mobility"
+        },
+        "headers": {
+            "Connection": "keep-alive",
+            "sec-ch-ua-platform": "(string)",
+            "Accept": "application/json, text/plain, */*",
+            "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+
+            "sec-ch-ua-mobile": "?0",
+            "Sec-Fetch-Site": "same-origin",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Dest": "empty",
+            "Accept-Encoding": "gzip, deflate, br, zstd",
+            "Cookie": "(string)"
+        }
+    },
+    "http-response": {
+        "status": 400,
+        "body": {
+            "errorCode": "2001",
+            "errorMessage": "INFO_PAYBILL_AMOUNT_RANGE_ERROR",
+            "dynMsg": [
+                "10000"
+            ]
+        },
+        "status-text": "Bad Request",
+        "headers": {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Connection": "keep-alive",
+            "Set-Cookie": "ADRUM_BTa=R:22|g:6c4d0ef9-8f43-4fd3-8f11-d0a7d6b80027|n:customer1_a309c9d0-b5ef-4ff1-8978-610c0b29df8f; Path=/~~ADRUM_BT1=R:22|i:4879681|e:2; Path=/~~ADRUM_BTa=R:22|g:68d22ddf-1f74-45b7-997c-021f705659c3; Path=/~~ADRUM_BTa=R:22|g:68d22ddf-1f74-45b7-997c-021f705659c3|n:customer1_a309c9d0-b5ef-4ff1-8978-610c0b29df8f; Path=/~~SameSite=None; Path=/; Secure~~ADRUM_BT1=R:22|i:4498865; Path=/~~ADRUM_BT1=R:22|i:4498865|e:193; Path=/~~NSC_Q1_kjp_njdsptfswjdf_WT_443=ffffffff0985b18445525d5f4f58455e445a4a4229a0; path=/; secure; httponly",
+            "x-frame-options": "SAMEORIGIN",
+            "x-content-type-options": "nosniff"
+        }
+    }
+}

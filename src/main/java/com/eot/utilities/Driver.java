@@ -24,6 +24,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Driver {
     private Driver() {
@@ -97,6 +99,9 @@ public class Driver {
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         options.addArguments("--remote-allow-origins=*");
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("enable_do_not_track", true);
+        options.setExperimentalOption("prefs", prefs);
         if (isHeadless) {
             options.addArguments("--headless=new");
         }
