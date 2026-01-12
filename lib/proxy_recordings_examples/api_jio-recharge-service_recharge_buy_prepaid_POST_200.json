@@ -6,7 +6,6 @@
       "Connection": "keep-alive",
       "sec-ch-ua-platform": "(string)",
       "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
-
       "Content-Type": "application/json",
       "sec-ch-ua-mobile": "?0",
       "Accept": "*/*",

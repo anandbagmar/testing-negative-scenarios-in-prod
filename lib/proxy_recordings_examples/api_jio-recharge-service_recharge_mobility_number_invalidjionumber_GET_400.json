@@ -7,7 +7,6 @@
             "sec-ch-ua-platform": "(string)",
             "Accept": "application/json, text/plain, */*",
             "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
-
             "sec-ch-ua-mobile": "?0",
             "Sec-Fetch-Site": "same-origin",
             "Sec-Fetch-Mode": "cors",
