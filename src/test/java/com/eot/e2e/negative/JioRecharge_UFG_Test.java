@@ -152,6 +152,24 @@ public class JioRecharge_UFG_Test {
     }
 
     @Test (alwaysRun = true)
+    void invalidJioNumberTest() {
+        driver.get(URL);
+        eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
+
+        waitFor(3);
+        By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
+        By rechargeOrPayBillsHeading = By.xpath("//div[text()='Recharge or pay bills']");
+        scrollTillElementIntoView(driver, rechargeOrPayBillsHeading);
+
+        typeInTextBox(driver, jionumberTextBox, INVALID_PHONE_NUMBER);
+        eyes.check("Entered Mobile Number", Target.region(By.xpath("//div[@class=\"recharge-paybill-withleads\"]")));
+
+        waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
+        waitFor(2);
+        eyes.check("Invalid Jio Number entered", Target.window().fully());
+    }
+
+    @Test (alwaysRun = true)
     void postPaidValidRechargeTest() {
         driver.get(URL);
         eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
