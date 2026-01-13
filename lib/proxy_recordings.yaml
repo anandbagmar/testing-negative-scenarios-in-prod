@@ -12,52 +12,12 @@ paths:
         required: true
         schema:
           type: string
-      - name: sec-ch-ua
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua-mobile
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua-platform
-        in: header
-        required: true
-        schema:
-          type: string
       - name: Upgrade-Insecure-Requests
         in: header
         required: true
         schema:
           type: integer
       - name: Accept
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Site
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Mode
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-User
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Dest
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Accept-Encoding
         in: header
         required: true
         schema:
@@ -134,42 +94,7 @@ paths:
         required: true
         schema:
           type: string
-      - name: sec-ch-ua-platform
-        in: header
-        required: true
-        schema:
-          type: string
       - name: Accept
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua-mobile
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Site
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Mode
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Dest
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Accept-Encoding
         in: header
         required: true
         schema:
@@ -251,47 +176,12 @@ paths:
         required: true
         schema:
           type: string
-      - name: sec-ch-ua-platform
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua-mobile
-        in: header
-        required: true
-        schema:
-          type: string
       - name: Accept
         in: header
         required: true
         schema:
           type: string
       - name: Origin
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Site
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Mode
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Dest
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Accept-Encoding
         in: header
         required: true
         schema:
@@ -361,42 +251,7 @@ paths:
         required: true
         schema:
           type: string
-      - name: sec-ch-ua-platform
-        in: header
-        required: true
-        schema:
-          type: string
       - name: Accept
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua-mobile
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Site
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Mode
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Dest
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Accept-Encoding
         in: header
         required: true
         schema:
@@ -478,47 +333,12 @@ paths:
         required: true
         schema:
           type: string
-      - name: sec-ch-ua-platform
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua-mobile
-        in: header
-        required: true
-        schema:
-          type: string
       - name: Accept
         in: header
         required: true
         schema:
           type: string
       - name: Origin
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Site
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Mode
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Dest
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Accept-Encoding
         in: header
         required: true
         schema:
@@ -588,42 +408,7 @@ paths:
         required: true
         schema:
           type: string
-      - name: sec-ch-ua-platform
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: sec-ch-ua-mobile
-        in: header
-        required: true
-        schema:
-          type: string
       - name: Accept
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Site
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Mode
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Sec-Fetch-Dest
-        in: header
-        required: true
-        schema:
-          type: string
-      - name: Accept-Encoding
         in: header
         required: true
         schema:
