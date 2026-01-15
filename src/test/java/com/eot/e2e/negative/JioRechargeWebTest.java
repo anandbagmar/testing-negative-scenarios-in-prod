@@ -37,9 +37,9 @@ import static com.eot.utilities.Wait.waitTillElementIsClickable;
 import static com.eot.utilities.Wait.waitTillElementIsPresent;
 import static com.eot.utilities.Wait.waitTillElementIsVisible;
 
-public class JioRecharge_UFG_Test {
+public class JioRechargeWebTest {
 
-    private static final String appName = JioRecharge_UFG_Test.class.getSimpleName();
+    private static final String appName = JioRechargeWebTest.class.getSimpleName();
     private static final String userName = System.getProperty("user.name");
     private static final String APPLITOOLS_API_KEY = System.getenv("APPLITOOLS_API_KEY");
     private static VisualGridRunner visualGridRunner;
@@ -58,7 +58,7 @@ public class JioRecharge_UFG_Test {
         visualGridRunner.setDontCloseBatches(true);
         batch = new BatchInfo(appName);
         batch.setNotifyOnCompletion(false);
-        batch.setSequenceName(JioRecharge_UFG_Test.class.getSimpleName());
+        batch.setSequenceName(JioRechargeWebTest.class.getSimpleName());
         batch.addProperty("REPOSITORY_NAME", new File(System.getProperty("user.dir")).getName());
         batch.addProperty("APP_NAME", appName);
         batch.addProperty("username", userName);

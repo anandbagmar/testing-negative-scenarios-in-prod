@@ -5,10 +5,10 @@
 This repository demonstrates how to validate **both positive and negative end-to-end scenarios against a deployed application**  by selectively stubbing specific backend APIs, while allowing the rest of the application traffic to hit the live environment, using a controlled and safe testing approach.
 
 It combines:
+- **Specmatic** for intelligent, spec-compliant API stubbing
 - **Web automation**: for functional automation using Selenium-Java + Specmatic intelligent stubbing + Applitools Eyes (UFG)
 - **Mobile automation**: for functional automation Appium (Android) + Specmatic intelligent stubbing + Applitools Eyes
 - **Applitools Visual AI** for visual and UI regression testing
-- **Specmatic** for intelligent, spec-compliant API stubbing
 
 > Specmatic proxy/stub server is the single recommended setup for executing mocked scenarios.
 
