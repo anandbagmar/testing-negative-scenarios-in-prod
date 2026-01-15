@@ -27,6 +27,8 @@ import com.applitools.eyes.visualgrid.services.RunnerOptions;
 import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 import com.eot.utilities.Browser;
 import com.eot.utilities.Driver;
+
+import static com.eot.e2e.negative.TestData.*;
 import static com.eot.utilities.EyesResults.displayVisualValidationResults;
 import static com.eot.utilities.Wait.scrollTillElementIntoView;
 import static com.eot.utilities.Wait.waitFor;
@@ -44,17 +46,7 @@ public class JioRecharge_UFG_Test {
     private Eyes eyes;
     private WebDriver driver;
     private static final boolean USE_UFG = true;
-    private static final boolean DISABLE_EYES = true;
-    private static final String POSTPAID_VALID_RECHARGE_PHONE_NUMBER = "9120000050";
-    private static final String POSTPAID_VALID_RECHARGE_AMOUNT = "50";
-    private static final String POSTPAID_INVALID_RECHARGE_PHONE_NUMBER = "9120050000";
-    private static final String POSTPAID_INVALID_RECHARGE_AMOUNT = "50000";
-    private static final String PREPAID_PHONE_NUMBER_0_PLANS = "9822000000";
-    private static final String PREPAID_PHONE_NUMBER_1_PLAN = "9822000001";
-    private static final String PREPAID_PHONE_NUMBER_2_PLANS = "9822000002";
-    private static final String PREPAID_PHONE_NUMBER_5_PLANS = "9822000005";
-    private static final String PREPAID_PHONE_NUMBER_10_PLANS = "9822000010";
-    private static final String INVALID_PHONE_NUMBER = "1111111111";
+    private static final boolean DISABLE_EYES = false;
 
     private static final String URL = "http://localhost:8080";
 

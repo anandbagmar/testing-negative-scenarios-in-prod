@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@appium/doctor": "2.1.9",
+    "@appium/relaxed-caps-plugin": "1.0.6",
+    "appium": "2.11.2",
+    "appium-uiautomator2-driver": "3.5.2",
+    "appium-xcuitest-driver": "7.17.4"
+  },
+  "name": "applitools-mobile-pocs",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "appium",
+    "appium2.0",
+    "appium-doctor",
+    "appium-device-farm",
+    "applitools"
+  ],
+  "author": "Anand Bagmar",
+  "license": "ISC"
+}

@@ -5,7 +5,10 @@ buildscript {
     ext {
         gradleVersion = '8.10'
         testngVersion = '7+'
-        applitoolsVersion = '5.81.0'
+        seleniumVersion = '4.19.0'
+        applitoolsSeleniumVersion = '5.81.0'
+        applitoolsAppiumVersion = '5.79.1'
+        appiumJavaClientVersion = '9.2.3'
     }
     repositories {
         mavenLocal()
@@ -28,10 +31,21 @@ repositories {
 
 compileJava { options.encoding = "UTF-8" }
 
+configurations.all {
+    resolutionStrategy {
+        force "org.seleniumhq.selenium:selenium-api:$project.seleniumVersion"
+        force "org.seleniumhq.selenium:selenium-remote-driver:$project.seleniumVersion"
+        force "org.seleniumhq.selenium:selenium-java:$project.seleniumVersion"
+    }
+}
+
 dependencies {
-    implementation "com.applitools:eyes-selenium-java5:$project.applitoolsVersion"
+    testImplementation("io.appium:java-client:$project.appiumJavaClientVersion")
+    testImplementation(platform("org.seleniumhq.selenium:selenium-bom:$project.seleniumVersion"))
+    testImplementation("org.seleniumhq.selenium:selenium-java")
+    implementation "com.applitools:eyes-selenium-java5:$project.applitoolsSeleniumVersion"
     implementation "org.testng:testng:$project.testngVersion"
-    implementation "io.specmatic.studio:specmatic-studio:1.16.0"
+    implementation "com.applitools:eyes-appium-java5:$project.applitoolsAppiumVersion"
 }
 
 static def getCurrentDatestamp() {
