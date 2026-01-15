@@ -39,7 +39,7 @@ public class JioRechargeAndroidTest {
     private static String DEBUG_APK_NAME = "sampleApps" + File.separator + "MockedE2EDemo-debug.apk";
     private static String APK_NAME = DEBUG_APK_NAME;
     private static String APK_WITH_NML_NAME = "sampleApps" + File.separator + "dist" + File.separator + "MockedE2EDemo-debug.apk";
-    private static final boolean DISABLE_EYES = getEnvBoolean("DISABLE_EYES", true);
+    private static final boolean DISABLE_EYES = getEnvBoolean("DISABLE_EYES", false);
     private static boolean IS_NML = false;
     private final String APPLITOOLS_API_KEY = System.getenv("APPLITOOLS_API_KEY");
     private AndroidDriver driver;
