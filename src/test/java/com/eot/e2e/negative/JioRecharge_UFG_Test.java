@@ -47,7 +47,7 @@ public class JioRecharge_UFG_Test {
     private Eyes eyes;
     private WebDriver driver;
     private static final boolean USE_UFG = true;
-    private static final boolean DISABLE_EYES = getEnvBoolean("DISABLE_EYES", false);
+    private static final boolean DISABLE_EYES = getEnvBoolean("DISABLE_EYES", true);
 
     private static final String URL = "http://localhost:8080";
 

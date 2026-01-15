@@ -3,8 +3,8 @@ package com.eot.e2e.negative;
 import com.applitools.eyes.*;
 import com.applitools.eyes.appium.Eyes;
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.options.UiAutomator2Options;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
@@ -26,24 +26,28 @@ import static com.eot.e2e.negative.StringUtils.getEnvBoolean;
 import static com.eot.e2e.negative.TestData.*;
 import static com.eot.utilities.Wait.*;
 
-public class JioRechargeAndroidTest {
-    private static final String className = JioRechargeAndroidTest.class.getSimpleName();
+public class JioRechargeiOSTest {
+    private static final String className = JioRechargeiOSTest.class.getSimpleName();
     private static final long epochSecond = new Date().toInstant().getEpochSecond();
     private static final String userName = System.getProperty("user.name");
-    private static final boolean IS_FULL_RESET = true;
-    private static final String PLATFORM_NAME = "android";
+    private static final boolean IS_FULL_RESET = false;
+    private static final String PLATFORM_NAME = "iOS";
     private static final boolean IS_MULTI_DEVICE = false;
     private static BatchInfo batch;
     private static String APPIUM_SERVER_URL = "http://localhost:4723/wd/hub/";
     private static AppiumDriverLocalService localAppiumServer;
-    private static String DEBUG_APK_NAME = "sampleApps" + File.separator + "MockedE2EDemo-debug.apk";
-    private static String APK_NAME = DEBUG_APK_NAME;
-    private static String APK_WITH_NML_NAME = "sampleApps" + File.separator + "dist" + File.separator + "MockedE2EDemo-debug.apk";
+    private static String DEBUG_APP_NAME = "sampleApps" + File.separator + "MockedE2EDemo-debug.app";
+    private static String APP_NAME = DEBUG_APP_NAME;
+    private static String APK_WITH_NML_NAME = "sampleApps" + File.separator + "dist" + File.separator + "MockedE2EDemo-debug.app";
     private static final boolean DISABLE_EYES = getEnvBoolean("DISABLE_EYES", true);
     private static boolean IS_NML = false;
     private final String APPLITOOLS_API_KEY = System.getenv("APPLITOOLS_API_KEY");
-    private AndroidDriver driver;
+    private IOSDriver driver;
     private Eyes eyes;
+    private final static String DEVICE_UUID = "1158D906-D411-447A-8BF8-F22B2333827F";
+    private final static String DEVICE_NAME = "iPhone 14 Pro Max";
+    private final static String BUNDLE_ID = "io.specmatic.e2edemo";
+
 
     @BeforeSuite
     static void beforeAll() {
@@ -93,7 +97,7 @@ public class JioRechargeAndroidTest {
     @BeforeMethod
     public void beforeEach(Method testInfo) {
         System.out.printf("Test: %s - BeforeEach%n", testInfo.getName());
-        setUpAndroid(testInfo);
+        setUpiOS(testInfo);
     }
 
     @AfterMethod
@@ -115,38 +119,55 @@ public class JioRechargeAndroidTest {
         }
     }
 
-    void setUpAndroid(Method testInfo) {
+    void setUpiOS(Method testInfo) {
         System.out.println("BeforeEach: Test - " + testInfo.getName());
-        System.out.printf("Create AppiumDriver for android test - %s%n", APPIUM_SERVER_URL);
-        UiAutomator2Options uiAutomator2Options = new UiAutomator2Options();
-        uiAutomator2Options.setPlatformName(PLATFORM_NAME);
+        System.out.printf("Create AppiumDriver for iOS test - %s%n", APPIUM_SERVER_URL);
 
-        uiAutomator2Options.setCapability(UiAutomator2Options.AUTOMATION_NAME_OPTION, "UiAutomator2");
-        uiAutomator2Options.setCapability(UiAutomator2Options.NEW_COMMAND_TIMEOUT_OPTION, 15000);
-        uiAutomator2Options.setCapability(UiAutomator2Options.DEVICE_NAME_OPTION, "Android");
-        uiAutomator2Options.setCapability(UiAutomator2Options.PRINT_PAGE_SOURCE_ON_FIND_FAILURE_OPTION, true);
-        uiAutomator2Options.setCapability(UiAutomator2Options.AUTO_GRANT_PERMISSIONS_OPTION, true);
-        uiAutomator2Options.setCapability(UiAutomator2Options.FULL_RESET_OPTION, IS_FULL_RESET);
+        IOSSimPermissions.bootSimIfNeeded(DEVICE_UUID);
+        IOSSimPermissions.grantLocation(DEVICE_UUID, BUNDLE_ID);
+
+        // optional but helpful if web content expects a location
+        IOSSimPermissions.setSimLocation(DEVICE_UUID, 19.0760, 72.8777); // Mumbai
+
+        XCUITestOptions xcuiTestOptions = new XCUITestOptions();
+        xcuiTestOptions.setPlatformName(PLATFORM_NAME);
+        xcuiTestOptions.setUdid(DEVICE_UUID);
+        xcuiTestOptions.setCapability(XCUITestOptions.DEVICE_NAME_OPTION, DEVICE_NAME);
+
+        xcuiTestOptions.setCapability(XCUITestOptions.AUTOMATION_NAME_OPTION, "XCUITest");
+        xcuiTestOptions.setCapability(XCUITestOptions.NEW_COMMAND_TIMEOUT_OPTION, 15000);
+        xcuiTestOptions.setCapability(XCUITestOptions.AUTO_ACCEPT_ALERTS_OPTION, true);
+        xcuiTestOptions.setCapability(XCUITestOptions.PRINT_PAGE_SOURCE_ON_FIND_FAILURE_OPTION, true);
+        xcuiTestOptions.setCapability(XCUITestOptions.INCLUDE_SAFARI_IN_WEBVIEWS_OPTION, true);
+//        xcuiTestOptions.setCapability(XCUITestOptions.WEBVIEW_CONNECT_TIMEOUT_OPTION, "120000");
+//        xcuiTestOptions.setCapability(XCUITestOptions.WEBKIT_RESPONSE_TIMEOUT_OPTION, "120000");
+        xcuiTestOptions.setCapability(XCUITestOptions.NATIVE_WEB_TAP_OPTION, true);
+//        xcuiTestOptions.setCapability(XCUITestOptions.SHOW_XCODE_LOG_OPTION, true);
+        xcuiTestOptions.setCapability(XCUITestOptions.FULL_RESET_OPTION, IS_FULL_RESET);
+        xcuiTestOptions.setCapability(XCUITestOptions.NO_RESET_OPTION, false);
+        xcuiTestOptions.setCapability("appium:autoGrantPermissions", true);
+        xcuiTestOptions.setCapability("appium:autoDismissAlerts", false);
+        xcuiTestOptions.setCapability("appium:locationServicesEnabled", true);
+        xcuiTestOptions.setCapability("appium:locationServicesAuthorized", true);
         if (IS_NML) {
-            uiAutomator2Options.setCapability(UiAutomator2Options.APP_OPTION, new File(APK_WITH_NML_NAME).getAbsolutePath());
-            System.out.printf("Add devices to NML configuration using capabilities: %%n%s%n", uiAutomator2Options);
-            Eyes.setMobileCapabilities(uiAutomator2Options, APPLITOOLS_API_KEY);
+            xcuiTestOptions.setCapability(XCUITestOptions.APP_OPTION, new File(APK_WITH_NML_NAME).getAbsolutePath());
+            System.out.printf("Add devices to NML configuration using capabilities: %%n%s%n", xcuiTestOptions);
+            Eyes.setMobileCapabilities(xcuiTestOptions, APPLITOOLS_API_KEY);
         } else {
-            String absolutePath = new File(APK_NAME).getAbsolutePath();
+            String absolutePath = new File(APP_NAME).getAbsolutePath();
             System.out.println("APK absolute path: " + absolutePath);
-            uiAutomator2Options.setCapability(UiAutomator2Options.APP_OPTION, absolutePath);
-            uiAutomator2Options.setCapability("appium:app", absolutePath);
+            xcuiTestOptions.setCapability(XCUITestOptions.APP_OPTION, absolutePath);
         }
         System.out.println("UiAutomator2Options:");
-        for (String capabilityName : uiAutomator2Options.getCapabilityNames()) {
-            System.out.println("\t" + capabilityName + ": " + uiAutomator2Options.getCapability(capabilityName));
+        for (String capabilityName : xcuiTestOptions.getCapabilityNames()) {
+            System.out.println("\t" + capabilityName + ": " + xcuiTestOptions.getCapability(capabilityName));
         }
 
         try {
-            driver = new AndroidDriver(new URL(APPIUM_SERVER_URL), uiAutomator2Options);
+            driver = new IOSDriver(new URL(APPIUM_SERVER_URL), xcuiTestOptions);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1L));
         } catch (MalformedURLException e) {
-            System.err.println("Error creating Appium driver for android device with capabilities: " + uiAutomator2Options);
+            System.err.println("Error creating Appium driver for android device with capabilities: " + xcuiTestOptions);
             throw new RuntimeException(e);
         }
         System.out.printf("Created AppiumDriver for - %s%n", APPIUM_SERVER_URL);
@@ -154,6 +175,11 @@ public class JioRechargeAndroidTest {
     }
 
     private void configureEyes(Method testInfo) {
+        if (!DISABLE_EYES) {
+            System.out.println("Eyes is enabled for this test.");
+        } else {
+            System.out.println("Eyes is disabled for this test.");
+        }
         System.out.println("Setup Eyes configuration");
         eyes = new Eyes();
 
@@ -167,10 +193,10 @@ public class JioRechargeAndroidTest {
         eyes.setServerUrl("https://eyes.applitools.com");
         eyes.setMatchLevel(MatchLevel.STRICT);
         eyes.setIsDisabled(DISABLE_EYES);
-        eyes.setIgnoreCaret(true);
-        eyes.setIgnoreDisplacements(true);
-        eyes.setForceFullPageScreenshot(false);
-        eyes.setSaveNewTests(true);
+//        eyes.setIgnoreCaret(true);
+//        eyes.setIgnoreDisplacements(true);
+//        eyes.setForceFullPageScreenshot(false);
+//        eyes.setSaveNewTests(true);
         if (IS_NML && IS_MULTI_DEVICE) {
             //            eyes.setConfiguration(eyes.getConfiguration().addMobileDevice(new AndroidDeviceInfo(AndroidDeviceName.Galaxy_S10_Plus)));
             //            eyes.setConfiguration(eyes.getConfiguration().addMobileDevice(new AndroidDeviceInfo(AndroidDeviceName.Galaxy_S21)));
@@ -178,7 +204,7 @@ public class JioRechargeAndroidTest {
         eyes.open(driver, className, testInfo.getName());
     }
 
-    private static void switchToWebView(AndroidDriver driver) {
+    private static void switchToWebView(IOSDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 
@@ -200,7 +226,7 @@ public class JioRechargeAndroidTest {
         throw new RuntimeException("❌ No WEBVIEW context found even after waiting.");
     }
 
-    private static void switchBackToNative(AndroidDriver driver) {
+    private static void switchBackToNative(IOSDriver driver) {
         driver.context("NATIVE_APP");
         System.out.println("✅ Switched back to native context");
     }
@@ -319,5 +345,9 @@ public class JioRechargeAndroidTest {
         typeInTextBox(driver, AppiumBy.xpath("//input[@placeholder=\"Jio Number\"]"), prepaidPhoneNumber);
         driver.findElement(AppiumBy.xpath("//div[text()=\"Proceed\"]")).click();
         eyes.checkWindow("Recharge Options Page");
+        if (DISABLE_EYES) {
+            waitFor(15);
+        }
     }
+
 }
