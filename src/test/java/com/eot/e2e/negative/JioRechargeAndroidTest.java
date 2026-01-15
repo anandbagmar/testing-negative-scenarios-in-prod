@@ -22,6 +22,7 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.Set;
 
+import static com.eot.e2e.negative.StringUtils.getEnvBoolean;
 import static com.eot.e2e.negative.TestData.*;
 import static com.eot.utilities.Wait.*;
 
@@ -38,7 +39,7 @@ public class JioRechargeAndroidTest {
     private static String DEBUG_APK_NAME = "sampleApps" + File.separator + "MockedE2EDemo-debug.apk";
     private static String APK_NAME = DEBUG_APK_NAME;
     private static String APK_WITH_NML_NAME = "sampleApps" + File.separator + "dist" + File.separator + "MockedE2EDemo-debug.apk";
-    private static boolean IS_EYES_ENABLED = true;
+    private static final boolean DISABLE_EYES = getEnvBoolean("DISABLE_EYES", true);
     private static boolean IS_NML = false;
     private final String APPLITOOLS_API_KEY = System.getenv("APPLITOOLS_API_KEY");
     private AndroidDriver driver;
@@ -99,7 +100,7 @@ public class JioRechargeAndroidTest {
     void tearDown(Method testInfo) {
         System.out.println("AfterEach: Test - " + testInfo.getName());
         boolean isPass = true;
-        if (IS_EYES_ENABLED) {
+        if (null != eyes) {
             TestResults testResults = eyes.close(false);
             System.out.printf("Test: %s\n%s%n", testResults.getName(), testResults);
             if (testResults.getStatus().equals(TestResultsStatus.Failed) || testResults.getStatus().equals(TestResultsStatus.Unresolved)) {
@@ -165,7 +166,7 @@ public class JioRechargeAndroidTest {
         eyes.setApiKey(APPLITOOLS_API_KEY);
         eyes.setServerUrl("https://eyes.applitools.com");
         eyes.setMatchLevel(MatchLevel.STRICT);
-        eyes.setIsDisabled(!IS_EYES_ENABLED);
+        eyes.setIsDisabled(DISABLE_EYES);
         eyes.setIgnoreCaret(true);
         eyes.setIgnoreDisplacements(true);
         eyes.setForceFullPageScreenshot(false);

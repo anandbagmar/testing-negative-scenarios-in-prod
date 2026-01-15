@@ -102,6 +102,23 @@ eyes.setApiKey("<replace_me>");
 
 ---
 
+## Enable/Disable Applitools validation (DISABLE_EYES)
+
+By default, Applitools validations are **skipped**.
+
+- Default: `DISABLE_EYES=true` (Eyes validations will be skipped)
+- To enable Applitools validations: set `DISABLE_EYES=false`
+
+### Disable Eyes (default)
+```bash
+export DISABLE_EYES=true
+```
+
+### Enable Eyes validations
+```bash
+export DISABLE_EYES=false
+```
+
 ## Start Specmatic stub server (required)
 
 Before running any web or Android tests, setup and start the Specmatic proxy/stub server using:

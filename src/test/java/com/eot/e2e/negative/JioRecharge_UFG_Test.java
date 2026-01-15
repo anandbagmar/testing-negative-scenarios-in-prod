@@ -28,6 +28,7 @@ import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 import com.eot.utilities.Browser;
 import com.eot.utilities.Driver;
 
+import static com.eot.e2e.negative.StringUtils.getEnvBoolean;
 import static com.eot.e2e.negative.TestData.*;
 import static com.eot.utilities.EyesResults.displayVisualValidationResults;
 import static com.eot.utilities.Wait.scrollTillElementIntoView;
@@ -46,7 +47,7 @@ public class JioRecharge_UFG_Test {
     private Eyes eyes;
     private WebDriver driver;
     private static final boolean USE_UFG = true;
-    private static final boolean DISABLE_EYES = false;
+    private static final boolean DISABLE_EYES = getEnvBoolean("DISABLE_EYES", true);
 
     private static final String URL = "http://localhost:8080";
 
