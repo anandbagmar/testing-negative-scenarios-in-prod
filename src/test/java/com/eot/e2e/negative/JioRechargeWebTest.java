@@ -28,7 +28,7 @@ import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 import com.eot.utilities.Browser;
 import com.eot.utilities.Driver;
 
-import static com.eot.e2e.negative.StringUtils.getEnvBoolean;
+import static com.eot.utilities.StringUtils.getEnvBoolean;
 import static com.eot.e2e.negative.TestData.*;
 import static com.eot.utilities.EyesResults.displayVisualValidationResults;
 import static com.eot.utilities.Wait.scrollTillElementIntoView;

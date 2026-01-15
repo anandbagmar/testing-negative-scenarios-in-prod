@@ -1,7 +1,7 @@
-package com.eot.e2e.negative;
+package com.eot.utilities;
 
 public class StringUtils {
-    static boolean getEnvBoolean(String envName, boolean defaultValue) {
+    public static boolean getEnvBoolean(String envName, boolean defaultValue) {
         String value = System.getenv(envName);
 
         if (value == null || value.trim().isEmpty()) {

@@ -2,6 +2,8 @@ package com.eot.e2e.negative;
 
 import com.applitools.eyes.*;
 import com.applitools.eyes.appium.Eyes;
+import com.eot.utilities.AndroidCommands;
+import com.eot.utilities.ShellUtils;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -22,7 +24,7 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.Set;
 
-import static com.eot.e2e.negative.StringUtils.getEnvBoolean;
+import static com.eot.utilities.StringUtils.getEnvBoolean;
 import static com.eot.e2e.negative.TestData.*;
 import static com.eot.utilities.Wait.*;
 
@@ -47,6 +49,7 @@ public class JioRechargeAndroidTest {
 
     @BeforeSuite
     static void beforeAll() {
+        AndroidCommands.adbReverse8080();
         startAppiumServer();
         String batchName = className;
         batch = new BatchInfo(batchName);

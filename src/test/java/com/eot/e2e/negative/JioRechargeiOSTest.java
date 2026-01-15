@@ -2,6 +2,7 @@ package com.eot.e2e.negative;
 
 import com.applitools.eyes.*;
 import com.applitools.eyes.appium.Eyes;
+import com.eot.utilities.IOSCommands;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
@@ -22,7 +23,7 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.Set;
 
-import static com.eot.e2e.negative.StringUtils.getEnvBoolean;
+import static com.eot.utilities.StringUtils.getEnvBoolean;
 import static com.eot.e2e.negative.TestData.*;
 import static com.eot.utilities.Wait.*;
 
@@ -123,11 +124,11 @@ public class JioRechargeiOSTest {
         System.out.println("BeforeEach: Test - " + testInfo.getName());
         System.out.printf("Create AppiumDriver for iOS test - %s%n", APPIUM_SERVER_URL);
 
-        IOSSimPermissions.bootSimIfNeeded(DEVICE_UUID);
-        IOSSimPermissions.grantLocation(DEVICE_UUID, BUNDLE_ID);
+        IOSCommands.bootSimIfNeeded(DEVICE_UUID);
+        IOSCommands.grantLocation(DEVICE_UUID, BUNDLE_ID);
 
         // optional but helpful if web content expects a location
-        IOSSimPermissions.setSimLocation(DEVICE_UUID, 19.0760, 72.8777); // Mumbai
+        IOSCommands.setSimLocation(DEVICE_UUID, 19.0760, 72.8777); // Mumbai
 
         XCUITestOptions xcuiTestOptions = new XCUITestOptions();
         xcuiTestOptions.setPlatformName(PLATFORM_NAME);
