@@ -37,6 +37,7 @@ It combines:
 ## Setup (fresh clone)
 
 ### 1) Clone this repo
+
 ```bash
 
 git clone https://github.com/anandbagmar/testing-negative-scenarios-in-prod/
@@ -111,11 +112,13 @@ By default, Applitools validations are **skipped**.
 
 ### Disable Eyes (default)
 ```bash
+
 export DISABLE_EYES=true
 ```
 
 ### Enable Eyes validations
 ```bash
+
 export DISABLE_EYES=false
 ```
 
@@ -143,15 +146,57 @@ npm install
 
 ---
 
-## Run Tests
+## Running the tests (Web + Android)
 
-> Update this section with your actual gradle/maven/npm commands as per the project structure.
+> Before running **any** tests, make sure the **Specmatic stub/proxy** is running by following the [Specmatic Stub Setup](README-Specmatic-Stub-Setup.md).
 
-### Web (Selenium) tests
-Run the Selenium-Java tests using your configured test runner (Gradle/Maven/TestNG).
+---
 
-### Android (Appium) tests
-Start the emulator and execute the Appium test suite.
+### Web E2E test (Selenium + Specmatic + Applitools Eyes UFG)
+
+Test class:
+- `src/test/java/com/eot/e2e/negative/JioRecharge_UFG_Test.java`
+
+#### Run from command line (Gradle wrapper)
+```bash
+  ./gradlew test --tests "com.eot.e2e.negative.JioRecharge_UFG_Test"
+```
+
+#### Run from IDE (IntelliJ IDEA / Android Studio)
+1. Open `JioRecharge_UFG_Test.java`
+2. Click the green ▶︎ gutter icon next to the class (or a test method)
+3. Make sure your environment variables are set in the Run Configuration:
+    - `DISABLE_EYES=true` (default; skips Eyes)
+    - `APPLITOOLS_API_KEY` (required only if you set `DISABLE_EYES=false`)
+
+---
+
+### Android E2E test (Appium + Specmatic + Applitools Eyes)
+
+Test class:
+- `src/test/java/com/eot/e2e/negative/JioRechargeAndroidTest.java`
+
+#### Prerequisites
+- The demo app binary exists in `sampleApps/` (copied from the `MockedE2EDemo` repo):
+    - `sampleApps/MockedE2EDemo-debug.apk`
+- Android emulator/device is running
+- `adb reverse` is configured (see [Specmatic Stub Setup](README-Specmatic-Stub-Setup.md))
+- Appium server is running, for example:
+  ```bash
+  appium --base-path /wd/hub --log-level info
+  ```
+
+#### Run from command line (Gradle wrapper)
+```bash
+  ./gradlew test --tests "com.eot.e2e.negative.JioRechargeAndroidTest"
+```
+
+#### Run from IDE (IntelliJ IDEA / Android Studio)
+1. Open `JioRechargeAndroidTest.java`
+2. Run the class using the ▶︎ gutter icon
+3. In your Run Configuration, set:
+    - `DISABLE_EYES=true` (default) or `DISABLE_EYES=false`
+    - `APPLITOOLS_API_KEY` (only needed when `DISABLE_EYES=false`)
 
 ---
 
