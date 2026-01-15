@@ -19,6 +19,9 @@ It combines:
 * [Setup Specmatic stub server (required)](#setup-specmatic-stub-server-required)
 * [Test the Web front-end](#test-the-web-front-end)
 * [Test the Android app](#test-the-android-app)
+* [Applitools Visual AI Setup](./Applitools-README.md)
+* [Troubleshooting](./Troubleshooting-README.md)
+
 
 ---
 
@@ -153,6 +156,3 @@ npm install
     - `APPLITOOLS_API_KEY` (only needed when `DISABLE_EYES=false`)
 
 ---
-
-### [Applitools Visual AI Setup](./Applitools-README.md)
-### [Troubleshooting](./Troubleshooting-README.md)
