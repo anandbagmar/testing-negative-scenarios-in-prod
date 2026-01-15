@@ -12,6 +12,14 @@ It combines:
 
 > Specmatic proxy/stub server is the single recommended setup for executing mocked scenarios.
 
+## Table of Contents
+
+* [How the tests work](#how-the-tests-work)
+* [Test framework setup](#test-framework-setup)
+* [Setup Specmatic stub server (required)](#setup-specmatic-stub-server-required)
+* [Test the Web front-end](#test-the-web-front-end)
+* [Test the Android app](#test-the-android-app)
+
 ---
 
 ## How the tests work
@@ -24,17 +32,16 @@ It combines:
 
 ---
 
-## Prerequisites
+## Test Framework Setup
 
-### System requirements
+### Prerequisites
+
+#### System requirements
 - Java 17+ (for Selenium/Appium test execution)
 - Node.js (for Android test dependencies)
 - Android Studio + Android SDK (for running emulator)
 - (Optional) Xcode (only needed if you want to build iOS sample app from source)
 
----
-
-## Setup (fresh clone)
 
 ### 1) Clone this repo
 
@@ -70,11 +77,9 @@ cp /path/to/MockedE2EDemo/android/app/build/outputs/apk/debug/MockedE2EDemo-debu
 
 ---
 
-## Start Specmatic stub server (required)
+## Setup Specmatic stub server (required)
 
-Before running any web or Android tests, setup and start the Specmatic proxy/stub server using:
-
-- https://github.com/anandbagmar/testing-negative-scenarios-in-prod/blob/main/README-Specmatic-Stub-Setup.md
+Before running any web or Android tests, [setup and start the Specmatic proxy/stub server](./README-Specmatic-Stub-Setup.md):
 
 This will:
 - start the Specmatic proxy server (default on port 8080)
@@ -83,18 +88,7 @@ This will:
 
 ---
 
-## Android test pre-step (Node dependencies)
-
-Before running Android Appium tests, run:
-
-```bash
-
-npm install
-```
-
----
-
-## Running the tests (Web + Android)
+## Test the Web front-end
 
 > Before running **any** tests, make sure the **Specmatic stub/proxy** is running by following the [Specmatic Stub Setup](README-Specmatic-Stub-Setup.md).
 
@@ -103,21 +97,23 @@ npm install
 ### Web E2E test (Selenium + Specmatic + Applitools Eyes UFG)
 
 Test class:
-- `src/test/java/com/eot/e2e/negative/JioRecharge_UFG_Test.java`
+- `src/test/java/com/eot/e2e/negative/JioRechargeWebTest.java`
 
 #### Run from command line (Gradle wrapper)
 ```bash
-  ./gradlew test --tests "com.eot.e2e.negative.JioRecharge_UFG_Test"
+  ./gradlew test --tests "com.eot.e2e.negative.JioRechargeWebTest"
 ```
 
 #### Run from IDE (IntelliJ IDEA / Android Studio)
-1. Open `JioRecharge_UFG_Test.java`
+1. Open `JioRechargeWebTest.java`
 2. Click the green ▶︎ gutter icon next to the class (or a test method)
 3. Make sure your environment variables are set in the Run Configuration:
     - `DISABLE_EYES=true` (default; skips Eyes)
     - `APPLITOOLS_API_KEY` (required only if you set `DISABLE_EYES=false`)
 
 ---
+
+## Test the Android app
 
 ### Android E2E test (Appium + Specmatic + Applitools Eyes)
 
@@ -133,6 +129,16 @@ Test class:
   ```bash
   appium --base-path /wd/hub --log-level info
   ```
+## Android test pre-step (Node dependencies)
+
+Before running Android Appium tests, run:
+
+```bash
+
+npm install
+```
+
+---
 
 #### Run from command line (Gradle wrapper)
 ```bash
