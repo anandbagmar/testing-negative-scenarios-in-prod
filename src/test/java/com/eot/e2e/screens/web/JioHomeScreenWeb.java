@@ -5,6 +5,7 @@ import com.eot.e2e.entities.E2E_TEST_CONTEXT;
 import com.eot.e2e.screens.JioHomeScreen;
 import com.eot.e2e.screens.PaymentScreen;
 import com.eot.e2e.screens.PrepaidPlansScreen;
+import com.eot.e2e.screens.TimedOutScreen;
 import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Runner;
@@ -65,7 +66,7 @@ public class JioHomeScreenWeb extends JioHomeScreen {
 
     @Override
     public JioHomeScreen proceedToEnterRechargeAmount() {
-        driver.waitForClickabilityOf(BY_PROCEED_BUTTON_XPATH).click();
+        clickOnProceedButton(BY_PROCEED_BUTTON_XPATH);
         driver.waitTillElementIsVisible(BY_PAY_BUTTON_XPATH);
         return this;
     }
@@ -111,7 +112,7 @@ public class JioHomeScreenWeb extends JioHomeScreen {
     @Override
     public JioHomeScreen proceedToRechargeNonJioNumber() {
         LOGGER.info("Proceeding to try and recharge Non Jio Number");
-        driver.waitForClickabilityOf(BY_PROCEED_BUTTON_XPATH).click();
+        clickOnProceedButton(BY_PROCEED_BUTTON_XPATH);
         driver.waitTillElementIsVisible(BY_INVALID_RECHARGE_AMOUNT_ERROR_MESSAGE_CLASSNAME);
         return this;
     }
@@ -122,6 +123,17 @@ public class JioHomeScreenWeb extends JioHomeScreen {
         LOGGER.info("Actual Invalid Jio Number Error Message: " + actualErrorMessage);
         visually.check(SCREEN_NAME, "Invalid Jio Number Error Message", Target.region(BY_RECHARGE_NUMBER_SECTION_XPATH));
         return actualErrorMessage;
+    }
+
+    @Override
+    public TimedOutScreen proceedToPlanSelectionWithoutWaiting() {
+        LOGGER.info("Proceeding to Plan Selection Page");
+        clickOnProceedButton(BY_PROCEED_BUTTON_XPATH);
+        return TimedOutScreen.get();
+    }
+
+    private void clickOnProceedButton(By byProceedButtonXpath) {
+        driver.waitForClickabilityOf(byProceedButtonXpath).click();
     }
 
     private @NotNull JioHomeScreenWeb enterRechargeAmount() {
@@ -161,7 +173,7 @@ public class JioHomeScreenWeb extends JioHomeScreen {
     @Override
     public PrepaidPlansScreen proceedToPlanSelection() {
         LOGGER.info("Proceeding to Plan Selection Page");
-        driver.waitForClickabilityOf(BY_PROCEED_BUTTON_XPATH).click();
+        clickOnProceedButton(BY_PROCEED_BUTTON_XPATH);
         driver.waitTillElementIsVisible(BY_INTERNATIONAL_ROAMING_PLANS_HEADING_XPATH);
         return PrepaidPlansScreen.get();
     }

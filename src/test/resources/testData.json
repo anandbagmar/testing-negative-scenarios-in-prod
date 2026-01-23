@@ -8,6 +8,7 @@
     "POSTPAID_INVALID_RECHARGE_PHONE_NUMBER": "9120050000",
     "POSTPAID_INVALID_RECHARGE_AMOUNT": "50000",
     "POSTPAID_MAXIMUM_AMOUNT_ERROR_MESSAGE": "Maximum amount that can be paid is Rs 10000. Please update the amount to be paid and resubmit.",
+    "PREPAID_PHONE_NUMBER_TIMEOUT": "9120055555",
     "PREPAID_PHONE_NUMBER_0_PLANS": "9822000000",
     "PREPAID_PHONE_NUMBER_1_PLAN": "9822000001",
     "PREPAID_PHONE_NUMBER_2_PLANS": "9822000002",
@@ -16,7 +17,8 @@
     "INVALID_PHONE_NUMBER": "1111111111",
     "INVALID_PHONE_NUMBER_ERROR_MESSAGE": "It seems you have entered a non-Jio number. Please try again with a Jio number",
     "ZERO_PLANS_ERROR_MESSAGE": "Uh-ohWe searched far and wide and couldn’t find what you were looking for. Try something else.",
-    "PLANS_AVAILABLE_MESSAGE": "Top Trending True 5G Unlimited Plans (NUMBER_OF_PLANS)"
+    "PLANS_AVAILABLE_MESSAGE": "Top Trending True 5G Unlimited Plans (NUMBER_OF_PLANS)",
+    "SOMETHING_WENT_WRONG_ERROR_MESSAGE": "Something Went wrong To continue working, please try again"
   },
   "browserStack": {
     "username": "eot.testing@gmail.com",

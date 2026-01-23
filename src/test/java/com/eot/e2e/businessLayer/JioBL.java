@@ -2,6 +2,7 @@ package com.eot.e2e.businessLayer;
 
 import com.eot.e2e.entities.E2E_TEST_CONTEXT;
 import com.eot.e2e.screens.JioHomeScreen;
+import com.eot.e2e.screens.TimedOutScreen;
 import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Runner;
@@ -38,6 +39,14 @@ public class JioBL {
                 .enterPrepaidNumber()
                 .proceedToPlanSelection();
         return new RechargePlansBL(this.currentUserPersona, this.currentPlatform);
+    }
+
+    public JioBL enterPrepaidNumberAndTryToRecharge() {
+        JioHomeScreen.get()
+                .enterPrepaidNumber()
+                .proceedToPlanSelectionWithoutWaiting()
+                .waitForTimedOutScreen();
+        return this;
     }
 
     public JioBL onLaunch() {
@@ -86,6 +95,15 @@ public class JioBL {
         String actualInvalidRechargeErrorMessage = context.getTestStateAsString(E2E_TEST_CONTEXT.ACTUAL_INVALID_JIO_NUMBER_ERROR_MESSAGE);
         softly.assertThat(actualInvalidRechargeErrorMessage)
                 .as("Verify invalid Jio number error message")
+                .isEqualTo(expectedErrorMessage);
+        return this;
+    }
+
+    public JioBL verifySomethingWentWrongMessage(String expectedErrorMessage) {
+        String actualSomethingWentWrongMessage = TimedOutScreen.get()
+                .getSomethingWentWrongMessage() ;
+        softly.assertThat(actualSomethingWentWrongMessage)
+                .as("Verify something went wrong error message")
                 .isEqualTo(expectedErrorMessage);
         return this;
     }

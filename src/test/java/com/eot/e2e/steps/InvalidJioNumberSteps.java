@@ -6,6 +6,7 @@ import com.znsio.teswiz.context.SessionContext;
 import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -40,4 +41,16 @@ public class InvalidJioNumberSteps {
         String expectedErrorMessage = context.getTestStateAsString(E2E_TEST_CONTEXT.EXPECTED_INVALID_PHONE_NUMBER_ERROR_MESSAGE);
         new JioBL().verifyInvalidJioNumberMessage(expectedErrorMessage);
     }
+
+    @Then("I should see {string} error message when the service times out")
+    public void iShouldSeeErrorMessageWhenTheServiceTimesOut(String errorMessage) {
+        String expectedErrorMessage = Runner.getTestData(errorMessage);
+        new JioBL().verifySomethingWentWrongMessage(expectedErrorMessage);
+    }
+
+    @When("I try to recharge the prepaid number")
+    public void iTryToRechargeThePrepaidNumber() {
+        new JioBL().enterPrepaidNumberAndTryToRecharge();
+    }
+
 }

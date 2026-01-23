@@ -53,4 +53,6 @@ public abstract class JioHomeScreen {
     public abstract JioHomeScreen proceedToRechargeNonJioNumber();
 
     public abstract String getInvalidJioNumberErrorMessage();
+
+    public abstract TimedOutScreen proceedToPlanSelectionWithoutWaiting();
 }
