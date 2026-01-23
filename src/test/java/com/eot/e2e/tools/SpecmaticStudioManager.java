@@ -15,7 +15,8 @@ public final class SpecmaticStudioManager {
     private static volatile ManagedProcess proc;
     private static final AtomicBoolean shutdownHookRegistered = new AtomicBoolean(false);
 
-    private SpecmaticStudioManager() {}
+    private SpecmaticStudioManager() {
+    }
 
     /**
      * Convenience wrapper:
@@ -89,7 +90,8 @@ public final class SpecmaticStudioManager {
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
                     stopIfRunning();
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
             }, "specmatic-studio-shutdown-hook"));
 
             LOGGER.info("[SpecmaticStudioManager] Shutdown hook registered.");

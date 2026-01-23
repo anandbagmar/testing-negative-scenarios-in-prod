@@ -41,4 +41,13 @@ public class RechargePlansBL {
                 .isEqualTo(expectedErrorMessage);
         return this;
     }
+
+    public RechargePlansBL verifyNumberOfPlansAvailable(String expectedPlansAvailableMessage) {
+        LOGGER.info("Verify number of plans available: " + expectedPlansAvailableMessage);
+        String actualNumberOfPlansAvailableMessage = PrepaidPlansScreen.get().getNumberOfPlansAvailableMessage();
+        softly.assertThat(actualNumberOfPlansAvailableMessage)
+                .as("Expected: " + expectedPlansAvailableMessage + " but was: " + actualNumberOfPlansAvailableMessage)
+                .isEqualTo(expectedPlansAvailableMessage);
+        return this;
+    }
 }

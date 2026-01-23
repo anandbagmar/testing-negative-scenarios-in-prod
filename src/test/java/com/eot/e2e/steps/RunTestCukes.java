@@ -5,7 +5,6 @@ import com.applitools.eyes.selenium.Configuration;
 import com.applitools.eyes.visualgrid.model.DeviceName;
 import com.applitools.eyes.visualgrid.model.ScreenOrientation;
 import com.eot.e2e.entities.E2E_TEST_CONTEXT;
-import com.eot.e2e.tools.JarDownloader;
 import com.eot.e2e.tools.SpecmaticStudioManager;
 import com.znsio.teswiz.context.SessionContext;
 import com.znsio.teswiz.context.TestExecutionContext;
@@ -16,7 +15,6 @@ import com.znsio.teswiz.steps.Hooks;
 import com.znsio.teswiz.tools.JsonPrettyPrinter;
 import com.znsio.teswiz.tools.OsUtils;
 import com.znsio.teswiz.tools.ReportPortalLogger;
-import com.znsio.teswiz.tools.cmd.CommandLineExecutor;
 import io.cucumber.java.*;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import org.apache.logging.log4j.LogManager;
@@ -25,8 +23,6 @@ import org.assertj.core.api.Assertions;
 import org.testng.annotations.DataProvider;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
 public class RunTestCukes
         extends AbstractTestNGCucumberTests {

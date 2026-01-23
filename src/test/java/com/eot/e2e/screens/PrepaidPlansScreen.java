@@ -29,4 +29,6 @@ public abstract class PrepaidPlansScreen {
     }
 
     public abstract String getErrorMessage();
+
+    public abstract String getNumberOfPlansAvailableMessage();
 }

@@ -13,7 +13,8 @@ import java.util.Objects;
 public final class SpecmaticStudioRunner {
     private static final Logger LOGGER = LogManager.getLogger(SpecmaticStudioRunner.class);
 
-    private SpecmaticStudioRunner() {}
+    private SpecmaticStudioRunner() {
+    }
 
     /**
      * Start Specmatic Studio: java -jar <jar> <args...>
@@ -21,7 +22,9 @@ public final class SpecmaticStudioRunner {
      */
     public static ManagedProcess start(Path jarPath, List<String> args, Path workingDir) {
         Objects.requireNonNull(jarPath, "jarPath");
-        if (args == null) args = List.of();
+        if (args == null) {
+            args = List.of();
+        }
 
         try {
             List<String> cmd = new ArrayList<>();
@@ -58,7 +61,8 @@ public final class SpecmaticStudioRunner {
                 while ((line = br.readLine()) != null) {
                     LOGGER.info("[SpecmaticStudio] {}", line);
                 }
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }, "specmatic-studio-logs");
 
         t.setDaemon(true);

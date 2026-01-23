@@ -1,16 +1,20 @@
 package com.eot.e2e.tools;
 
-import io.cucumber.java.be.I;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.file.*;
+import java.nio.file.AtomicMoveNotSupportedException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,13 +38,14 @@ public final class JarDownloader {
     private static final Pattern VERSION_PATTERN =
             Pattern.compile("<version>\\s*([^<\\s]+)\\s*</version>");
 
-    private JarDownloader() {}
+    private JarDownloader() {
+    }
 
     /**
      * Ensures the latest specmatic-studio jar is present under <projectDir>/temp.
      * Returns the jar path.
      */
-    public static Path downloadLatestIfMissing(Path projectDir)  {
+    public static Path downloadLatestIfMissing(Path projectDir) {
         try {
             Objects.requireNonNull(projectDir, "projectDir");
 
@@ -79,14 +84,20 @@ public final class JarDownloader {
 
             // Prefer <release>, then <latest>, else last <version>
             String release = firstMatch(RELEASE_PATTERN, xml);
-            if (isNonBlank(release)) return release;
+            if (isNonBlank(release)) {
+                return release;
+            }
 
             String latest = firstMatch(LATEST_PATTERN, xml);
-            if (isNonBlank(latest)) return latest;
+            if (isNonBlank(latest)) {
+                return latest;
+            }
 
             List<String> versions = allMatches(VERSION_PATTERN, xml);
             String last = lastStableSemver(versions);
-            if (isNonBlank(last)) return last;
+            if (isNonBlank(last)) {
+                return last;
+            }
         }
 
         // 2) Fallback: parse artifact directory listing
@@ -94,7 +105,9 @@ public final class JarDownloader {
         if (listing.isPresent()) {
             List<String> versions = allMatches(VERSION_DIR_PATTERN, listing.get());
             String last = lastStableSemver(versions);
-            if (isNonBlank(last)) return last;
+            if (isNonBlank(last)) {
+                return last;
+            }
         }
 
         throw new IOException("Unable to determine latest specmatic-studio version from: " + ARTIFACT_DIR);
@@ -157,7 +170,9 @@ public final class JarDownloader {
         Matcher m = p.matcher(s);
         while (m.find()) {
             String v = m.group(1).trim();
-            if (!v.isEmpty()) out.add(v);
+            if (!v.isEmpty()) {
+                out.add(v);
+            }
         }
         return out;
     }
@@ -167,7 +182,9 @@ public final class JarDownloader {
      * Skips obvious non-numeric qualifiers (e.g., -SNAPSHOT, -RC).
      */
     private static String lastStableSemver(List<String> versions) {
-        if (versions == null || versions.isEmpty()) return null;
+        if (versions == null || versions.isEmpty()) {
+            return null;
+        }
 
         return versions.stream()
                 .filter(Objects::nonNull)
@@ -183,7 +200,9 @@ public final class JarDownloader {
         for (int i = 0; i < Math.max(va.length, vb.length); i++) {
             int ai = i < va.length ? va[i] : 0;
             int bi = i < vb.length ? vb[i] : 0;
-            if (ai != bi) return Integer.compare(ai, bi);
+            if (ai != bi) {
+                return Integer.compare(ai, bi);
+            }
         }
         return 0;
     }

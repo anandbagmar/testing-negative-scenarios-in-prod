@@ -7,7 +7,6 @@ import com.znsio.teswiz.context.SessionContext;
 import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.runner.Drivers;
 import com.znsio.teswiz.runner.Runner;
-import io.cucumber.java.PendingException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -56,5 +55,17 @@ public class JioRechargeSteps {
     public void iShouldSeeErrorMessage(String errorMessage) {
         String expectedErrorMessage = Runner.getTestData(errorMessage);
         new RechargePlansBL().verifyErrorMessageIsDisplayed(expectedErrorMessage);
+    }
+
+    @Then("I should see {string} plans available message")
+    public void iShouldSeePlansAvailableMessage(String numberOfPlans) {
+        String expectedPlansAvailableMessage = Runner.getTestData(E2E_TEST_CONTEXT.PLANS_AVAILABLE_MESSAGE).replace(E2E_TEST_CONTEXT.NUMBER_OF_PLANS, numberOfPlans);
+        new RechargePlansBL().verifyNumberOfPlansAvailable(expectedPlansAvailableMessage);
+    }
+
+    @Then("I should see {string} plan available message")
+    public void iShouldSeePlanAvailableMessage(String numberOfPlans) {
+        String expectedPlansAvailableMessage = Runner.getTestData(E2E_TEST_CONTEXT.PLANS_AVAILABLE_MESSAGE).replace(E2E_TEST_CONTEXT.NUMBER_OF_PLANS, numberOfPlans);
+        new RechargePlansBL().verifyNumberOfPlansAvailable(expectedPlansAvailableMessage);
     }
 }
