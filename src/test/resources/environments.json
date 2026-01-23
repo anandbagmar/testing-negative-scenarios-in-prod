@@ -1,0 +1,10 @@
+{
+  "prod": {
+  },
+  "dev": {
+  },
+  "local": {
+    "JIO_LOCAL_BASE_URL": "http://localhost:8080/",
+    "HEALTH_CHECK_URL": "http://localhost:8080/health"
+  }
+}

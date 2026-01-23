@@ -1,4 +1,5 @@
 import org.codehaus.groovy.runtime.GStringImpl
+
 import java.text.SimpleDateFormat
 
 buildscript {
@@ -22,14 +23,28 @@ plugins {
 version '0.0.1'
 
 repositories {
+    flatDir {
+        dirs 'libs'
+    }
     mavenLocal()
     mavenCentral()
-        maven {
-            url = uri("https://repo.specmatic.io/releases")
-        }
+    maven {
+        url = uri("https://repo.specmatic.io/releases")
+    }
+    maven {
+        url = 'https://jitpack.io'
+    }
 }
 
-compileJava { options.encoding = "UTF-8" }
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
 
 configurations.all {
     resolutionStrategy {
@@ -40,12 +55,9 @@ configurations.all {
 }
 
 dependencies {
-    testImplementation("io.appium:java-client:$project.appiumJavaClientVersion")
-    testImplementation(platform("org.seleniumhq.selenium:selenium-bom:$project.seleniumVersion"))
-    testImplementation("org.seleniumhq.selenium:selenium-java")
-    implementation "com.applitools:eyes-selenium-java5:$project.applitoolsSeleniumVersion"
-    implementation "org.testng:testng:$project.testngVersion"
-    implementation "com.applitools:eyes-appium-java5:$project.applitoolsAppiumVersion"
+    implementation("com.github.znsio:teswiz:9245d32abc") {
+        transitive = false
+    }
 }
 
 static def getCurrentDatestamp() {
@@ -100,6 +112,94 @@ test {
             jvmArgs '-Xdebug', '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,' + 'address=*:5005'
         }
     }
+}
+
+def logDir = "./target/" + getMonth() + "/" + getCurrentDatestamp() + "/" + getCurrentTimestamp()
+
+def copyRpPropertiesIfMissing() {
+    def rpFile = file('src/test/resources/reportportal.properties')
+    def rpTemplateFile = file('src/test/resources/reportportal.properties.template')
+
+    if (!rpFile.exists() && rpTemplateFile.exists()) {
+        println "Copying $rpTemplateFile to $rpFile"
+        rpFile.text = rpTemplateFile.text
+    } else if (!rpTemplateFile.exists()) {
+        println "$rpTemplateFile does not exist. Please create it."
+    } else {
+        println "$rpFile already exists."
+    }
+    System.setProperty("reportportal.properties.file", rpFile.absolutePath)
+}
+
+tasks.register('copyRpPropertiesIfMissing') {
+    doLast {
+        copyRpPropertiesIfMissing()
+    }
+}
+
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.hasTask(':build') || taskGraph.hasTask(':run')) {
+        copyRpPropertiesIfMissing()
+    }
+}
+
+tasks.register('run', JavaExec) {
+    doFirst {
+        println "Using LOG_DIR: ${logDir}"
+        System.setProperty "LOG_DIR", "${logDir}"
+        environment "APPLITOOLS_LOG_DIR", "${logDir}/applitools_logs"
+        environment "APPLITOOLS_API_KEY", System.getenv("TESWIZ_APPLITOOLS_API_KEY")
+
+        def hostname = InetAddress.getLocalHost().getHostName()
+        println "Hostname: $hostname"
+        def ipAddress = InetAddress.getAllByName(hostname)
+                .find { it.hostAddress.startsWith("192") || it.hostAddress.startsWith("172") || it.hostAddress.startsWith("10") }
+                ?.hostAddress
+        println "IP Address of this machine: $ipAddress"
+        if (null == ipAddress) {
+            println "Unable to get local IP address. NOT updating BASE_URL and REMOTE_WEBDRIVER_GRID_HOST_NAME"
+        } else {
+//            println "Updating BASE_URL ('http://$ipAddress:3000') and REMOTE_WEBDRIVER_GRID_HOST_NAME ('$ipAddress')"
+//            environment "BASE_URL", "http://$ipAddress:3000"
+            environment "REMOTE_WEBDRIVER_GRID_HOST_NAME", "$ipAddress"
+        }
+
+        def configFile = System.getenv("CONFIG")
+        if (null == configFile || !file(configFile).exists()) {
+            println("CONFIG file not provided, or does not exist")
+            configFile = "./src/test/resources/configs/jio_local_web_config.properties"
+            println("Using CONFIG file: ${configFile}")
+        }
+        assert file(configFile).exists()
+
+//      You can also specify which config file to use based on the value of RUN_IN_CI as shown below
+//
+//        def isRunInCI = Boolean.parseBoolean(System.getenv("RUN_IN_CI"))
+//        println "isRunningInCI: $isRunInCI"
+//        def configFile = isRunInCI
+//                ? "./configs/theapp/theapp_pcloudy_config.properties"
+//                : "./configs/theapp/theapp_local_android_config.properties"
+//        configFile = System.getenv("CONFIG") ? System.getenv("CONFIG") : configFile
+
+        systemProperties = System.properties as Map<String, ?>
+        def runnerArgs = [
+                "${configFile}",
+                "com/eot/e2e/steps",
+                "./src/test/resources/com/eot/e2e/features"
+        ]
+        args = runnerArgs
+
+        println("Debug mode: " + System.getProperty('debug', 'false'))
+        // attach debugger
+        // example: ./gradlew run -Ddebug=true
+        if (System.getProperty('debug', 'false') == 'true') {
+            println("In debug mode")
+            jvmArgs '-Xdebug', '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,' +
+                    'address=*:5005'
+        }
+    }
+    mainClass = "com.znsio.teswiz.runner.Runner"
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
 }
 
 clean.doFirst {
