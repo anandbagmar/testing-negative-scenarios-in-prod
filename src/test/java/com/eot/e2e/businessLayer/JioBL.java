@@ -72,4 +72,21 @@ public class JioBL {
                 .isEqualTo(expectedInvalidRechargeErrorMessage);
         return this;
     }
+
+    public JioBL enterNonJioNumberAndRecharge() {
+        String actualInvalidJioNumberErrorMessage = JioHomeScreen.get()
+                .enterNonJioNumber()
+                .proceedToRechargeNonJioNumber()
+                .getInvalidJioNumberErrorMessage();
+        context.addTestState(E2E_TEST_CONTEXT.ACTUAL_INVALID_JIO_NUMBER_ERROR_MESSAGE, actualInvalidJioNumberErrorMessage);
+        return this;
+    }
+
+    public JioBL verifyInvalidJioNumberMessage(String expectedErrorMessage) {
+        String actualInvalidRechargeErrorMessage = context.getTestStateAsString(E2E_TEST_CONTEXT.ACTUAL_INVALID_JIO_NUMBER_ERROR_MESSAGE);
+        softly.assertThat(actualInvalidRechargeErrorMessage)
+                .as("Verify invalid Jio number error message")
+                .isEqualTo(expectedErrorMessage);
+        return this;
+    }
 }

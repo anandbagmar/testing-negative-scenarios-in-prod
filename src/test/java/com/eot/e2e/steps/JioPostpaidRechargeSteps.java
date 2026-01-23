@@ -18,14 +18,10 @@ public class JioPostpaidRechargeSteps {
 
     public JioPostpaidRechargeSteps() {
         context = SessionContext.getTestExecutionContext(Thread.currentThread().getId());
-        LOGGER.info("context: " + context.getTestName());
     }
 
     @Given("I have a postpaid number")
     public void iHaveAPostpaidNumber() {
-        LOGGER.info(System.out.printf(
-                "iHaveAPostpaidNumber - Persona:'%s', Platform: '%s'",
-                E2E_TEST_CONTEXT.I, Runner.getPlatform()));
         Drivers.createDriverFor(E2E_TEST_CONTEXT.I, Runner.getPlatform(), context);
         new JioBL(E2E_TEST_CONTEXT.I, Runner.getPlatform()).onLaunch();
     }
@@ -36,9 +32,6 @@ public class JioPostpaidRechargeSteps {
         String rechargeAmount = Runner.getTestData(E2E_TEST_CONTEXT.POSTPAID_VALID_RECHARGE_AMOUNT);
         context.addTestState(E2E_TEST_CONTEXT.RECHARGE_NUMBER, postpaidNumberToUse);
         context.addTestState(E2E_TEST_CONTEXT.RECHARGE_AMOUNT, rechargeAmount);
-        LOGGER.info(System.out.printf(
-                "iRechargeWithAValidRechargeAmount - Persona:'%s', Platform: '%s', Postpaid number: '%s', Recharge amount: '%s'",
-                E2E_TEST_CONTEXT.I, Runner.getPlatform(), postpaidNumberToUse, rechargeAmount));
         new JioBL().enterPostpaidNumberAndValidRechargeAmount();
     }
     @Given("I recharge with an invalid recharge amount")
@@ -47,9 +40,6 @@ public class JioPostpaidRechargeSteps {
         String rechargeAmount = Runner.getTestData(E2E_TEST_CONTEXT.POSTPAID_INVALID_RECHARGE_AMOUNT);
         context.addTestState(E2E_TEST_CONTEXT.RECHARGE_NUMBER, postpaidNumberToUse);
         context.addTestState(E2E_TEST_CONTEXT.RECHARGE_AMOUNT, rechargeAmount);
-        LOGGER.info(System.out.printf(
-                "iRechargeWithAnInvalidRechargeAmount - Persona:'%s', Platform: '%s', Postpaid number: '%s', Recharge amount: '%s'",
-                E2E_TEST_CONTEXT.I, Runner.getPlatform(), postpaidNumberToUse, rechargeAmount));
         new JioBL().enterPostpaidNumberAndInvalidRechargeAmount();
     }
 

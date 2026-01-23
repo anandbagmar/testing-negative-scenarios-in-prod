@@ -101,6 +101,29 @@ public class JioHomeScreenWeb extends JioHomeScreen {
         return this;
     }
 
+    @Override
+    public JioHomeScreen enterNonJioNumber() {
+        String nonJioNumber = context.getTestStateAsString(E2E_TEST_CONTEXT.RECHARGE_NUMBER);
+        LOGGER.info("Entering Non Jio Number: " + nonJioNumber);
+        return enterNumber(nonJioNumber);
+    }
+
+    @Override
+    public JioHomeScreen proceedToRechargeNonJioNumber() {
+        LOGGER.info("Proceeding to try and recharge Non Jio Number");
+        driver.waitForClickabilityOf(BY_PROCEED_BUTTON_XPATH).click();
+        driver.waitTillElementIsVisible(BY_INVALID_RECHARGE_AMOUNT_ERROR_MESSAGE_CLASSNAME);
+        return this;
+    }
+
+    @Override
+    public String getInvalidJioNumberErrorMessage() {
+        String actualErrorMessage = driver.waitTillElementIsVisible(BY_INVALID_RECHARGE_AMOUNT_ERROR_MESSAGE_CLASSNAME).getText();
+        LOGGER.info("Actual Invalid Jio Number Error Message: " + actualErrorMessage);
+        visually.check(SCREEN_NAME, "Invalid Jio Number Error Message", Target.region(BY_RECHARGE_NUMBER_SECTION_XPATH));
+        return actualErrorMessage;
+    }
+
     private @NotNull JioHomeScreenWeb enterRechargeAmount() {
         LOGGER.info("Proceeding to enter Recharge Amount");
         String rechargeAmount = context.getTestStateAsString(E2E_TEST_CONTEXT.RECHARGE_AMOUNT);

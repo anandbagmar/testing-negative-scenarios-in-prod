@@ -1,5 +1,5 @@
 @jio @specmatic @postpaid
-Feature: Prepaid number recharge scenarios
+Feature: Postpaid number recharge scenarios
 
 #  CONFIG=./src/test/resources/configs/jio_local_web_config.properties TAG="@validRecharge" PLATFORM=web ./gradlew run
   @web @validRecharge

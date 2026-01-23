@@ -47,4 +47,10 @@ public abstract class JioHomeScreen {
     public abstract String getInvalidRechargeAmountErrorMessage();
 
     public abstract JioHomeScreen proceedToPaymentForInvalidRechargeAmount();
+
+    public abstract JioHomeScreen enterNonJioNumber();
+
+    public abstract JioHomeScreen proceedToRechargeNonJioNumber();
+
+    public abstract String getInvalidJioNumberErrorMessage();
 }

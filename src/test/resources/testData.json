@@ -14,7 +14,7 @@
     "PREPAID_PHONE_NUMBER_5_PLANS": "9822000005",
     "PREPAID_PHONE_NUMBER_10_PLANS": "9822000010",
     "INVALID_PHONE_NUMBER": "1111111111",
-    "INVALID_PHONE_NUMBER_ERROR_MESSAGE": "Please enter a valid Jio number",
+    "INVALID_PHONE_NUMBER_ERROR_MESSAGE": "It seems you have entered a non-Jio number. Please try again with a Jio number",
     "ZERO_PLANS_ERROR_MESSAGE": "Uh-ohWe searched far and wide and couldn’t find what you were looking for. Try something else.",
     "PLANS_AVAILABLE_MESSAGE": "Top Trending True 5G Unlimited Plans (NUMBER_OF_PLANS)"
   },
