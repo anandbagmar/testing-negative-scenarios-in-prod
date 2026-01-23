@@ -24,20 +24,18 @@ public final class SpecmaticStudioManager {
      * java -jar ../temp/specmatic-studio-<latest>.jar --specs-dir=proxy_recording_examples proxy
      */
     public static void startProxyMode(Path projectDir) {
-        System.out.println(">>> Log4j2 Logger class = " + LogManager.getLogger(SpecmaticStudioManager.class).getClass());
-        System.out.println(">>> Log4j2 factory      = " + LogManager.getFactory().getClass());
         Objects.requireNonNull(projectDir, "projectDir");
 
-        Path libDir = projectDir.resolve("lib");
-        Path jarAbsolute = JarDownloader.downloadLatestIfMissing(projectDir);
-        Path jarRelative = libDir.relativize(jarAbsolute);
+        Path specmaticStubDir = projectDir.resolve("src/test/resources/specmatic");
+        Path specmaticStudioJarDir = JarDownloader.downloadLatestIfMissing(projectDir);
+        Path jarRelative = specmaticStubDir.relativize(specmaticStudioJarDir);
 
         List<String> args = List.of(
                 "--specs-dir=proxy_recording_examples",
                 "proxy"
         );
 
-        startOnce(jarRelative, args, libDir);
+        startOnce(jarRelative, args, specmaticStubDir);
     }
 
     /**
