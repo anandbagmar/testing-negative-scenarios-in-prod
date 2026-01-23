@@ -1,7 +1,7 @@
 @jio @specmatic @invalid
 Feature: Verify timeout scenarios for dependent services
 
-#  CONFIG=./src/test/resources/configs/jio_local_web_config.properties TAG="@timeout" PLATFORM=web ./gradlew run
+#  CONFIG=./teswiz_configs/configs/jio_local_web_config.properties TAG="@timeout" ./gradlew run
   @web @timeout @0Plans
   Scenario: User should see something went wrong error message when the service times out for prepaid number having zero plans
     Given I have a prepaid number "PREPAID_PHONE_NUMBER_TIMEOUT" with zero plans

@@ -117,8 +117,8 @@ test {
 def logDir = "./target/" + getMonth() + "/" + getCurrentDatestamp() + "/" + getCurrentTimestamp()
 
 def copyRpPropertiesIfMissing() {
-    def rpFile = file('src/test/resources/reportportal.properties')
-    def rpTemplateFile = file('src/test/resources/reportportal.properties.template')
+    def rpFile = file('teswiz_configs/reportportal.properties')
+    def rpTemplateFile = file('teswiz_configs/reportportal.properties.template')
 
     if (!rpFile.exists() && rpTemplateFile.exists()) {
         println "Copying $rpTemplateFile to $rpFile"
@@ -167,7 +167,7 @@ tasks.register('run', JavaExec) {
         def configFile = System.getenv("CONFIG")
         if (null == configFile || !file(configFile).exists()) {
             println("CONFIG file not provided, or does not exist")
-            configFile = "./src/test/resources/configs/jio_local_web_config.properties"
+            configFile = "./teswiz_configs/configs/jio_local_web_config.properties"
             println("Using CONFIG file: ${configFile}")
         }
         assert file(configFile).exists()
