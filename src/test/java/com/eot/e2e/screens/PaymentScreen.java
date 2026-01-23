@@ -1,6 +1,7 @@
 package com.eot.e2e.screens;
 
 import com.eot.e2e.screens.web.JioHomeScreenWeb;
+import com.eot.e2e.screens.web.PaymentScreenWeb;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Drivers;
@@ -10,11 +11,11 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public abstract class JioHomeScreen {
-    private static final String SCREEN_NAME = JioHomeScreen.class.getSimpleName();
+public abstract class PaymentScreen {
+    private static final String SCREEN_NAME = PaymentScreen.class.getSimpleName();
     private static final Logger LOGGER = LogManager.getLogger(SCREEN_NAME);
 
-    public static JioHomeScreen get() {
+    public static PaymentScreen get() {
         Driver driver = Drivers.getDriverForCurrentUser(Thread.currentThread().getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
@@ -22,29 +23,9 @@ public abstract class JioHomeScreen {
 
         switch (platform) {
             case web:
-                return new JioHomeScreenWeb(driver, visually);
+                return new PaymentScreenWeb(driver, visually);
         }
         throw new NotImplementedException(
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
-
-    public abstract JioHomeScreen enterPrepaidNumber();
-
-    public abstract JioHomeScreen onLaunch();
-
-    public abstract PrepaidPlansScreen proceedToPlanSelection();
-
-    public abstract JioHomeScreen enterPostPaidNumber();
-
-    public abstract JioHomeScreen enterValidRechargeAmount();
-
-    public abstract JioHomeScreen proceedToEnterRechargeAmount();
-
-    public abstract PaymentScreen proceedToPaymentForValidRechargeAmount();
-
-    public abstract JioHomeScreen enterInvalidRechargeAmount();
-
-    public abstract String getInvalidRechargeAmountErrorMessage();
-
-    public abstract JioHomeScreen proceedToPaymentForInvalidRechargeAmount();
 }

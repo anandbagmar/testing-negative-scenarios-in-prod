@@ -13,34 +13,21 @@ import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Map;
-
-public class JioRechargeSteps {
-    private static final Logger LOGGER = LogManager.getLogger(JioRechargeSteps.class.getName());
+public class JioPrepaidRechargeSteps {
+    private static final Logger LOGGER = LogManager.getLogger(JioPrepaidRechargeSteps.class.getName());
     private final TestExecutionContext context;
 
-    public JioRechargeSteps() {
+    public JioPrepaidRechargeSteps() {
         context = SessionContext.getTestExecutionContext(Thread.currentThread().getId());
         LOGGER.info("context: " + context.getTestName());
-    }
-
-    @Given("I sign in as a registered {string}")
-    public void iSignInAsARegistered(String userSuffix) {
-        Map userDetails = Runner.getTestDataAsMap(userSuffix);
-        LOGGER.info(System.out.printf(
-                "iSignInAsARegistered - Persona:'%s', User details: '%s', Platform: '%s'",
-                E2E_TEST_CONTEXT.I, userDetails, Runner.getPlatform()));
-        Drivers.createDriverFor(E2E_TEST_CONTEXT.I, Runner.getPlatform(), context);
-        context.addTestState(E2E_TEST_CONTEXT.I, String.valueOf(userDetails.get("username")));
-        new JioBL(E2E_TEST_CONTEXT.I, Runner.getPlatform());
     }
 
     @Given("I have a prepaid number {string} with zero plans")
     public void iHaveAPrepaidNumberWithZeroPlans(String prepaidNumber) {
         String prepaidNumberToUse = Runner.getTestData(prepaidNumber);
         LOGGER.info(System.out.printf(
-                "iHaveAPrepaidNumberWithZeroPlans - Persona:'%s', User details: '%s', Platform: '%s'",
-                E2E_TEST_CONTEXT.I, prepaidNumberToUse, Runner.getPlatform()));
+                "iHaveAPrepaidNumberWithZeroPlans - Persona:'%s', Platform: '%s', Prepaid number: '%s'",
+                E2E_TEST_CONTEXT.I, Runner.getPlatform(), prepaidNumberToUse));
         Drivers.createDriverFor(E2E_TEST_CONTEXT.I, Runner.getPlatform(), context);
         context.addTestState(E2E_TEST_CONTEXT.RECHARGE_NUMBER, prepaidNumberToUse);
         new JioBL(E2E_TEST_CONTEXT.I, Runner.getPlatform()).onLaunch();

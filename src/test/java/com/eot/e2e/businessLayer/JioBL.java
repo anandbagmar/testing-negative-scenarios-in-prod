@@ -34,12 +34,42 @@ public class JioBL {
     }
 
     public RechargePlansBL enterPrepaidNumberAndRecharge() {
-        JioHomeScreen.get().enterPrepaidNumber().proceedToPlanSelection();
+        JioHomeScreen.get()
+                .enterPrepaidNumber()
+                .proceedToPlanSelection();
         return new RechargePlansBL(this.currentUserPersona, this.currentPlatform);
     }
 
     public JioBL onLaunch() {
         JioHomeScreen.get().onLaunch();
+        return this;
+    }
+
+    public PaymentsBL enterPostpaidNumberAndValidRechargeAmount() {
+        JioHomeScreen.get()
+                .enterPostPaidNumber()
+                .proceedToEnterRechargeAmount()
+                .enterValidRechargeAmount()
+                .proceedToPaymentForValidRechargeAmount();
+        return new PaymentsBL(this.currentUserPersona, this.currentPlatform);
+    }
+
+    public JioBL enterPostpaidNumberAndInvalidRechargeAmount() {
+        String actualInvalidRechargeAmountErrorMessage = JioHomeScreen.get()
+                .enterPostPaidNumber()
+                .proceedToEnterRechargeAmount()
+                .enterInvalidRechargeAmount()
+                .proceedToPaymentForInvalidRechargeAmount()
+                .getInvalidRechargeAmountErrorMessage();
+        context.addTestState(E2E_TEST_CONTEXT.POSTPAID_MAXIMUM_AMOUNT_ERROR_MESSAGE, actualInvalidRechargeAmountErrorMessage);
+        return this;
+    }
+
+    public JioBL verifyInvalidRechargeAmountForPostpaidMessage(String expectedInvalidRechargeErrorMessage) {
+        String actualInvalidRechargeErrorMessage = context.getTestStateAsString(E2E_TEST_CONTEXT.POSTPAID_MAXIMUM_AMOUNT_ERROR_MESSAGE);
+        softly.assertThat(actualInvalidRechargeErrorMessage)
+                .as("Verify invalid recharge amount error message")
+                .isEqualTo(expectedInvalidRechargeErrorMessage);
         return this;
     }
 }

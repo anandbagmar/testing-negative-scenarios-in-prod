@@ -1,4 +1,4 @@
-@jio @specmatic
+@jio @specmatic @prepaid
 Feature: Prepaid number recharge scenarios
 
 #  CONFIG=./src/test/resources/configs/jio_local_web_config.properties TAG="@0Plans" PLATFORM=web ./gradlew run
