@@ -1,5 +1,6 @@
 package com.eot.e2e.screens;
 
+import com.eot.e2e.screens.android.PaymentScreenAndroid;
 import com.eot.e2e.screens.web.JioHomeScreenWeb;
 import com.eot.e2e.screens.web.PaymentScreenWeb;
 import com.znsio.teswiz.entities.Platform;
@@ -24,6 +25,8 @@ public abstract class PaymentScreen {
         switch (platform) {
             case web:
                 return new PaymentScreenWeb(driver, visually);
+            case android:
+                 return new PaymentScreenAndroid(driver, visually);
         }
         throw new NotImplementedException(
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());

@@ -1,5 +1,6 @@
 package com.eot.e2e.screens;
 
+import com.eot.e2e.screens.android.PrepaidPlansScreenAndroid;
 import com.eot.e2e.screens.web.PrepaidPlansScreenWeb;
 import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.runner.Driver;
@@ -23,6 +24,8 @@ public abstract class PrepaidPlansScreen {
         switch (platform) {
             case web:
                 return new PrepaidPlansScreenWeb(driver, visually);
+            case android:
+                return new PrepaidPlansScreenAndroid(driver, visually);
         }
         throw new NotImplementedException(
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());

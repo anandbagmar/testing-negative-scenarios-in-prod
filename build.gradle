@@ -5,11 +5,6 @@ import java.text.SimpleDateFormat
 buildscript {
     ext {
         gradleVersion = '8.10'
-        testngVersion = '7+'
-        seleniumVersion = '4.19.0'
-        applitoolsSeleniumVersion = '5.81.0'
-        applitoolsAppiumVersion = '5.79.1'
-        appiumJavaClientVersion = '9.2.3'
     }
     repositories {
         mavenLocal()
@@ -46,16 +41,8 @@ configurations {
     }
 }
 
-configurations.all {
-    resolutionStrategy {
-        force "org.seleniumhq.selenium:selenium-api:$project.seleniumVersion"
-        force "org.seleniumhq.selenium:selenium-remote-driver:$project.seleniumVersion"
-        force "org.seleniumhq.selenium:selenium-java:$project.seleniumVersion"
-    }
-}
-
 dependencies {
-    implementation("com.github.znsio:teswiz:9245d32abc") {
+    implementation("com.github.znsio:teswiz:be88ba6451") {
         transitive = false
     }
 }
@@ -164,10 +151,20 @@ tasks.register('run', JavaExec) {
             environment "REMOTE_WEBDRIVER_GRID_HOST_NAME", "$ipAddress"
         }
 
+        def platform = System.getenv("PLATFORM")
+        if (null == platform || platform.isEmpty()) {
+            println("PLATFORM not provided, defaulting to 'web'")
+            platform = "web"
+        }
+
         def configFile = System.getenv("CONFIG")
         if (null == configFile || !file(configFile).exists()) {
             println("CONFIG file not provided, or does not exist")
-            configFile = "./teswiz_configs/configs/jio_local_web_config.properties"
+            if (platform.equalsIgnoreCase("android")) {
+                configFile = "./teswiz_configs/configs/jio_local_android_config.properties"
+            } else {
+                configFile = "./teswiz_configs/configs/jio_local_web_config.properties"
+            }
             println("Using CONFIG file: ${configFile}")
         }
         assert file(configFile).exists()
