@@ -6,6 +6,8 @@ import com.applitools.eyes.visualgrid.model.DeviceName;
 import com.applitools.eyes.visualgrid.model.ScreenOrientation;
 import com.eot.e2e.entities.E2E_TEST_CONTEXT;
 import com.eot.e2e.tools.SpecmaticStudioManager;
+import com.eot.utilities.ShellUtils;
+import com.eot.utilities.TestLogger;
 import com.znsio.teswiz.context.SessionContext;
 import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.entities.APPLITOOLS;
@@ -49,6 +51,12 @@ public class RunTestCukes
     public static void beforeAll() {
         LOGGER.info("RunTestCukes: beforeAll");
         SpecmaticStudioManager.startProxyMode(Path.of(OsUtils.getUserDirectory()));
+        adbReverse8080();
+    }
+
+    private static void adbReverse8080() {
+        LOGGER.info("Setting up adb reverse for port 8080");
+        ShellUtils.run("adb", "reverse", "tcp:8080", "tcp:8080");
     }
 
     @AfterAll

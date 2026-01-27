@@ -2,13 +2,15 @@
 Feature: Postpaid number recharge scenarios
 
 #  CONFIG=./teswiz_configs/configs/jio_local_web_config.properties TAG="@validRecharge" ./gradlew run
-  @web @validRecharge
+#  CONFIG=./teswiz_configs/configs/jio_local_android_config.properties TAG="@validRecharge" ./gradlew run
+  @android @web @validRecharge
   Scenario: User should be able to do a recharge for a postpaid number for a valid amount
     Given I have a postpaid number
     Then I recharge with a valid recharge amount
 
 #  CONFIG=./teswiz_configs/configs/jio_local_web_config.properties TAG="@invalidRecharge" ./gradlew run
-  @web @invalidRecharge
+#  CONFIG=./teswiz_configs/configs/jio_local_android_config.properties TAG="@invalidRecharge" ./gradlew run
+  @android @web @invalidRecharge
   Scenario: User should be not be able to do a recharge for a postpaid number with an invalid recharge amount
     Given I have a postpaid number
     When I recharge with an invalid recharge amount

@@ -30,13 +30,4 @@ public class PrepaidPlansScreenAndroid extends PrepaidPlansScreen {
         context = Runner.getTestExecutionContext(threadId);
     }
 
-    @Override
-    public String getErrorMessage() {
-        return NOT_YET_IMPLEMENTED;
-    }
-
-    @Override
-    public String getNumberOfPlansAvailableMessage() {
-        return NOT_YET_IMPLEMENTED;
-    }
 }

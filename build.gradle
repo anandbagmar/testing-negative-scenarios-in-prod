@@ -42,7 +42,7 @@ configurations {
 }
 
 dependencies {
-    implementation("com.github.znsio:teswiz:be88ba6451") {
+    implementation("com.github.znsio:teswiz:4674628ce3") {
         transitive = false
     }
 }

@@ -12,6 +12,9 @@
     "printPageSourceOnFindFailure": true,
     "app": "sampleApps/MockedE2EDemo-debug.apk",
     "deviceName": "android",
+    "noReset": false,
+    "fullReset": false,
+    "appium:clearDeviceLogsOnStart": true,
     "noSign": true
   },
   "serverConfig": {
