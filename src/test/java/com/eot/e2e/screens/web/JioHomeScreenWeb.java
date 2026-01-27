@@ -2,18 +2,19 @@ package com.eot.e2e.screens.web;
 
 import com.applitools.eyes.selenium.fluent.Target;
 import com.eot.e2e.screens.JioHomeScreen;
+import com.eot.e2e.screens.PrepaidPlansScreen;
 import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.runner.Driver;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.runner.Visual;
+import com.znsio.teswiz.tools.Wait;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static com.eot.utilities.Wait.waitFor;
-
 public class JioHomeScreenWeb extends JioHomeScreen {
+    private static final By BY_INTERNATIONAL_ROAMING_PLANS_HEADING_XPATH = By.xpath("//button[text()=\"Gaming\"]");
     private final Driver driver;
     private final Visual visually;
     private final WebDriver innerDriver;
@@ -34,9 +35,16 @@ public class JioHomeScreenWeb extends JioHomeScreen {
     @Override
     public JioHomeScreen onLaunch() {
         LOGGER.info("On Jio Home Page");
-        waitFor(3);
+        Wait.waitFor(3);
         visually.check(SCREEN_NAME, "Jio Home Page", Target.window().fully().ignore(BY_IGNORE_CAROUSSEL_XPATH));
         return this;
     }
 
+    @Override
+    public PrepaidPlansScreen proceedToPlanSelection() {
+        LOGGER.info("Proceeding to Plan Selection Page");
+        clickOnProceedButton(BY_PROCEED_BUTTON_XPATH);
+        driver.waitTillElementIsVisible(BY_INTERNATIONAL_ROAMING_PLANS_HEADING_XPATH);
+        return PrepaidPlansScreen.get();
+    }
 }

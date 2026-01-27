@@ -25,5 +25,4 @@ public class TimedOutScreenWeb extends TimedOutScreen {
         long threadId = Thread.currentThread().getId();
         context = Runner.getTestExecutionContext(threadId);
     }
-
 }

@@ -19,8 +19,6 @@ public class PrepaidPlansScreenAndroid extends PrepaidPlansScreen {
     private static final String SCREEN_NAME = JioHomeScreenWeb.class.getSimpleName();
     private static final Logger LOGGER = LogManager.getLogger(SCREEN_NAME);
     private static final String NOT_YET_IMPLEMENTED = " not yet implemented";
-    private static final By BY_ERROR_MESSAGE_XPATH = By.xpath("//div[@data-testid=\"sadFaceError\"]");
-    private static final By BY_NUMBER_OF_PLANS_FOUND_ID = By.id("planAcc0");
 
     public PrepaidPlansScreenAndroid(Driver driver, Visual visually) {
         this.driver = driver;
@@ -29,5 +27,4 @@ public class PrepaidPlansScreenAndroid extends PrepaidPlansScreen {
         long threadId = Thread.currentThread().getId();
         context = Runner.getTestExecutionContext(threadId);
     }
-
 }

@@ -25,5 +25,4 @@ public class PaymentScreenWeb extends PaymentScreen {
         long threadId = Thread.currentThread().getId();
         context = Runner.getTestExecutionContext(threadId);
     }
-
 }

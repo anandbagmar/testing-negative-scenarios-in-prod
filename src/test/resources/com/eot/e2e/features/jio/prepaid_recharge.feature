@@ -5,7 +5,7 @@ Feature: Prepaid number recharge scenarios
 #  CONFIG=./teswiz_configs/configs/jio_local_android_config.properties TAG="@0Plans" ./gradlew run
   @android @web @0Plans
   Scenario: User should see 0 plans available message for prepaid number having zero plans
-    Given I have a prepaid number "PREPAID_PHONE_NUMBER_0_PLANS" with zero plans
+    Given I have a prepaid number "PREPAID_PHONE_NUMBER_0_PLANS" with "0" plans
     When I recharge the prepaid number
     Then I should see "ZERO_PLANS_ERROR_MESSAGE" error message
 
@@ -45,7 +45,7 @@ Feature: Prepaid number recharge scenarios
   #  CONFIG=./teswiz_configs/configs/jio_local_android_config.properties TAG="@PrepaidPlans" ./gradlew run
   @android @web @PrepaidPlans
   Scenario Outline: User should see <NumberOfPlansMessageExpected> plans available message for prepaid number having <NumberOfPlansMessageExpected> plans
-    Given I have a prepaid number "<PrepaidNumberVariable>" with zero plans
+    Given I have a prepaid number "<PrepaidNumberVariable>" with <NumberOfPlansMessageExpected> plans
     When I recharge the prepaid number
     Then I should see <NumberOfPlansMessageExpected> plans available message
     Examples:

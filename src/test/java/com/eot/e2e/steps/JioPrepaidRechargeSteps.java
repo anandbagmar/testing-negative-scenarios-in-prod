@@ -21,8 +21,9 @@ public class JioPrepaidRechargeSteps {
         context = SessionContext.getTestExecutionContext(Thread.currentThread().getId());
     }
 
-    @Given("I have a prepaid number {string} with zero plans")
-    public void iHaveAPrepaidNumberWithVaryingPlans(String prepaidNumber) {
+    @Given("I have a prepaid number {string} with {string} plans")
+    public void iHaveAPrepaidNumberWithVaryingPlans(String prepaidNumber, String numberOfPlans) {
+        LOGGER.info("Prepaid number to use: {}", prepaidNumber);
         String prepaidNumberToUse = Runner.getTestData(prepaidNumber);
         Drivers.createDriverFor(E2E_TEST_CONTEXT.I, Runner.getPlatform(), context);
         context.addTestState(E2E_TEST_CONTEXT.RECHARGE_NUMBER, prepaidNumberToUse);

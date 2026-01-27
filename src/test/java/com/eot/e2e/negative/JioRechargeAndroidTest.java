@@ -4,6 +4,7 @@ import com.applitools.eyes.*;
 import com.applitools.eyes.appium.Eyes;
 import com.eot.utilities.AndroidCommands;
 import com.eot.utilities.ShellUtils;
+import com.znsio.teswiz.tools.Wait;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
@@ -229,7 +230,7 @@ public class JioRechargeAndroidTest {
         eyes.checkWindow("Entered Mobile Number");
 
         waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
-        waitFor(3);
+        Wait.waitFor(3);
 
         By amountTextBox = By.xpath("//input[@placeholder='Amount']");
         waitTillElementIsPresent(driver, amountTextBox);
@@ -238,7 +239,7 @@ public class JioRechargeAndroidTest {
 
         System.out.println("Clicking Pay button");
         driver.findElement(By.xpath("//div[text()='Pay']")).click();
-        waitFor(3);
+        Wait.waitFor(3);
         System.out.println("Checking Payment Options page");
         eyes.checkWindow("Payment Options Page");
     }
@@ -256,7 +257,7 @@ public class JioRechargeAndroidTest {
 
         System.out.println("Clicking Proceed button");
         waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
-        waitFor(3);
+        Wait.waitFor(3);
         System.out.println("Enter recharge amount");
 
         By amountTextBox = By.xpath("//input[@placeholder='Amount']");
@@ -265,7 +266,7 @@ public class JioRechargeAndroidTest {
         eyes.checkWindow("Entered Valid Recharge Amount");
 
         driver.findElement(By.xpath("//div[text()='Pay']")).click();
-        waitFor(3);
+        Wait.waitFor(3);
         System.out.println("Checking for Invalid recharge amount error");
         eyes.checkWindow("Invalid recharge amount error");
     }
@@ -296,13 +297,13 @@ public class JioRechargeAndroidTest {
     }
 
     private void switchToRechargePhoneNumber() {
-        waitFor(3);
+        Wait.waitFor(3);
         eyes.checkWindow("Specmatic Android E2E Demo App");
-        waitFor(2);
+        Wait.waitFor(2);
         driver.findElement(AppiumBy.accessibilityId("home.btn.recharge")).click();
-        waitFor(10);
+        Wait.waitFor(10);
         switchToWebView(driver);
-        waitFor(2);
+        Wait.waitFor(2);
         eyes.checkWindow("Jio Home Page");
     }
 
@@ -313,7 +314,7 @@ public class JioRechargeAndroidTest {
         for (char digit : inputText.toCharArray()) {
             mobileNumberInput.sendKeys(Character.toString(digit));
         }
-        waitFor(1);
+        Wait.waitFor(1);
         System.out.println("Typed text: " + inputText + " into element: " + locator.toString());
     }
 

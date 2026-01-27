@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat
 buildscript {
     ext {
         gradleVersion = '8.10'
+        teswizVersion = '229cf210e7'
     }
     repositories {
         mavenLocal()
@@ -42,7 +43,7 @@ configurations {
 }
 
 dependencies {
-    implementation("com.github.znsio:teswiz:4674628ce3") {
+    implementation("com.github.znsio:teswiz:${teswizVersion}") {
         transitive = false
     }
 }
@@ -65,20 +66,22 @@ static def getCurrentTimestamp() {
     return df.format(today)
 }
 
-project.ext.logDir = "${rootDir}/reports/" + getMonth() + "/" + getCurrentDatestamp() + "/" + getCurrentTimestamp() as GStringImpl
+project.ext.LOG_DIR = "./reports/" + getMonth() + "/" + getCurrentDatestamp() + "/" + getCurrentTimestamp()
+project.ext.LOG4J2_PROPERTIES_FILE = "${projectDir}/teswiz_configs/log4j2.properties"
 
 test {
     doFirst {
         environment "APPLITOOLS_DONT_CLOSE_BATCHES", "true"
-        environment "APPLITOOLS_LOG_DIR", "${project.logDir}/applitools_logs"
-        environment "LOG_DIR", "${project.logDir}"
+        environment "APPLITOOLS_LOG_DIR", "${project.LOG_DIR}/applitools_logs"
+        environment "LOG_DIR", "${project.LOG_DIR}"
+        System.setProperty "log4j.configurationFile", "${project.LOG4J2_PROPERTIES_FILE}"
     }
     useTestNG() {
         reports {
             html.required.set(true)
             junitXml.required.set(true)
-            html.outputLocation.set(file("$project.logDir/html"))
-            junitXml.outputLocation.set(file("$project.logDir/junit"))
+            html.outputLocation.set(file("$project.LOG_DIR/html"))
+            junitXml.outputLocation.set(file("$project.LOG_DIR/junit"))
         }
         reports.junitXml.outputPerTestCase(true)
         testLogging {
@@ -91,7 +94,7 @@ test {
             showCauses = true
             showExceptions = true
         }
-        println("Log directory: ${project.logDir}")
+        println("Log directory: ${project.LOG_DIR}")
         println("Debug mode: " + System.getProperty('debug', 'false'))
         // attach debugger
         if (System.getProperty('debug', 'false') == 'true') {
@@ -100,8 +103,6 @@ test {
         }
     }
 }
-
-def logDir = "./target/" + getMonth() + "/" + getCurrentDatestamp() + "/" + getCurrentTimestamp()
 
 def copyRpPropertiesIfMissing() {
     def rpFile = file('teswiz_configs/reportportal.properties')
@@ -132,10 +133,11 @@ gradle.taskGraph.whenReady { taskGraph ->
 
 tasks.register('run', JavaExec) {
     doFirst {
-        println "Using LOG_DIR: ${logDir}"
-        System.setProperty "LOG_DIR", "${logDir}"
-        environment "APPLITOOLS_LOG_DIR", "${logDir}/applitools_logs"
+        println "Using LOG_DIR: ${project.LOG_DIR}"
+        System.setProperty "LOG_DIR", "${project.LOG_DIR}"
+        environment "APPLITOOLS_LOG_DIR", "${project.LOG_DIR}/applitools_logs"
         environment "APPLITOOLS_API_KEY", System.getenv("TESWIZ_APPLITOOLS_API_KEY")
+        System.setProperty "log4j.configurationFile", "${project.LOG4J2_PROPERTIES_FILE}"
 
         def hostname = InetAddress.getLocalHost().getHostName()
         println "Hostname: $hostname"
@@ -168,15 +170,6 @@ tasks.register('run', JavaExec) {
             println("Using CONFIG file: ${configFile}")
         }
         assert file(configFile).exists()
-
-//      You can also specify which config file to use based on the value of RUN_IN_CI as shown below
-//
-//        def isRunInCI = Boolean.parseBoolean(System.getenv("RUN_IN_CI"))
-//        println "isRunningInCI: $isRunInCI"
-//        def configFile = isRunInCI
-//                ? "./configs/theapp/theapp_pcloudy_config.properties"
-//                : "./configs/theapp/theapp_local_android_config.properties"
-//        configFile = System.getenv("CONFIG") ? System.getenv("CONFIG") : configFile
 
         systemProperties = System.properties as Map<String, ?>
         def runnerArgs = [

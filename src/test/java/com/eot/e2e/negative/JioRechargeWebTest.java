@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.znsio.teswiz.tools.Wait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +33,6 @@ import static com.eot.utilities.StringUtils.getEnvBoolean;
 import static com.eot.e2e.negative.TestData.*;
 import static com.eot.utilities.EyesResults.displayVisualValidationResults;
 import static com.eot.utilities.Wait.scrollTillElementIntoView;
-import static com.eot.utilities.Wait.waitFor;
 import static com.eot.utilities.Wait.waitTillElementIsClickable;
 import static com.eot.utilities.Wait.waitTillElementIsPresent;
 import static com.eot.utilities.Wait.waitTillElementIsVisible;
@@ -149,7 +149,7 @@ public class JioRechargeWebTest {
         driver.get(URL);
         eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
-        waitFor(3);
+        Wait.waitFor(3);
         By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
         By rechargeOrPayBillsHeading = By.xpath("//div[text()='Recharge or pay bills']");
         scrollTillElementIntoView(driver, rechargeOrPayBillsHeading);
@@ -158,7 +158,7 @@ public class JioRechargeWebTest {
         eyes.check("Entered Mobile Number", Target.region(By.xpath("//div[@class=\"recharge-paybill-withleads\"]")));
 
         waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
-        waitFor(2);
+        Wait.waitFor(2);
         eyes.check("Invalid Jio Number entered", Target.window().fully());
     }
 
@@ -167,7 +167,7 @@ public class JioRechargeWebTest {
         driver.get(URL);
         eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
-        waitFor(3);
+        Wait.waitFor(3);
         By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
         By rechargeOrPayBillsHeading = By.xpath("//div[text()='Recharge or pay bills']");
         scrollTillElementIntoView(driver, rechargeOrPayBillsHeading);
@@ -176,7 +176,7 @@ public class JioRechargeWebTest {
         eyes.check("Entered Mobile Number", Target.region(By.xpath("//div[@class=\"recharge-paybill-withleads\"]")));
 
         waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
-        waitFor(3);
+        Wait.waitFor(3);
 
         By amountTextBox = By.xpath("//input[@placeholder='Amount']");
         waitTillElementIsPresent(driver, amountTextBox);
@@ -185,7 +185,7 @@ public class JioRechargeWebTest {
 
         System.out.println("Clicking Pay button");
         driver.findElement(By.xpath("//div[text()='Pay']")).click();
-        waitFor(3);
+        Wait.waitFor(3);
         System.out.println("Checking Payment Options page");
         eyes.check("Payment Options Page", Target.window().fully());
     }
@@ -195,7 +195,7 @@ public class JioRechargeWebTest {
         driver.get(URL);
         eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
-        waitFor(3);
+        Wait.waitFor(3);
         By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
         By rechargeOrPayBillsHeading = By.xpath("//div[text()='Recharge or pay bills']");
         scrollTillElementIntoView(driver, rechargeOrPayBillsHeading);
@@ -205,7 +205,7 @@ public class JioRechargeWebTest {
 
         System.out.println("Clicking Proceed button");
         waitTillElementIsClickable(driver, By.xpath("//div[text()='Proceed']")).click();
-        waitFor(3);
+        Wait.waitFor(3);
         System.out.println("Enter recharge amount");
 
         By amountTextBox = By.xpath("//input[@placeholder='Amount']");
@@ -214,7 +214,7 @@ public class JioRechargeWebTest {
         eyes.check("Entered Valid Recharge Amount", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
         driver.findElement(By.xpath("//div[text()='Pay']")).click();
-        waitFor(3);
+        Wait.waitFor(3);
         System.out.println("Checking for Invalid recharge amount error");
         eyes.check("Invalid recharge amount error", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
@@ -252,7 +252,7 @@ public class JioRechargeWebTest {
         driver.get(URL);
         eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
-        waitFor(3);
+        Wait.waitFor(3);
         By jionumberTextBox = By.xpath("//input[@data-testid='JDSInput-input']");
         By rechargeOrPayBillsHeading = By.xpath("//div[text()='Recharge or pay bills']");
         scrollTillElementIntoView(driver, rechargeOrPayBillsHeading);
@@ -260,9 +260,9 @@ public class JioRechargeWebTest {
         typeInTextBox(driver, jionumberTextBox, prepaidPhoneNumber10Plans);
         eyes.check("Entered Mobile Number", Target.region(By.xpath("//div[@class=\"recharge-paybill-withleads\"]")));
 
-        waitFor(2);
+        Wait.waitFor(2);
         driver.findElement(By.xpath("//div[text()='Proceed']")).click();
-        waitFor(5);
+        Wait.waitFor(5);
 
         eyes.checkWindow("Recharge Options Page");
     }
@@ -274,7 +274,7 @@ public class JioRechargeWebTest {
         for (char digit : inputText.toCharArray()) {
             mobileNumberInput.sendKeys(Character.toString(digit));
         }
-        waitFor(1);
+        Wait.waitFor(1);
         System.out.println("Typed text: " + inputText + " into element: " + locator.toString());
     }
 }
