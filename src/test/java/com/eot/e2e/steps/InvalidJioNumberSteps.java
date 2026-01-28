@@ -53,4 +53,8 @@ public class InvalidJioNumberSteps {
         new JioBL().enterPrepaidNumberAndTryToRecharge();
     }
 
+    @When("I retry recharging the prepaid number")
+    public void iRetryRechargingThePrepaidNumber() {
+        new JioBL().retryRechargingPrepaidNumber();
+    }
 }

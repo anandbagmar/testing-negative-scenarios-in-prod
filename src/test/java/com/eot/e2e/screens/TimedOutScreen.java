@@ -17,14 +17,13 @@ import org.openqa.selenium.WebElement;
 public abstract class TimedOutScreen {
     private static final String SCREEN_NAME = TimedOutScreen.class.getSimpleName();
     private static final Logger LOGGER = LogManager.getLogger(SCREEN_NAME);
+    protected static final By BY_BACK_BUTTON_XPATH = By.xpath("//div[@aria-label=\"button Back\"]");
     private static Driver driver;
     private static Visual visually;
     private static TestExecutionContext context;
-    private static final By BY_SOMETHING_WENT_WRONG_MESSAGE_XPATH = By.xpath("//div[contains(@class,\"jdsErrorScreen_containerLayout_\")]");
-    private static final By BY_INTERNATIONAL_ROAMING_PLANS_HEADING_XPATH = By.xpath("//a[@aria-label=\"International Services\"]");
 
     public static TimedOutScreen get() {
-        Driver driver = Drivers.getDriverForCurrentUser(Thread.currentThread().getId());
+        driver = Drivers.getDriverForCurrentUser(Thread.currentThread().getId());
         Platform platform = Runner.fetchPlatform(Thread.currentThread().getId());
         LOGGER.info(SCREEN_NAME + ": Driver type: " + driver.getType() + ": Platform: " + platform);
         visually = Drivers.getVisualDriverForCurrentUser(Thread.currentThread().getId());
@@ -41,21 +40,13 @@ public abstract class TimedOutScreen {
                 SCREEN_NAME + " is not implemented in " + Runner.getPlatform());
     }
 
-    public String getSomethingWentWrongMessage() {
-        LOGGER.info("Getting 'Something went wrong' message from Timed Out Screen");
-        visually.checkWindow(SCREEN_NAME, "Timed Out Screen");
-        String errorMessage = waitForTimeoutScreen().getText().replace("\n", " ");
-        LOGGER.info("'Something went wrong' message: " + errorMessage);
-        return errorMessage;
-    }
+    public abstract String getSomethingWentWrongMessage();
 
-    public TimedOutScreen waitForTimedOutScreen() {
-        waitForTimeoutScreen();
-        return this;
-    }
+    public abstract TimedOutScreen waitForTimedOutScreen();
 
-    private WebElement waitForTimeoutScreen() {
-        driver.waitTillElementIsVisible(BY_INTERNATIONAL_ROAMING_PLANS_HEADING_XPATH, 30);
-        return driver.waitTillElementIsVisible(BY_SOMETHING_WENT_WRONG_MESSAGE_XPATH, 30);
+    public JioHomeScreen clickOnBackButton() {
+        LOGGER.info("Clicking on Back Button");
+        driver.waitTillElementIsVisible(BY_BACK_BUTTON_XPATH).click();
+        return JioHomeScreen.get();
     }
 }

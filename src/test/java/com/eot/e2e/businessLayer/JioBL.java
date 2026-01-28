@@ -107,4 +107,12 @@ public class JioBL {
                 .isEqualTo(expectedErrorMessage);
         return this;
     }
+
+    public JioBL retryRechargingPrepaidNumber() {
+        TimedOutScreen.get()
+                .clickOnBackButton()
+                .enterPrepaidNumber()
+                .proceedToPlanSelection();
+        return this;
+    }
 }

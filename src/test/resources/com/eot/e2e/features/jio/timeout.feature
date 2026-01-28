@@ -8,3 +8,5 @@ Feature: Verify timeout scenarios for dependent services
     Given I have a prepaid number "PREPAID_PHONE_NUMBER_TIMEOUT" with "0" plans
     When I try to recharge the prepaid number
     Then I should see "SOMETHING_WENT_WRONG_ERROR_MESSAGE" error message when the service times out
+    When I retry recharging the prepaid number
+    Then I should see "ZERO_PLANS_ERROR_MESSAGE" error message
