@@ -1,7 +1,6 @@
 package com.eot.e2e.steps;
 
 import com.eot.e2e.businessLayer.JioBL;
-import com.eot.e2e.businessLayer.RechargePlansBL;
 import com.eot.e2e.entities.E2E_TEST_CONTEXT;
 import com.znsio.teswiz.context.SessionContext;
 import com.znsio.teswiz.context.TestExecutionContext;
@@ -34,6 +33,7 @@ public class JioPostpaidRechargeSteps {
         context.addTestState(E2E_TEST_CONTEXT.RECHARGE_AMOUNT, rechargeAmount);
         new JioBL().enterPostpaidNumberAndValidRechargeAmount();
     }
+
     @Given("I recharge with an invalid recharge amount")
     public void iRechargeWithAnInvalidRechargeAmount() {
         String postpaidNumberToUse = Runner.getTestData(E2E_TEST_CONTEXT.POSTPAID_INVALID_RECHARGE_PHONE_NUMBER);

@@ -1,25 +1,6 @@
 package com.eot.e2e.negative;
 
-import java.io.File;
-import java.lang.reflect.Method;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import com.znsio.teswiz.tools.Wait;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
-
-import com.applitools.eyes.BatchInfo;
-import com.applitools.eyes.MatchLevel;
-import com.applitools.eyes.RectangleSize;
-import com.applitools.eyes.StdoutLogHandler;
-import com.applitools.eyes.TestResultsStatus;
-import com.applitools.eyes.TestResultsSummary;
+import com.applitools.eyes.*;
 import com.applitools.eyes.selenium.BrowserType;
 import com.applitools.eyes.selenium.Configuration;
 import com.applitools.eyes.selenium.Eyes;
@@ -28,14 +9,20 @@ import com.applitools.eyes.visualgrid.services.RunnerOptions;
 import com.applitools.eyes.visualgrid.services.VisualGridRunner;
 import com.eot.utilities.Browser;
 import com.eot.utilities.Driver;
+import com.znsio.teswiz.tools.Wait;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.*;
 
-import static com.eot.utilities.StringUtils.getEnvBoolean;
+import java.io.File;
+import java.lang.reflect.Method;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import static com.eot.e2e.negative.TestData.*;
 import static com.eot.utilities.EyesResults.displayVisualValidationResults;
-import static com.eot.utilities.Wait.scrollTillElementIntoView;
-import static com.eot.utilities.Wait.waitTillElementIsClickable;
-import static com.eot.utilities.Wait.waitTillElementIsPresent;
-import static com.eot.utilities.Wait.waitTillElementIsVisible;
+import static com.eot.utilities.StringUtils.getEnvBoolean;
+import static com.eot.utilities.Wait.*;
 
 public class JioRechargeWebTest {
 
@@ -110,16 +97,16 @@ public class JioRechargeWebTest {
         config.addBrowser(1920, 1600, BrowserType.FIREFOX);
         config.addBrowser(1600, 1200, BrowserType.EDGE_CHROMIUM);
         config.addBrowser(1920, 1600, BrowserType.SAFARI);
-//        config.addBrowser(800, 600, BrowserType.CHROME);
-//        config.addBrowser(800, 600, BrowserType.CHROME_ONE_VERSION_BACK);
-//        config.addBrowser(800, 600, BrowserType.CHROME_TWO_VERSIONS_BACK);
-//        config.addBrowser(700, 500, BrowserType.FIREFOX);
-//        config.addBrowser(700, 500, BrowserType.SAFARI);
-//        config.addBrowser(700, 500, BrowserType.EDGE_CHROMIUM);
-//
-//        // Add mobile emulation devices in Portrait/Landscape mode
-//        config.addDeviceEmulation(DeviceName.iPhone_15_Pro);
-//        config.addDeviceEmulation(DeviceName.Pixel_5);
+        //        config.addBrowser(800, 600, BrowserType.CHROME);
+        //        config.addBrowser(800, 600, BrowserType.CHROME_ONE_VERSION_BACK);
+        //        config.addBrowser(800, 600, BrowserType.CHROME_TWO_VERSIONS_BACK);
+        //        config.addBrowser(700, 500, BrowserType.FIREFOX);
+        //        config.addBrowser(700, 500, BrowserType.SAFARI);
+        //        config.addBrowser(700, 500, BrowserType.EDGE_CHROMIUM);
+        //
+        //        // Add mobile emulation devices in Portrait/Landscape mode
+        //        config.addDeviceEmulation(DeviceName.iPhone_15_Pro);
+        //        config.addDeviceEmulation(DeviceName.Pixel_5);
     }
 
     @AfterMethod
@@ -141,10 +128,10 @@ public class JioRechargeWebTest {
         if (null != driver) {
             driver.quit();
         }
-//        Assert.assertTrue(isPass.get(), "Visual differences found.");
+        //        Assert.assertTrue(isPass.get(), "Visual differences found.");
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void invalidJioNumberTest() {
         driver.get(URL);
         eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
@@ -162,7 +149,7 @@ public class JioRechargeWebTest {
         eyes.check("Invalid Jio Number entered", Target.window().fully());
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void postPaidValidRechargeTest() {
         driver.get(URL);
         eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
@@ -190,7 +177,7 @@ public class JioRechargeWebTest {
         eyes.check("Payment Options Page", Target.window().fully());
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void postPaidInvalidRechargeTest() {
         driver.get(URL);
         eyes.check("Jio Home Page", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
@@ -218,32 +205,32 @@ public class JioRechargeWebTest {
         System.out.println("Checking for Invalid recharge amount error");
         eyes.check("Invalid recharge amount error", Target.window().fully().ignore(By.xpath("//div[@class=\"slick-center-mode\"]")));
 
-//        String actualErrorMessage = driver.findElement(By.xpath("//span[@class=\"j-error-message\"]")).getText();
-//        String expectedErrorMessage = "Based on your current outstanding amount, maximum payment allowed is Rs." + POSTPAID_VALID_RECHARGE_AMOUNT + ".0";
-//        Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Error message mismatch!");
+        //        String actualErrorMessage = driver.findElement(By.xpath("//span[@class=\"j-error-message\"]")).getText();
+        //        String expectedErrorMessage = "Based on your current outstanding amount, maximum payment allowed is Rs." + POSTPAID_VALID_RECHARGE_AMOUNT + ".0";
+        //        Assert.assertEquals(actualErrorMessage, expectedErrorMessage, "Error message mismatch!");
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge0PlansTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_0_PLANS);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge1PlanTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_1_PLAN);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge2PlansTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_2_PLANS);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge5PlansTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_5_PLANS);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge10PlansTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_10_PLANS);
     }

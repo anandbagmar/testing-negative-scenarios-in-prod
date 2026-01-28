@@ -3,7 +3,6 @@ package com.eot.e2e.negative;
 import com.applitools.eyes.*;
 import com.applitools.eyes.appium.Eyes;
 import com.eot.utilities.AndroidCommands;
-import com.eot.utilities.ShellUtils;
 import com.znsio.teswiz.tools.Wait;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
@@ -25,8 +24,8 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.Set;
 
-import static com.eot.utilities.StringUtils.getEnvBoolean;
 import static com.eot.e2e.negative.TestData.*;
+import static com.eot.utilities.StringUtils.getEnvBoolean;
 import static com.eot.utilities.Wait.*;
 
 public class JioRechargeAndroidTest {
@@ -218,7 +217,7 @@ public class JioRechargeAndroidTest {
         eyes.checkWindow("Invalid Jio Number entered");
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void postPaidValidRechargeTest() {
         switchToRechargePhoneNumber();
 
@@ -244,7 +243,7 @@ public class JioRechargeAndroidTest {
         eyes.checkWindow("Payment Options Page");
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void postPaidInvalidRechargeTest() {
         switchToRechargePhoneNumber();
 
@@ -276,22 +275,22 @@ public class JioRechargeAndroidTest {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_0_PLANS);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge1PlanTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_1_PLAN);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge2PlansTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_2_PLANS);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge5PlansTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_5_PLANS);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge10PlansTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_10_PLANS);
     }

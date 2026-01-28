@@ -19,7 +19,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 
-
 public abstract class JioHomeScreen {
     private static final String SCREEN_NAME = JioHomeScreen.class.getSimpleName();
     private static final Logger LOGGER = LogManager.getLogger(SCREEN_NAME);

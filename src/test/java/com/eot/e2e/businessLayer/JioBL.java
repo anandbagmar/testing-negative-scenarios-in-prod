@@ -101,7 +101,7 @@ public class JioBL {
 
     public JioBL verifySomethingWentWrongMessage(String expectedErrorMessage) {
         String actualSomethingWentWrongMessage = TimedOutScreen.get()
-                .getSomethingWentWrongMessage() ;
+                .getSomethingWentWrongMessage();
         softly.assertThat(actualSomethingWentWrongMessage)
                 .as("Verify something went wrong error message")
                 .isEqualTo(expectedErrorMessage);

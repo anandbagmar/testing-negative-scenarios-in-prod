@@ -24,8 +24,8 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.Set;
 
-import static com.eot.utilities.StringUtils.getEnvBoolean;
 import static com.eot.e2e.negative.TestData.*;
+import static com.eot.utilities.StringUtils.getEnvBoolean;
 import static com.eot.utilities.Wait.*;
 
 public class JioRechargeiOSTest {
@@ -141,10 +141,10 @@ public class JioRechargeiOSTest {
         xcuiTestOptions.setCapability(XCUITestOptions.AUTO_ACCEPT_ALERTS_OPTION, true);
         xcuiTestOptions.setCapability(XCUITestOptions.PRINT_PAGE_SOURCE_ON_FIND_FAILURE_OPTION, true);
         xcuiTestOptions.setCapability(XCUITestOptions.INCLUDE_SAFARI_IN_WEBVIEWS_OPTION, true);
-//        xcuiTestOptions.setCapability(XCUITestOptions.WEBVIEW_CONNECT_TIMEOUT_OPTION, "120000");
-//        xcuiTestOptions.setCapability(XCUITestOptions.WEBKIT_RESPONSE_TIMEOUT_OPTION, "120000");
+        //        xcuiTestOptions.setCapability(XCUITestOptions.WEBVIEW_CONNECT_TIMEOUT_OPTION, "120000");
+        //        xcuiTestOptions.setCapability(XCUITestOptions.WEBKIT_RESPONSE_TIMEOUT_OPTION, "120000");
         xcuiTestOptions.setCapability(XCUITestOptions.NATIVE_WEB_TAP_OPTION, true);
-//        xcuiTestOptions.setCapability(XCUITestOptions.SHOW_XCODE_LOG_OPTION, true);
+        //        xcuiTestOptions.setCapability(XCUITestOptions.SHOW_XCODE_LOG_OPTION, true);
         xcuiTestOptions.setCapability(XCUITestOptions.FULL_RESET_OPTION, IS_FULL_RESET);
         xcuiTestOptions.setCapability(XCUITestOptions.NO_RESET_OPTION, false);
         xcuiTestOptions.setCapability("appium:autoGrantPermissions", true);
@@ -195,10 +195,10 @@ public class JioRechargeiOSTest {
         eyes.setServerUrl("https://eyes.applitools.com");
         eyes.setMatchLevel(MatchLevel.STRICT);
         eyes.setIsDisabled(DISABLE_EYES);
-//        eyes.setIgnoreCaret(true);
-//        eyes.setIgnoreDisplacements(true);
-//        eyes.setForceFullPageScreenshot(false);
-//        eyes.setSaveNewTests(true);
+        //        eyes.setIgnoreCaret(true);
+        //        eyes.setIgnoreDisplacements(true);
+        //        eyes.setForceFullPageScreenshot(false);
+        //        eyes.setSaveNewTests(true);
         if (IS_NML && IS_MULTI_DEVICE) {
             //            eyes.setConfiguration(eyes.getConfiguration().addMobileDevice(new AndroidDeviceInfo(AndroidDeviceName.Galaxy_S10_Plus)));
             //            eyes.setConfiguration(eyes.getConfiguration().addMobileDevice(new AndroidDeviceInfo(AndroidDeviceName.Galaxy_S21)));
@@ -242,7 +242,7 @@ public class JioRechargeiOSTest {
         eyes.checkWindow("Invalid Jio Number entered");
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void postPaidValidRechargeTest() {
         switchToRechargePhoneNumber();
 
@@ -268,7 +268,7 @@ public class JioRechargeiOSTest {
         eyes.checkWindow("Payment Options Page");
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void postPaidInvalidRechargeTest() {
         switchToRechargePhoneNumber();
 
@@ -300,22 +300,22 @@ public class JioRechargeiOSTest {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_0_PLANS);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge1PlanTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_1_PLAN);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge2PlansTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_2_PLANS);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge5PlansTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_5_PLANS);
     }
 
-    @Test (alwaysRun = true)
+    @Test(alwaysRun = true)
     void prePaidRecharge10PlansTest() {
         prepaidRechargePlanTest(PREPAID_PHONE_NUMBER_10_PLANS);
     }

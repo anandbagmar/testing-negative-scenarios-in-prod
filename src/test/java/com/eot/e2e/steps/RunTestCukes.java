@@ -7,7 +7,6 @@ import com.applitools.eyes.visualgrid.model.ScreenOrientation;
 import com.eot.e2e.entities.E2E_TEST_CONTEXT;
 import com.eot.e2e.tools.SpecmaticStudioManager;
 import com.eot.utilities.ShellUtils;
-import com.eot.utilities.TestLogger;
 import com.znsio.teswiz.context.SessionContext;
 import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.entities.APPLITOOLS;
