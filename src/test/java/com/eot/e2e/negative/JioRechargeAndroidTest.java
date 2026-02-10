@@ -1,7 +1,11 @@
 package com.eot.e2e.negative;
 
-import com.applitools.eyes.*;
+import com.applitools.eyes.BatchInfo;
+import com.applitools.eyes.MatchLevel;
+import com.applitools.eyes.StdoutLogHandler;
+import com.applitools.eyes.TestResults;
 import com.applitools.eyes.appium.Eyes;
+import com.applitools.eyes.appium.Target;
 import com.eot.utilities.AndroidCommands;
 import com.znsio.teswiz.tools.Wait;
 import io.appium.java_client.AppiumBy;
@@ -22,6 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import static com.eot.e2e.negative.TestData.*;
@@ -57,6 +62,8 @@ public class JioRechargeAndroidTest {
         batch.addProperty("REPOSITORY_NAME", new File(System.getProperty("user.dir")).getName());
         batch.addProperty("IS_NML", String.valueOf(IS_NML));
         batch.addProperty("IS_MULTI_DEVICE", String.valueOf(IS_MULTI_DEVICE));
+        batch.addProperty("PLATFORM", "android");
+        batch.setNotifyOnCompletion(true);
         System.out.println("Create AppiumRunner");
         System.out.printf("Batch name: %s%n", batch.getName());
         System.out.printf("Batch startedAt: %s%n", batch.getStartedAt().getTime());
@@ -102,19 +109,13 @@ public class JioRechargeAndroidTest {
     @AfterMethod
     void tearDown(Method testInfo) {
         System.out.println("AfterEach: Test - " + testInfo.getName());
-        boolean isPass = true;
         if (!DISABLE_EYES) {
-            TestResults testResults = eyes.close(false);
-            System.out.printf("Test: %s\n%s%n", testResults.getName(), testResults);
-            if (testResults.getStatus().equals(TestResultsStatus.Failed) || testResults.getStatus().equals(TestResultsStatus.Unresolved)) {
-                isPass = false;
-            }
+            eyes.closeAsync();
+            List<TestResults> testResults = eyes.getResults(false);
+            System.out.printf("Test: %s\n%s%n", testResults.size(), testResults);
         }
         if (null != driver) {
             driver.quit();
-        }
-        if (!isPass) {
-            System.out.printf("Test: %s had visual differences.%n", testInfo.getName());
         }
     }
 
@@ -210,6 +211,7 @@ public class JioRechargeAndroidTest {
 
     @Test(alwaysRun = true)
     void invalidJioNumberTest() {
+        eyes.check("Specmatic Android E2E Demo App", Target.window().fully(false));
         switchToRechargePhoneNumber();
         typeInTextBox(driver, AppiumBy.xpath("//input[@placeholder=\"Jio Number\"]"), INVALID_PHONE_NUMBER);
         eyes.checkWindow("Entered Mobile Number");

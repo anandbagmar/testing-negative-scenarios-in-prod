@@ -42,13 +42,13 @@ public class JioRechargeWebTest {
     public static void beforeSuite() {
         System.out.println("BeforeSuite");
         visualGridRunner = new VisualGridRunner(new RunnerOptions().testConcurrency(10));
-        visualGridRunner.setDontCloseBatches(true);
+        visualGridRunner.setDontCloseBatches(false);
         batch = new BatchInfo(appName);
-        batch.setNotifyOnCompletion(false);
-        batch.setSequenceName(JioRechargeWebTest.class.getSimpleName());
+        batch.setNotifyOnCompletion(true);
         batch.addProperty("REPOSITORY_NAME", new File(System.getProperty("user.dir")).getName());
         batch.addProperty("APP_NAME", appName);
         batch.addProperty("username", userName);
+        batch.addProperty("PLATFORM", "web");
     }
 
     @AfterSuite
@@ -56,11 +56,13 @@ public class JioRechargeWebTest {
         System.out.println("AfterSuite");
         if (null != visualGridRunner) {
             System.out.println("Closing VisualGridRunner");
+            visualGridRunner.setDontCloseBatches(true);
             visualGridRunner.close();
         }
         if (null != batch) {
             System.out.println("Mark batch completed");
             batch.setCompleted(true);
+            System.out.println("Batch marked completed");
         }
     }
 
