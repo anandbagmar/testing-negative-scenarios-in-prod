@@ -10,6 +10,7 @@ import com.eot.utilities.ShellUtils;
 import com.znsio.teswiz.context.SessionContext;
 import com.znsio.teswiz.context.TestExecutionContext;
 import com.znsio.teswiz.entities.APPLITOOLS;
+import com.znsio.teswiz.entities.Platform;
 import com.znsio.teswiz.entities.TEST_CONTEXT;
 import com.znsio.teswiz.runner.Runner;
 import com.znsio.teswiz.steps.Hooks;
@@ -54,8 +55,10 @@ public class RunTestCukes
     }
 
     private static void adbReverse8080() {
-        LOGGER.info("Setting up adb reverse for port 8080");
-        ShellUtils.run("adb", "reverse", "tcp:8080", "tcp:8080");
+        if (Runner.getPlatform().equals(Platform.android)) {
+            LOGGER.info("Setting up adb reverse for port 8080");
+            ShellUtils.run("adb", "reverse", "tcp:8080", "tcp:8080");
+        }
     }
 
     @AfterAll
