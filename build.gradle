@@ -1,11 +1,11 @@
 import org.codehaus.groovy.runtime.GStringImpl
-
 import java.text.SimpleDateFormat
 
 buildscript {
     ext {
         gradleVersion = '8.10'
-        teswizVersion = '727f837a35'
+        teswizVersion = 'dc1f32eb1e'
+        specmaticVersion = '1.1.2'
     }
     repositories {
         mavenLocal()
@@ -40,12 +40,21 @@ configurations {
     cucumberRuntime {
         extendsFrom testImplementation
     }
+
+    // ✅ Dedicated configuration: resolves the jar but does NOT pollute runtime/test classpath
+    specmaticExecutable {
+        canBeConsumed = false
+        canBeResolved = true
+    }
 }
 
 dependencies {
     implementation("com.github.znsio:teswiz:${teswizVersion}") {
         transitive = false
     }
+
+    // ✅ Download Specmatic enterprise executable jar without putting it on implementation/runtime classpath
+    specmaticExecutable "io.specmatic.enterprise:executable-all:${specmaticVersion}"
 }
 
 static def getCurrentDatestamp() {
@@ -70,12 +79,18 @@ project.ext.LOG_DIR = "./reports/" + getMonth() + "/" + getCurrentDatestamp() + 
 project.ext.LOG4J2_PROPERTIES_FILE = "${projectDir}/teswiz_configs/log4j2.properties"
 
 test {
+    systemProperty "log4j.configurationFile", file(project.LOG4J2_PROPERTIES_FILE).toURI().toString()
     doFirst {
         environment "APPLITOOLS_DONT_CLOSE_BATCHES", "true"
         environment "APPLITOOLS_LOG_DIR", "${project.LOG_DIR}/applitools_logs"
         environment "LOG_DIR", "${project.LOG_DIR}"
-        System.setProperty "log4j.configurationFile", "${project.LOG4J2_PROPERTIES_FILE}"
+
+        // ✅ Resolve the specmatic executable jar path and pass to tests
+        def specmaticJar = configurations.specmaticExecutable.singleFile
+        systemProperty "specmatic.executableJar", specmaticJar.absolutePath
+        println("Specmatic executable jar: ${specmaticJar.absolutePath}")
     }
+
     useTestNG() {
         reports {
             html.required.set(true)
@@ -86,9 +101,7 @@ test {
         reports.junitXml.outputPerTestCase(true)
         testLogging {
             events "started", "passed", "skipped", "failed"
-            // show standard out and standard error of the test JVM(s) on the console
             showStandardStreams = true
-            // show full exception trace
             exceptionFormat = 'full'
             showStackTraces = true
             showCauses = true
@@ -96,7 +109,6 @@ test {
         }
         println("Log directory: ${project.LOG_DIR}")
         println("Debug mode: " + System.getProperty('debug', 'false'))
-        // attach debugger
         if (System.getProperty('debug', 'false') == 'true') {
             println("In debug mode")
             jvmArgs '-Xdebug', '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,' + 'address=*:5005'
@@ -132,12 +144,15 @@ gradle.taskGraph.whenReady { taskGraph ->
 }
 
 tasks.register('run', JavaExec) {
+    systemProperty "log4j.configurationFile", file(project.LOG4J2_PROPERTIES_FILE).toURI().toString()
     doFirst {
         println "Using LOG_DIR: ${project.LOG_DIR}"
         System.setProperty "LOG_DIR", "${project.LOG_DIR}"
         environment "APPLITOOLS_LOG_DIR", "${project.LOG_DIR}/applitools_logs"
         environment "APPLITOOLS_API_KEY", System.getenv("TESWIZ_APPLITOOLS_API_KEY")
-        System.setProperty "log4j.configurationFile", "${project.LOG4J2_PROPERTIES_FILE}"
+        def specmaticJar = configurations.specmaticExecutable.singleFile
+        System.setProperty "specmatic.executableJar", specmaticJar.absolutePath
+        println("Specmatic executable jar: ${specmaticJar.absolutePath}")
 
         def hostname = InetAddress.getLocalHost().getHostName()
         println "Hostname: $hostname"
@@ -148,8 +163,6 @@ tasks.register('run', JavaExec) {
         if (null == ipAddress) {
             println "Unable to get local IP address. NOT updating BASE_URL and REMOTE_WEBDRIVER_GRID_HOST_NAME"
         } else {
-//            println "Updating BASE_URL ('http://$ipAddress:3000') and REMOTE_WEBDRIVER_GRID_HOST_NAME ('$ipAddress')"
-//            environment "BASE_URL", "http://$ipAddress:3000"
             environment "REMOTE_WEBDRIVER_GRID_HOST_NAME", "$ipAddress"
         }
 
@@ -180,8 +193,6 @@ tasks.register('run', JavaExec) {
         args = runnerArgs
 
         println("Debug mode: " + System.getProperty('debug', 'false'))
-        // attach debugger
-        // example: ./gradlew run -Ddebug=true
         if (System.getProperty('debug', 'false') == 'true') {
             println("In debug mode")
             jvmArgs '-Xdebug', '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,' +
@@ -206,5 +217,5 @@ clean.doLast {
 }
 
 wrapper {
-    gradleVersion = project.gradleVersion // version from gradle.properties
+    gradleVersion = project.gradleVersion
 }

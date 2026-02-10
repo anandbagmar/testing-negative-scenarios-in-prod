@@ -3,6 +3,7 @@ package com.eot.e2e.tools;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.util.List;
@@ -21,19 +22,16 @@ public final class SpecmaticStudioManager {
     /**
      * Convenience wrapper:
      * cd <projectDir>/lib
-     * java -jar ../temp/specmatic-studio-<latest>.jar --specs-dir=proxy_recording_examples proxy
+     * java -jar <gradle_downloaded_dir>/enterprise-all-<version></>.jar proxy
      */
     public static void startProxyMode(Path projectDir) {
         Objects.requireNonNull(projectDir, "projectDir");
 
         Path specmaticStubDir = projectDir.resolve("src/test/resources/specmatic");
-        Path specmaticStudioJarDir = JarDownloader.downloadLatestIfMissing(projectDir);
-        Path jarRelative = specmaticStubDir.relativize(specmaticStudioJarDir);
+        String specmaticStudioJarDir = getSpecmaticJarPathFromDependencies();
+        Path jarRelative = Path.of(specmaticStudioJarDir);
 
-        List<String> args = List.of(
-                "--specs-dir=proxy_recording_examples",
-                "proxy"
-        );
+        List<String> args = List.of("proxy");
 
         startOnce(jarRelative, args, specmaticStubDir);
     }
@@ -75,14 +73,6 @@ public final class SpecmaticStudioManager {
         LOGGER.info("[SpecmaticStudioManager] Stopped.");
     }
 
-    public static boolean isRunning() {
-        return proc != null && proc.isAlive();
-    }
-
-    public static long pid() {
-        return proc == null ? -1 : proc.pid();
-    }
-
     private static void registerShutdownHookOnce() {
         if (shutdownHookRegistered.compareAndSet(false, true)) {
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -94,5 +84,16 @@ public final class SpecmaticStudioManager {
 
             LOGGER.info("[SpecmaticStudioManager] Shutdown hook registered.");
         }
+    }
+
+    private static String getSpecmaticJarPathFromDependencies() {
+        String jarPath = System.getProperty("specmatic.executableJar");
+        if (jarPath == null || jarPath.isBlank()) {
+            throw new IllegalStateException("specmatic.executableJar system property not set");
+        }
+        if (!new File(jarPath).exists()) {
+            throw new IllegalStateException("Incorrect path to Specmatic jar file: '%s'".formatted(jarPath));
+        }
+        return jarPath;
     }
 }

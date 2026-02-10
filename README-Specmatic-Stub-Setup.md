@@ -12,51 +12,20 @@ To make this work on a freshly cloned repo, you must start the Specmatic proxy/s
 git clone https://github.com/anandbagmar/testing-negative-scenarios-in-prod/
 ```
 
-2. Download the latest **Specmatic Studio** JAR from:
+2. Use the latest **Specmatic** version from:
 
-- https://repo.specmatic.io/#/releases/io/specmatic/studio/specmatic-studio/
+- https://repo.specmatic.io/#/releases/io/specmatic/enterprise/executable-all
 
-Example: `specmatic-studio-1.16.0.jar`
+Example: `enterprise-all-1.1.2.jar`
 
-You can also use curl to download it directly:
-
-```bash
-
-VERSION=$(
-  curl -s https://repo.specmatic.io/releases/io/specmatic/studio/specmatic-studio/maven-metadata.xml \
-  | sed -n 's:.*<latest>\(.*\)</latest>.*:\1:p'
-)
-
-echo "Latest Specmatic Studio version: $VERSION"
-
-curl -L -o "lib/specmatic-studio-${VERSION}.jar" \
-  "https://repo.specmatic.io/releases/io/specmatic/studio/specmatic-studio/${VERSION}/specmatic-studio-${VERSION}.jar"
-
-echo "Downloaded: lib/specmatic-studio-${VERSION}.jar"
-```
-
-3. Place the JAR in the cloned repo under:
-
-```text
-testing-negative-scenarios-in-prod/lib/
-```
+Update build.gradle with this latest version.
 
 ## Start Specmatic stub/proxy server
 
-Run the following commands from the repo root:
-
-> **Note**: Replace the version of the jar file appropriately
-
-```bash
-
-cd testing-negative-scenarios-in-prod
-java -jar lib/specmatic-studio-1.16.0.jar proxy
-```
-
-This will load Specmatic mocks from:
+The tests will automatically start/stop the proxy server programmatically and will load Specmatic mocks from:
 
 ```text
-testing-negative-scenarios-in-prod/lib/proxy_recordings_examples/
+testing-negative-scenarios-in-prod/src/test/resources/specmatic/proxy_recordings_examples/
 ```
 
 ## Android setup
@@ -70,3 +39,5 @@ adb reverse tcp:8080 tcp:8080
 ```
 
 Now `http://localhost:8080` inside the emulator will resolve to `localhost:8080` on your laptop (where Specmatic proxy is running).
+
+This command is executed automatically when running the tests for Android platform.

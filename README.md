@@ -80,79 +80,33 @@ cp /path/to/MockedE2EDemo/android/app/build/outputs/apk/debug/MockedE2EDemo-debu
 
 ---
 
-## Setup Specmatic stub server (required)
 
-Before running any web or Android tests, [setup and start the Specmatic proxy/stub server](./README-Specmatic-Stub-Setup.md):
-
-This will:
-- start the Specmatic proxy server (default on port 8080)
-- load stub recordings from `lib/proxy_recordings_examples`
-- allow Android emulator to access the proxy via ADB reverse
+## Test the Web front-end (Selenium + Specmatic + Applitools Eyes UFG)
 
 ---
-
-## Test the Web front-end
-
-> Before running **any** tests, make sure the **Specmatic stub/proxy** is running by following the [Specmatic Stub Setup](README-Specmatic-Stub-Setup.md).
-
----
-
-### Web E2E test (Selenium + Specmatic + Applitools Eyes UFG)
-
-Test class:
-- `src/test/java/com/eot/e2e/negative/JioRechargeWebTest.java`
 
 #### Run from command line (Gradle wrapper)
 ```bash
-  ./gradlew test --tests "com.eot.e2e.negative.JioRechargeWebTest"
+   IS_VISUAL=true PLATFORM=web ./gradlew run
 ```
 
-#### Run from IDE (IntelliJ IDEA / Android Studio)
-1. Open `JioRechargeWebTest.java`
-2. Click the green ▶︎ gutter icon next to the class (or a test method)
-3. Make sure your environment variables are set in the Run Configuration:
-    - `DISABLE_EYES=true` (default; skips Eyes)
-    - `APPLITOOLS_API_KEY` (required only if you set `DISABLE_EYES=false`)
-
 ---
+## Test the Android app (Appium + Specmatic + Applitools Eyes)
 
-## Test the Android app
-
-### Android E2E test (Appium + Specmatic + Applitools Eyes)
-
-Test class:
-- `src/test/java/com/eot/e2e/negative/JioRechargeAndroidTest.java`
-
-#### Prerequisites
+### Prerequisites
 - The demo app binary exists in `sampleApps/` (copied from the `MockedE2EDemo` repo):
     - `sampleApps/MockedE2EDemo-debug.apk`
 - Android emulator/device is running
-- `adb reverse` is configured (see [Specmatic Stub Setup](README-Specmatic-Stub-Setup.md))
-- Appium server is running, for example:
-  ```bash
-  appium --base-path /wd/hub --log-level info
-  ```
-## Android test pre-step (Node dependencies)
+
+### Android test pre-step (Node dependencies)
 
 Before running Android Appium tests, run:
 
 ```bash
-
-npm install
+    npm install
 ```
 
----
-
-#### Run from command line (Gradle wrapper)
+### Running the tests
 ```bash
-  ./gradlew test --tests "com.eot.e2e.negative.JioRechargeAndroidTest"
+    IS_VISUAL=true PLATFORM=web ./gradlew run
 ```
-
-#### Run from IDE (IntelliJ IDEA / Android Studio)
-1. Open `JioRechargeAndroidTest.java`
-2. Run the class using the ▶︎ gutter icon
-3. In your Run Configuration, set:
-    - `DISABLE_EYES=true` (default) or `DISABLE_EYES=false`
-    - `APPLITOOLS_API_KEY` (only needed when `DISABLE_EYES=false`)
-
----
