@@ -1,0 +1,60 @@
+name: Run Web Tests on Push to Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-web-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Run Web Tests (Headless)
+        env:
+          PLATFORM: web
+          BROWSER_CONFIG_FILE: ./teswiz_configs/configs/headless_browser_config.json
+        run: ./gradlew clean run
+
+      - name: Find latest report directory
+        id: find_report
+        run: |
+          latest_dir=$(find reports -type d -mindepth 3 -maxdepth 3 | sort | tail -n 1)
+          echo "latest_report_dir=$latest_dir" >> $GITHUB_OUTPUT
+
+      - name: Archive latest report directory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: latest-report
+          path: ${{ steps.find_report.outputs.latest_report_dir }}
+
+      - name: Add test summary to GitHub Actions Summary
+        if: always()
+        run: |
+          report_dir="${{ steps.find_report.outputs.latest_report_dir }}"
+          if [ -z "$report_dir" ]; then
+            echo "No report directory found." >> $GITHUB_STEP_SUMMARY
+            exit 0
+          fi
+          html_report=$(find "$report_dir" -name 'index.html' | head -n 1)
+          xml_report=$(find "$report_dir" -name 'TESTS-TestSuites.xml' | head -n 1)
+          if [ -n "$html_report" ]; then
+            echo "### Test Report: [View HTML Report]($html_report)" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ -n "$xml_report" ]; then
+            PASSED=$(grep -o 'testsuite errors="0" failures="0"' "$xml_report" | wc -l)
+            TOTAL=$(grep -o '<testsuite ' "$xml_report" | wc -l)
+            echo "#### Test Suites Passed: $PASSED / $TOTAL" >> $GITHUB_STEP_SUMMARY
+          fi
