@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 buildscript {
     ext {
         gradleVersion = '8.10'
-        teswizVersion = 'dc1f32eb1e'
+        teswizVersion = '325c8d9fce'
         specmaticVersion = '1.1.2'
     }
     repositories {
