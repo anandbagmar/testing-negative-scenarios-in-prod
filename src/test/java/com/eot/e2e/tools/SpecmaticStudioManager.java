@@ -1,5 +1,7 @@
 package com.eot.e2e.tools;
 
+import com.znsio.teswiz.tools.FileUtils;
+import com.znsio.teswiz.tools.OsUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,12 +30,14 @@ public final class SpecmaticStudioManager {
         Objects.requireNonNull(projectDir, "projectDir");
 
         Path specmaticStubDir = projectDir.resolve("src/test/resources/specmatic");
-        String specmaticStudioJarDir = getSpecmaticJarPathFromDependencies();
-        Path jarRelative = Path.of(specmaticStudioJarDir);
+        Path specmaticStudioJarDir = Path.of(getSpecmaticJarPathFromDependencies());
 
+        String destinationName = OsUtils.getUserDirectory() + File.separator + "temp" + File.separator + specmaticStudioJarDir.getFileName();
+        LOGGER.info("Copying '" + specmaticStudioJarDir + "' to: '" + destinationName + "'");
+        FileUtils.copyFile(specmaticStudioJarDir.toFile(), new File(destinationName));
         List<String> args = List.of("proxy");
 
-        startOnce(jarRelative, args, specmaticStubDir);
+        startOnce(specmaticStudioJarDir, args, specmaticStubDir);
     }
 
     /**
